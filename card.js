@@ -34,7 +34,7 @@ const COURSES = {"mwat1":{"name":"HSC Preliminary year · Music 2 · MWAT1 Stude
 const NSW = (() => {
   const yr = s => { const m = String(s).match(/\d{4}/); return m ? +m[0] : 0; };
   const now = new Date(), nextHSC = now.getMonth() >= 10 ? now.getFullYear() + 1 : now.getFullYear();
-  const oldHSC = nextHSC <= 2027 ? 2027 : 0, newHSC = Math.max(nextHSC, 2028);
+  const newHSC = Math.max(nextHSC, 2028);
   const S = a => new Set(a), lant = gid => { const x = (MIN.genres || []).find(z => z.id === gid); return x ? x.lanterns : []; };
   const JAZZ = S(['ragjazzpiano', 'concertjazz', 'thirdstream', 'artjazz']), GLOBAL = S(['globalfusion', 'intercultural', 'commons']);
   const TECH = S(['concrete', 'synth', 'electroac', 'generative', 'digiscores', 'soundscape']), NOTATE = S(['chance', 'digiscores']);
@@ -48,7 +48,7 @@ const NSW = (() => {
   const strand = n => STRAND.has(n.id);
   const A = [];
   const add = (grp, key, t, f) => A.push({grp, key, t, f});
-  const M2 = 'Music 2 (2025, from 2027)', M1 = 'Music 1 (2025, from 2027)', O2 = 'Music 2 (2009) · HSC 2027', O1 = 'Music 1 (2009) · HSC 2027';
+  const M2 = 'Music 2 (2025, from 2027)', M1 = 'Music 1 (2025, from 2027)';
   add(M2, 'm2-wat1', 'Y11 Music of Western art traditions 1 (1600–1900)', per('baroque', 'classical', 'romantic'));
   add(M2, 'm2-dme', 'Y11 Music for drama, movement and entertainment', n => n.lane === 'stage');
   add(M2, 'm2-2021', 'Y11 Music of the 20th and 21st centuries', per('modern', 'postwar', 'contemporary'));
@@ -74,28 +74,32 @@ const NSW = (() => {
   add(M1, 'm1-s-dance', 'Y12 Screen, stage and story: music for dance', n => dance().has(n.id));
   add(M1, 'm1-s-ritual', 'Y12 Screen, stage and story: music for ritual and ceremony', n => n.lane === 'sacred');
   add(M1, 'm1-s-story', 'Y12 Screen, stage and story: music for communication and storytelling', n => n.lane === 'song');
-  if (oldHSC) {
-    add(O2, 'o2-l25', `HSC mandatory: music of the last 25 years (Australian focus), from ${oldHSC - 25}`, n => inWin(n, oldHSC));
-    add(O2, 'o2-1600', 'Preliminary mandatory: music 1600–1900', per('baroque', 'classical', 'romantic'));
-    [['medieval', 'medieval music'], ['renaissance', 'renaissance music'], ['baroque', 'baroque music'], ['classical', 'classical music'], ['romantic', 'music in the nineteenth century'], ['modern', 'music 1900–1945']]
-      .forEach(([p, t]) => add(O2, 'o2-' + p, 'Additional topic: ' + t, per(p)));
-    add(O2, 'o2-1945', 'Additional topic: music 1945 to music 25 years ago', n => n.period === 'postwar' || (n.period === 'contemporary' && beforeWin(n, oldHSC)));
-    add(O2, 'o2-culture', 'Additional topic: music of a culture', n => strand(n) || GLOBAL.has(n.id));
-    add(O2, 'o2-aus', 'Preliminary additional topic: Australian music', aus);
-    [['Baroque music', per('baroque')], ['Medieval music', per('medieval')], ['Renaissance music', per('renaissance')], ['Music of the 18th century', n => n.period === 'classical' || (n.period === 'baroque' && n.y >= 1700)],
-     ['Music of the 19th century', per('romantic')], ['Music of the 20th and 21st centuries', per('modern', 'postwar', 'contemporary')], ['Theatre music', n => n.lane === 'stage' && !dance().has(n.id) && !screen().has(n.id)],
-     ['Music for radio, film, television and multimedia', n => screen().has(n.id)], ['Music and religion', n => n.lane === 'sacred'], ['Music for small ensembles', n => n.lane === 'chamber'],
-     ['Music for large ensembles', n => n.lane === 'orch' || n.lane === 'concerto'], ['An instrument and its repertoire', n => n.lane === 'keyboard' || n.lane === 'concerto'], ['Jazz', n => JAZZ.has(n.id)],
-     ['Music in education', n => EDU.has(n.id)], ['Technology and its influence on music', n => TECH.has(n.id)], ['Methods of notating music', n => NOTATE.has(n.id)],
-     ['Australian music', aus], ['Music and the related arts', n => dance().has(n.id)], ['Music of a culture', n => strand(n) || GLOBAL.has(n.id)], ['Popular music (bridge forms only)', n => BRIDGE.has(n.id)]]
-      .forEach(([t, f], i) => add(O1, 'o1-' + i, 'Topic: ' + t, f));
-  }
   Object.entries(typeof COURSES === 'object' ? COURSES : {}).forEach(([k, c]) => { const ids = new Set(c.stops.map(s => s.id)); add(c.group || 'Course routes', 'r-' + k, c.name.replace('HSC Preliminary year · ', ''), n => ids.has(n.id)); });
   const set = key => { const a = A.find(x => x.key === key); return a ? new Set(DATA.nodes.filter(a.f).map(n => n.id)) : new Set(); };
-  const XW = [['concepts of music', 'elements of music', 'Music context and Music language'], ['duration', 'duration', 'rhythmic devices'], ['pitch', 'pitch', 'melodic and harmonic devices'],
-    ['dynamics and expressive techniques', 'dynamics and expression', 'expressive devices'], ['tone colour', 'performing media and timbre', 'performing media'], ['texture', 'texture', 'textural devices'], ['structure', 'structure', 'structural devices']];
-  return {A, set, yr, oldHSC, newHSC, XW};
+  return {A, set, yr, newHSC};
 })();
+
+/* Levels (22 Nov 2026): the Garden's own depth ladder. Data keeps the NSW stage number (4, 5, 6); display maps it. */
+const LEVELS = {4: {n: 1, name: 'Seed', does: 'hear it and respond, in simple words'}, 5: {n: 2, name: 'Shoot', does: 'the elements and their context'}, 6: {n: 3, name: 'Bloom', does: 'analysis and evaluation'}};
+/* Elements across curricula (22 Nov 2026). Each cell says where the Garden's element sits in that curriculum, in its own words. */
+const ELX = [
+  {t: 'NSW Music 7–10 (2024)', umb: 'elements of music', src: 'https://curriculum.nsw.edu.au/learning-areas/creative-arts/music-7-10-2024/overview',
+    c: {dur: 'duration', pit: 'pitch', dyn: 'dynamics and expression', pmt: 'performing media and timbre', tex: 'texture', str: 'structure'}},
+  {t: 'NSW Music 1 11–12 (2025, from 2027)', umb: 'no single term: they sit in Music language, under Theoretical language and Compositional language', src: 'https://curriculum.nsw.edu.au/learning-areas/creative-arts/music-1-11-12-2025/content',
+    c: {dur: 'metre (simple and compound); note values and rhythmic patterns; rhythmic devices', pit: 'scales and modes; chords; chord qualities; chord progressions and cadences; melodic devices; harmonic devices', dyn: 'expressive devices', pmt: 'performing media; and a separate item for looping, sampling, delay, echo and digital reverb', tex: 'textural devices', str: 'structural devices'}},
+  {t: 'NSW Music 2 and Music Extension 11–12 (2025, from 2027)', umb: 'no single term: they sit in Music language, under Theoretical language and Compositional language', src: 'https://curriculum.nsw.edu.au/learning-areas/creative-arts/music-2-11-12-2025/content/year-11/fa9ec28184',
+    c: {dur: 'metre; tempo; note values and rhythm groupings; rhythmic devices', pit: 'scales, modes and tonality; chord qualities; chord progressions and cadences; melodic devices; harmonic devices', dyn: 'expressive devices', pmt: 'performing media; and a separate item for looping, sampling, delay, echo and digital reverb', tex: 'textural devices', str: 'structural devices'}},
+  {t: 'Australian Curriculum v9 (F–10)', umb: 'elements of music', src: 'https://www.australiancurriculum.edu.au/curriculum-information/understand-this-learning-area/the-arts/#muskeycons',
+    c: {dur: 'duration/time (including beat and rhythm)', pit: 'pitch', dyn: 'dynamics and expression', pmt: 'timbre', tex: 'texture', str: 'form and structure'}},
+  {t: 'Victorian Curriculum F–10 2.0', umb: 'elements of music', src: 'https://f10.vcaa.vic.edu.au/sites/default/files/2024-10/Music%20glossary.docx',
+    c: {dur: 'duration (including tempo, rhythm and metre)', pit: 'pitch', dyn: 'dynamics; articulation', pmt: 'tone colour/timbre', tex: 'texture', str: 'structure/form'}},
+  {t: 'England, Key Stage 3 (national curriculum, 2013)', umb: 'the interrelated dimensions of music', src: 'https://www.gov.uk/government/publications/national-curriculum-in-england-music-programmes-of-study/national-curriculum-in-england-music-programmes-of-study',
+    c: {dur: 'duration; tempo', pit: 'pitch', dyn: 'dynamics', pmt: 'timbre', tex: 'texture', str: 'structure'}},
+  {t: 'England, GCSE and A level (DfE subject content)', umb: 'musical elements', src: ['https://dera.ioe.ac.uk/id/eprint/21930/1/GCSE_subject_content_for_music.pdf', 'https://dera.ioe.ac.uk/id/eprint/21927/1/GCE_AS_and_A_level_subject_content_for_music.pdf'],
+    c: {dur: 'tempo, metre and rhythm', pit: 'organisation of pitch (melodically and harmonically); tonality', dyn: 'dynamics', pmt: 'sonority (GCSE puts articulation here)', tex: 'texture', str: 'structure'}},
+  {t: 'USA, National Core Arts Standards (2014)', umb: 'elements of music', src: 'https://nationalartsstandards.org/sites/default/files/Music%20Glossary.pdf',
+    c: {dur: 'rhythm (tempo is listed under expressive qualities)', pit: 'pitch; harmony', dyn: 'dynamics; style/articulation (dynamics, tempo and articulation are also listed as expressive qualities)', pmt: 'timbre', tex: 'texture', str: 'form'}}];
+const ELX_ROWS = ['dur', 'pit', 'dyn', 'pmt', 'tex', 'str'];
 function dnotice(parent, L) {      // audit 15: the warning always shows; a long list of names folds away
   if (L.length <= 12) { h('p', 'cnotice', parent, 'Aboriginal and Torres Strait Islander readers are advised that this card names people who have died: ' + L.join(', ') + '.'); return; }
   const p = h('div', 'cnotice', parent); p.setAttribute('role', 'note'); p.append('Aboriginal and Torres Strait Islander readers are advised that this card names people who have died.');
@@ -353,13 +357,12 @@ function render(panel, id, ctx) {
     if (F.tryit) { const t = h('div', 'box', panel); h('small', '', t, 'Try it · ' + (F.tryType === 'compose' ? 'composing' : F.tryType === 'perform' ? 'performing' : 'listening')); h('p', '', t, F.tryit); }
     if (F.q) { const t = h('div', 'box q', panel); h('small', '', t, 'Evidence question'); h('p', '', t, F.q); } }
 
-  // G5 Answer like an analyst: the Stage 4, 5 and 6 questions
+  // G5 Answer like an analyst: Seed, Shoot and Bloom questions (stored as stage 4, 5, 6)
   if ((F.qs || []).length) { h('h3', '', panel, 'Answer like an analyst'); const ol = h('ol', 'qs', panel);
     F.qs.slice().sort((a, b) => a.stage - b.stage).forEach(q => { const li = h('li', '', ol), qm = h('div', 'qm', li), v = VERBS[q.verb] || {w: cap1(q.verb), def: ''}, w = n.works[q.work], m = w ? (F.media || [])[q.work] || [] : [];
-      h('span', 'st', qm, 'Stage ' + q.stage);
-      if (q.stage === 6) { const t = h('span', 'crs', qm, q.verb === 'evaluate' ? 'Music 2 Y12' : 'Music 1 Y12 · Music 2 Y11'); t.title = q.verb === 'evaluate' ? 'Music 2 Year 12 outcomes evaluate the ways Music context and Music language shape meaning' : 'Music 1 Year 12 and Music 2 Year 11 outcomes analyse the ways Music context and Music language shape music'; }
-      h('span', 'verb', qm, v.w).title = v.def; elLabels(qm, q.el); h('p', 'qt', li, q.q);
-      if (q.stage === 6 && /^(Analyse|Evaluate) /.test(q.q)) { const d1 = h('p', 'qt m1y11', li), c1 = h('span', 'crs', d1, 'Music 1 Y11'); c1.title = 'Music 1 Year 11 outcomes describe the ways Music context and Music language shape music'; d1.append(' ' + q.q.replace(/^(Analyse|Evaluate) /, 'Describe ')); }
+      { const L = LEVELS[q.stage] || LEVELS[4], lc = h('span', 'st', qm, L.name); lc.title = 'Level ' + L.n + ' · ' + L.name + ': ' + L.does; }
+            h('span', 'verb', qm, v.w).title = v.def; elLabels(qm, q.el); h('p', 'qt', li, q.q);
+      if (q.stage === 6 && /^(Analyse|Evaluate) /.test(q.q)) { const d1 = h('p', 'qt m1y11', li), c1 = h('span', 'crs', d1, 'Simpler'); c1.title = 'The same question one step gentler: describe instead of analyse or evaluate'; d1.append(' ' + q.q.replace(/^(Analyse|Evaluate) /, 'Describe ')); }
       if (w) { const lw = h('p', 'lw', li); h('b', '', lw, 'Listen to '); if (m[0]) ext(lw, m[0], w[0] + ' ↗'); else lw.append(w[0]); lw.append(', ' + w[1] + (m[2] === 'NO_RECORDING' ? ' (no reliable recording yet; try its Spotify search above)' : '')); }
       if (q.hint) { const d = h('details', '', li); h('summary', '', d, 'Hint'); rich(h('p', '', d), q.hint); }
       if (q.research) { const r = h('div', 'research', li); h('small', '', r, 'Research challenge'); rich(h('p', '', r), q.research); } });      // an optional task that sends the student out to find a source for themselves
@@ -371,7 +374,11 @@ function render(panel, id, ctx) {
   if (n.attached) { h('h3', '', panel, 'Where the band runs'); const ul = h('ul', '', panel); n.attached.forEach(a => { const li = h('li', '', ul); h('cite', '', li, a.work); li.append(`, ${a.movement} · `); if (N[a.form]) nav(li, a.form, N[a.form].t); }); }
 
   // G10 NSW syllabus · for teachers (the Garden's suggestions, to check against the syllabus)
-  { const d = h('details', 'nsw', panel); h('summary', '', d, 'NSW syllabus · for teachers'); const box = h('div', 'nsw-in', d);
+  { const d = h('details', 'nsw', panel); h('summary', '', d, 'Curriculum links · for teachers'); const box = h('div', 'nsw-in', d);
+    { const p = h('p', '', box); h('b', '', p, 'Levels: '); p.append('Seed (Level 1) hears and responds in simple words; Shoot (Level 2) works with the elements and their context; Bloom (Level 3) analyses and evaluates.'); }
+    h('h4', 'cl-h', box, 'New South Wales');
+    { const p = h('p', '', box); h('b', '', p, 'Levels in NSW: '); p.append('Seed = Stage 4 (Years 7–8) · Shoot = Stage 5 (Years 9–10) · Bloom = Stage 6 (Years 11–12: Music 1, Music 2; Music Extension in Year 12).'); }
+    if ((F.qs || []).some(q => q.stage === 6)) { const p = h('p', '', box); h('b', '', p, 'Bloom questions in NSW (2025 syllabuses): '); p.append('analyse and explain questions suit Music 1 Year 12 (MU1-12L-01: analyses the ways Music context and Music language shape music) and Music 2 Year 11 (MU2-11L-01: analyses the ways Music context and Music language shape meaning in musical pieces); evaluate questions suit Music 2 Year 12 (MU2-12L-01: evaluates the ways Music context and Music language shape meaning and expressive intent in musical pieces). Each “Simpler” line suits Music 1 Year 11 (MU1-11L-01: describes the ways Music context and Music language shape music).'); }
     const row = t => { const p = h('p', '', box); h('b', '', p, t + ' '); return p; }, tt = F.tryType;
     const s45 = ['MU4-LIS-01', 'MU5-LIS-01', 'MU5-LIS-02'].concat(tt === 'perform' ? ['MU4-PER-01', 'MU5-PER-01'] : tt === 'compose' ? ['MU4-COM-01', 'MU5-COM-01'] : []);
     row('Stages 4–5, Music 7–10 (2024):').append(s45.join(' · '));
@@ -380,15 +387,19 @@ function render(panel, id, ctx) {
     const cM2 = t => t.startsWith('Y11') ? 'MU2-11L-01 · MU2-11L-02' + (tt === 'compose' ? ' · MU2-11C-02' : '') : 'MU2-12L-01 · MU2-12L-02' + (tt === 'compose' ? ' · MU2-12C-02' : '');
     const cM1 = t => t.startsWith('Y12') ? 'MU1-12L-01 · MU1-12L-02' + (tt === 'compose' ? ' · MU1-12C-02' : '') : '';
     grpRow('Music 2 (2025, from 2027)', cM2); grpRow('Music 1 (2025, from 2027)', cM1, 'Y11 Contexts of music, Creative practice and Music in focus can draw on any form (MU1-11L-01 · MU1-11L-02)');
-    if (NSW.oldHSC) { grpRow('Music 2 (2009) · HSC 2027'); grpRow('Music 1 (2009) · HSC 2027'); }
-    if (['modern', 'postwar', 'contemporary'].includes(n.period)) [[NSW.oldHSC, '2009 syllabuses'], [NSW.newHSC, '2025 syllabuses']].forEach(([y, lab]) => { if (!y) return;
+    if (['modern', 'postwar', 'contemporary'].includes(n.period)) [[NSW.newHSC, '2025 syllabuses']].forEach(([y, lab]) => { if (!y) return;
       const inw = n.works.filter(w => NSW.yr(w[2]) >= y - 25), oldCore = n.works.filter(w => w[3] && NSW.yr(w[2]) && NSW.yr(w[2]) < y - 25);
       const p = row(`Last 25 years, HSC ${y} (${lab}), from ${y - 25}:`); p.append(inw.length ? inw.map(w => w[0]).join('; ') + '.' : 'no works on this card fall inside it.');
       if (inw.length && oldCore.length) h('em', '', p, ` Hear-first works older than the window: ${oldCore.map(w => w[0]).join('; ')}.`); });
     Object.values(COURSES).filter(c => !c.group).forEach(c => { c.stops.filter(s => s.id === id).forEach(s => { const p = row('Course route:'); h('i', '', p, c.name); p.append(`: ${s.week}, ${s.pages}. ${s.role}: ${s.works.join('; ')}.`); });
       (c.extra || []).filter(e => (e.go || []).includes(id)).forEach(e => { const p = row('Course route:'); h('i', '', p, c.name); p.append(`: ${e.week}, ${e.pages}. ${e.note}`); }); });
-    const xd = h('details', 'nsw-x', box); h('summary', '', xd, 'Terms across the syllabuses'); const tb = h('table', '', xd), hr = h('tr', '', tb); ['Stage 6 (2009)', 'Music 7–10 (2024)', 'Music 11–12 (2025)'].forEach(t => h('th', '', hr, t));
-    NSW.XW.forEach(r => { const tr = h('tr', '', tb); r.forEach(t => h('td', '', tr, t)); });
+    const xd = h('details', 'nsw-x', box); h('summary', '', xd, 'Elements across curricula');
+    { const sel = h('select', 'cl-pick', xd); sel.setAttribute('aria-label', 'Choose a curriculum'); ELX.forEach((c, k) => { const o = h('option', '', sel, c.t); o.value = k; });
+      const um = h('p', 'nsw-note', xd), tb = h('table', '', xd), src = h('p', 'nsw-note', xd);
+      const draw = () => { const c = ELX[+sel.value] || ELX[0]; um.textContent = 'What it calls them: ' + c.umb + '.'; tb.textContent = ''; const hr = h('tr', '', tb); h('th', '', hr, 'The Garden'); h('th', '', hr, c.t);
+        ELX_ROWS.forEach(e => { const tr = h('tr', '', tb); h('td', '', tr, elName(e)); h('td', '', tr, c.c[e] || '—'); }); src.textContent = ''; src.append('Source: '); [].concat(c.src).forEach((u, k) => { if (k) src.append(' · '); ext(src, u, (k ? 'A level' : c.t) + ' ↗'); }); };
+      sel.addEventListener('change', draw); draw();
+      h('p', 'nsw-note', xd, 'Each curriculum groups things a little differently. A cell shows where the Garden’s element sits in that curriculum, in its own words.'); }
     h('p', 'nsw-note', box, 'Matches are the Garden’s suggestions from each form’s period, family, kind and dates: check them against the syllabus. The last 25 years counts back from the HSC year.'); }
   if (F.teacher || F.teacherNote) { const t = h('p', 'tnote', panel); h('b', '', t, 'For teachers. '); t.append(F.teacher || F.teacherNote); }
 
@@ -396,7 +407,7 @@ function render(panel, id, ctx) {
   if (F.figures || F.centres || F.who || F.where || F.tech || F.now || F.deep) { const sec = h('details', 'sec', panel); h('summary', '', sec, 'Learning about music');
     if (F.figures) { const d = h('div', 'people', sec); h('small', '', d, 'Key figures'); h('p', '', d, F.figures.join(' · ')); }
     if (F.centres) { const d = h('div', 'people', sec); h('small', '', d, 'Centres'); h('p', '', d, F.centres.join(' · ')); }
-    [['Who made it, who paid', F.who], ['Where it was heard', F.where], ['Technology', F.tech], ['Then and now', F.now], ['Stage 6', F.deep]].forEach(([t, v]) => { if (!v) return; const d = h('div', 'about', sec); h('small', '', d, t); rich(h('p', '', d), v); if (t === 'Technology' && F.pages) pagesPanel(sec, F.pages, h, rich); }); }
+    [['Who made it, who paid', F.who], ['Where it was heard', F.where], ['Technology', F.tech], ['Then and now', F.now], ['Bloom · going deeper', F.deep]].forEach(([t, v]) => { if (!v) return; const d = h('div', 'about', sec); h('small', '', d, t); rich(h('p', '', d), v); if (t === 'Technology' && F.pages) pagesPanel(sec, F.pages, h, rich); }); }
 
   // G8 Connections, each with the Garden's reason (folded, open by default)
   if (Lg.direct + k.ev.length) { const sec = h('details', 'sec', panel); sec.open = true; h('summary', '', sec, 'Connections');
@@ -442,5 +453,5 @@ function renderEvent(panel, eid, ctx) {
     to.slice().sort((a, b) => N[a].y - N[b].y).forEach(i => { const li = h('li', '', ul), b = h('button', 'lk-b', li, N[i].t); b.type = 'button'; b.addEventListener('click', () => ctx.go(i)); h('small', '', li, ` ${N[i].d} · ${cap(ctx.famName(i))} spire`); }); }
   h('p', 'respect', panel, 'This Garden is presented with respect for every musician and culture it includes. To raise a cultural concern or report an incorrect link, contact Justin Ossher, the creator of this Garden, at any time.'); { const lv = h('p', 'living', panel, 'This is a living document in the form of an interactive page. Please e-mail '); const a = h('a', '', lv, 'shmungfroi@gmail.com'); a.href = 'mailto:shmungfroi@gmail.com'; lv.append(' to make any suggestions, comments or corrections.'); }
 }
-window.GardenCard = {render, renderComposer, renderEvent, VOICES, voiceTags, EVENTS: E, NSW, STRAND, COURSES, WINS};
+window.GardenCard = {render, renderComposer, renderEvent, VOICES, voiceTags, EVENTS: E, NSW, STRAND, COURSES, WINS, LEVELS, ELX};
 })();
