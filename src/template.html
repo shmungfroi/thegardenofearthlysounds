@@ -1009,6 +1009,14 @@ function commonsNote(on) {      // a short note on what lights up when the seed 
   cpop.style.left = Math.max(r0.left + 10, Math.min(r0.right - 350, sx + 170)) + 'px'; cpop.style.top = Math.max(r0.top + 40, sy - 680) + 'px'; cpop.classList.add('show'); }      // set beside the seed, clear of the oldest (brightest) names
 svg.addEventListener('mouseout', e => { const g0 = e.target.closest('.fm.soil'); if (g0) commonsNote(false); const g = e.target.closest('.fm'); if (g && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.fm') === g)) hoverId = null; if (g && !sel && !spot && !tkey && !ekey && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.fm') === g)) light(null); });
 $('#zin').onclick = () => goLevel(level() + 1); $('#zout').onclick = () => { if (tkey) { closePanel(); return goLevel(1); } if (sel) { closePanel(); light(null); return goLevel(2); } goLevel(level() - 1); };
+/* phone zoom (22 Nov) */ (() => { const NARROW = () => aw < 700, MIDY = {};
+  const midY = f => { if (MIDY[f] == null) { const ys = Object.values(LAY.nodes).filter(n => n.f === f).map(n => n.y).sort((a, b) => a - b); MIDY[f] = ys.length ? ys[ys.length >> 1] : centre()[1]; } return MIDY[f]; };
+  const zi = $('#zin').onclick, zo = $('#zout').onclick;
+  $('#zin').onclick = e => { if (NARROW() && !tkey && !sel && !ekey && level() === 0) { const f = famAt(centre()[0]), F = LAY.fams[f], fx = (F.x0 + F.x1) / 2, y = midY(f); closePanel(); clearSpot();
+      if (K_FAMILY() / view.k > 3) { nav = 0; return flyTo(Math.sqrt(view.k * K_FAMILY()), fx, y); }
+      return goFamily(f, y); } return zi(e); };
+  $('#zout').onclick = e => { if (NARROW() && !tkey && !sel && !ekey && level() === 1 && view.k / fitK > 3) { const [cx, cy] = centre(); nav = 0; curFam = null; return flyTo(Math.sqrt(view.k * fitK), cx, cy); } return zo(e); };
+})();
 document.querySelectorAll('.rung').forEach(r => r.onclick = () => { if (+r.dataset.l === 4) return tkey && showThread(tkey); if (tkey) closePanel(); goLevel(+r.dataset.l); });
 $('#hint').onclick = () => openPinned();
 addEventListener('keydown', e => {
