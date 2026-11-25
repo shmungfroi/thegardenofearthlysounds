@@ -40,8 +40,8 @@ STYLES = """(a) => { const [sel, skip] = a; const P = %s; const root = document.
 INIT = """(() => { window.__sound = 0; const AC = window.AudioContext || window.webkitAudioContext; if (AC) { const W = function () { window.__sound++; return new AC(); }; window.AudioContext = W; window.webkitAudioContext = W; }
   const play = HTMLMediaElement.prototype.play; HTMLMediaElement.prototype.play = function () { window.__sound++; return play.apply(this, arguments); }; })();"""
 VIEWS = ['overview', 0, 1, 2, 3, 'learned']
-SIZES = [(1440, 900), (1280, 720), (1024, 768), (390, 844), (360, 640), (768, 1024), (1180, 820), (820, 1180), (1920, 1080)]
-EXTRA = {(768, 1024), (1180, 820), (820, 1180), (1920, 1080)}
+SIZES = [(1440, 900), (1280, 720), (1024, 768), (390, 844), (360, 640), (768, 1024), (1180, 820), (820, 1180), (1920, 1080), (1366, 768), (320, 568), (667, 375)]
+EXTRA = {(768, 1024), (1180, 820), (820, 1180), (1920, 1080), (1366, 768), (320, 568), (667, 375)}
 TAP = "document.getElementById('map').dispatchEvent(new PointerEvent('pointerdown', {clientX: 5, clientY: 5, bubbles: true})); window.dispatchEvent(new PointerEvent('pointerup', {bubbles: true}))"
 def norm(t): return re.sub(r'\s+', ' ', str(t).replace('**', '').replace('*', '')).strip()
 
@@ -381,7 +381,7 @@ async def restore(b, size):
 CHECK = """(frame) => { const svg = document.getElementById('map'), R = svg.getBoundingClientRect(), S = __nz.state(); if (!S) return null;
   const rect = q => ({l: q.left, t: q.top, r: q.right, b: q.bottom}), ov = (a, o) => Math.max(0, Math.min(a.r, o.r) - Math.max(a.l, o.l)) * Math.max(0, Math.min(a.b, o.b) - Math.max(a.t, o.t));
   const vis = e => { const cs = getComputedStyle(e); return cs.display !== 'none' && cs.visibility !== 'hidden' && +cs.opacity > .05; };
-  const marks = []; document.querySelectorAll('#nzmk text, #nzmk circle.nz-fruit, #nzmk path.nz-root').forEach(e => { const q = e.getBoundingClientRect(); if (!q.width) return; const grp = e.closest('.nz-nmb,.nz-fr,.nz-lpg') || e; marks.push({e, r: rect(q), grp, what: (e.getAttribute('class') || '') + ':' + (e.textContent || (e.closest('.nz-fr') ? e.closest('.nz-fr').dataset.w : 'root'))}); });
+  const marks = []; document.querySelectorAll('#nzmk text, #nzmk circle.nz-fruit, #nzmk path.nz-root, #nzmk circle.nz-dc').forEach(e => { const q = e.getBoundingClientRect(); if (!q.width) return; const grp = e.closest('.nz-nmb,.nz-fr,.nz-lpg') || e; marks.push({e, r: rect(q), grp, what: (e.getAttribute('class') || '') + ':' + (e.textContent || (e.closest('.nz-fr') ? e.closest('.nz-fr').dataset.w : 'root'))}); });
   const ui = []; document.querySelectorAll('.ladder,.mm,#foot,#fams .fam,#lensbar>span,#hint,#trail,.gut,.rail,header.top,#eras .era,#evs .evd,#panel,#sheet.open').forEach(e => { if (e.getClientRects().length && vis(e)) ui.push({r: rect(e.getBoundingClientRect()), what: e.id || e.className}); });
   const names = []; document.querySelectorAll('#map .fm:not(.nzt)').forEach(g => { const go = +getComputedStyle(g).opacity; g.querySelectorAll('text').forEach(t => { const cs = getComputedStyle(t); if (cs.display === 'none' || go * +cs.opacity * +(cs.fillOpacity || 1) < .04) return; const q = t.getBoundingClientRect(); if (q.width) names.push({r: rect(q), what: t.textContent}); }); });
   const rings = [...document.querySelectorAll('#nzg circle')].map(c => ({r: rect(c.getBoundingClientRect()), lan: c.dataset.lan}));
@@ -392,23 +392,25 @@ CHECK = """(frame) => { const svg = document.getElementById('map'), R = svg.getB
   marks.forEach((m, i) => { if (!inside(m.r)) bad.push('outside the map: ' + m.what);
     ui.forEach(u => { if (ov(m.r, u.r) > .5) bad.push('under ' + u.what + ': ' + m.what); });
     names.forEach(n => { if (ov(m.r, n.r) > .5) bad.push(m.what + ' on Garden name ' + n.what); });
-    rings.forEach(g => { if (ov(m.r, g.r) > .5) bad.push(m.what + ' on a ring'); });
+    rings.forEach(g => { if (ov(m.r, g.r) <= .5) return; const cx = (g.r.l + g.r.r) / 2, cy = (g.r.t + g.r.b) / 2, rad = (g.r.r - g.r.l) / 2, dx = cx - Math.max(m.r.l, Math.min(cx, m.r.r)), dy = cy - Math.max(m.r.t, Math.min(cy, m.r.b)); if (dx * dx + dy * dy < rad * rad) bad.push(m.what + ' on a ring'); });      /* a ring is a circle */
     if (pts.some(([x, y]) => x > m.r.l + .5 && x < m.r.r - .5 && y > m.r.t + .5 && y < m.r.b - .5)) bad.push(m.what + ' on the thread');
     marks.forEach((o, j) => { if (j > i && o.grp !== m.grp && ov(m.r, o.r) > .5) bad.push(m.what + ' on ' + o.what); }); });
   document.querySelectorAll('#nzmk .nz-stem').forEach(st => { const g = st.closest('.nz-fr'), L = st.getTotalLength(), M = st.getScreenCTM(), lan = __nz.data.stops[+g.dataset.go].lan, ring = rings.find(x => x.lan === lan);
     for (let j = 2; j <= 20; j++) { const q = st.getPointAtLength(L * j / 20), x = M.a * q.x + M.c * q.y + M.e, y = M.b * q.x + M.d * q.y + M.f; if (ring && x > ring.r.l - 1 && x < ring.r.r + 1 && y > ring.r.t - 1 && y < ring.r.b + 1) continue;
       if (marks.some(m => m.grp !== g && x > m.r.l && x < m.r.r && y > m.r.t && y < m.r.b)) { bad.push('stem of ' + g.dataset.w + ' through a mark'); break; }
       if (rings.some(r => r !== ring && x > r.r.l && x < r.r.r && y > r.r.t && y < r.r.b)) { bad.push('stem of ' + g.dataset.w + ' through a ring'); break; } } });
-  const free = (x, y) => x > R.left + 8 && x < R.right - 8 && y > R.top + 8 && y < R.bottom - 8 && !ui.some(u => x > u.r.l && x < u.r.r && y > u.r.t && y < u.r.b);
+  const free = (x, y) => x > R.left + 8 && x < R.right - 8 && y > R.top + 8 && y < R.bottom - 8 && !ui.some(u => x > u.r.l - 3 && x < u.r.r + 3 && y > u.r.t - 3 && y < u.r.b + 3);      /* a lantern touching the frame counts as out of view (its ring steps aside) */
   __nz.data.stops.forEach((s, i) => { const c = document.querySelector('#map .fm[data-id="' + s.lan + '"] circle').getBoundingClientRect(), x = c.left + c.width / 2, y = c.top + c.height / 2; if (!free(x, y)) return; seenStop.push(i);
     if (!document.querySelector('#nzmk .nz-nmb[data-go="' + i + '"]')) bad.push('stop name hidden: ' + s.name);
     s.works.filter(w => w.core && w.lv.includes(S.lv)).forEach(w => { if (!document.querySelector('#nzmk .nz-fr[data-w="' + w.id + '"]')) bad.push('core work hidden: ' + w.id); }); });
   const Rv = {l: R.left, t: R.top, r: R.right, b: R.bottom};
-  __nz.data.stops.forEach((s, i) => { const ring = rings.find(x => x.lan === s.lan); if (!ring || !frame) return; const vis = ov(ring.r, Rv) > 2 && !ui.some(u => ring.r.l >= u.r.l && ring.r.r <= u.r.r && ring.r.t >= u.r.t && ring.r.b <= u.r.b);
+  __nz.data.stops.forEach((s, i) => { const ring = rings.find(x => x.lan === s.lan); if (!ring) return; const vis = ov(ring.r, Rv) > 2 && !ui.some(u => ring.r.l >= u.r.l && ring.r.r <= u.r.r && ring.r.t >= u.r.t && ring.r.b <= u.r.b);
     if (vis && !document.querySelector('#nzmk .nz-nmb[data-go="' + i + '"]')) bad.push('a thread ring in view without its name: ' + s.name);
     if (vis && s.works.some(w => w.core && w.lv.includes(S.lv) && !document.querySelector('#nzmk .nz-fr[data-w="' + w.id + '"]'))) bad.push('a thread ring in view without its core work: ' + s.name); });
   const cur = typeof S.at === 'number' ? document.querySelector('#nzmk .nz-nmb[data-go="' + S.at + '"]') : null;
   if (cur && !cur.querySelector('.nz-cap') && document.querySelector('#nzmk .nz-nmb:not([data-go="' + S.at + '"]) .nz-cap')) bad.push('the current chapter lost its caption while another stop kept one');
+  const dots = document.querySelectorAll('#nzmk .nz-nmb.nz-dot').length, nmb = document.querySelectorAll('#nzmk .nz-nmb').length;
+  if (dots && dots !== nmb) bad.push('numbered stops mixed with names');
   const lp = document.querySelector('#nzmk .nz-lp');
   if (lp) { const c2 = document.querySelector('#map .fm[data-id="triosonata"] circle').getBoundingClientRect(), c3 = document.querySelector('#map .fm[data-id="kbsonata"] circle').getBoundingClientRect(), q = lp.getBoundingClientRect();
     const a = [c2.left + c2.width / 2, c2.top + c2.height / 2], b = [c3.left + c3.width / 2, c3.top + c3.height / 2], m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
@@ -426,10 +428,11 @@ async def collisions(b, size):
             for v in VIEWS:
                 await ev(f"__nz.show({json.dumps(v)})"); await settle(pg)
                 zooms = [None, '+'] if (W, H) in EXTRA else [None] + (['+', '-'] if v not in ('overview', 'learned') else ['+'])
-                if W in (1440, 390) and lv == 6: zooms += ['k0.8', 'k1.6', 'k6', 'k9']
+                if W in (1440, 390) and lv == 6: zooms += ['++', 'k0.8', 'k1.6', 'k6', 'k9']
                 for z in zooms:
-                    if z in ('+', '-'):
-                        await ev("__nz.frame()"); await settle(pg); await ev("document.querySelector('#map').focus()"); await pg.keyboard.press(z if z == '+' else '-')
+                    if z in ('+', '-', '++'):
+                        await ev("__nz.frame()"); await settle(pg); await ev("document.querySelector('#map').focus()")
+                        for key in ('+', '+') if z == '++' else (z,): await pg.keyboard.press(key); await pg.wait_for_timeout(60)
                     elif z:
                         await ev(f"(() => {{ const v = __map.view, k = {z[1:]}, r = document.getElementById('map').getBoundingClientRect(), c = [(r.width / 2 - v.tx) / v.k, (r.height / 2 - v.ty) / v.k]; v.k = k; v.tx = r.width / 2 - c[0] * k; v.ty = r.height / 2 - c[1] * k; window.dispatchEvent(new Event('resize')); }})()")
                     await settle(pg); r = await ev(CHECK, z is None); views += 1
