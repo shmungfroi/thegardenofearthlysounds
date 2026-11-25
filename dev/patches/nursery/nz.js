@@ -30,6 +30,7 @@ const nzWorks = (i, lv) => NZJ.stops[i].works.filter(w => w.lv.includes(lv));
 const nzHasNote = (i, lv) => nzWorks(i, lv).some(w => nzNote(i, w.id).trim());
 const nzIsCh = at => typeof at === 'number';
 const nzSur = w => w.composer.split(' ').pop();
+const nzHd = t => String(t).replace(/\.$/, '');      /* the text's bold headings end in a full stop; as headings they are set without it */
 
 /* ---- text: **term** opens the Garden's own definition, *title* is set in italics ---- */
 function nzRich(parent, text) {
@@ -72,13 +73,13 @@ function nzSection(sh) { if (!NZJ) return; const S = el('section', 'nz-sec', sh)
 function nzBegin(at) { if (!NZJ) return;
   if (NZS) return nzShow(at == null ? 'overview' : at);
   const pan = document.body.classList.contains('pan');
-  const snap = {view: {...view}, curFam, curEra, nav, sel, spot, tkey, ekey, pan, ps: panel.scrollTop,
+  const snap = {hid: NZJ.stops.map(st => !!(NODE[st.lan] && NODE[st.lan].classList.contains('hid'))), svgCls: svg.getAttribute('class'), hint: $('#hint').style.display, view: {...view}, curFam, curEra, nav, sel, spot, tkey, ekey, pan, ps: panel.scrollTop,
     sheet: sheet.classList.contains('open') ? {kind: sheet.dataset.kind, top: sheet.scrollTop} : null, walk: walking ? {j: walking.j, i: walking.i, shared: walking.shared} : null};
   closeSheet(); quitWalk(); clearTrace(); clearThread(); clearEvent(); hidePill(); commonsNote(false); tip.style.display = 'none'; sel = null; spot = null;
   NZS = {lv: NZ.lv, at: null, snap};
   panel.classList.add('nz-read'); document.body.classList.add('pan', 'nzon'); measure(); clamp(view);
   nzMapOn(); nzShow(at == null ? 'overview' : at, true); }
-function nzShow(at, first) { if (!NZS) return; const prev = NZS.at; NZS.at = at; NZ.at.sonata = at; nzSave();
+function nzShow(at, first) { if (!NZS) return; const prev = NZS.at; NZS.at = at; if (at !== 'overview') { NZ.at.sonata = at; nzSave(); }
   nzRender(); nzLight(); nzThreadState(first ? null : prev, at); nzFrame();
   say(at === 'overview' ? 'Sonata, Follow the growth. The start of the journey.' : at === 'learned' ? 'What I learned.' : `${nzLabel(at)}: ${NZJ.stops[at].name}.`); }
 function nzBack() { if (!NZS) return false;
@@ -96,6 +97,8 @@ function nzEnd(restore) { if (!NZS) return; const S = NZS; NZS = null; clearTime
   else light(null);
   cancelAnimationFrame(anim); measure(); Object.assign(view, s.view); curFam = s.curFam; curEra = s.curEra; nav = s.nav; apply();
   if (s.pan) panel.scrollTop = s.ps;
+  NZJ.stops.forEach((st, i) => NODE[st.lan] && NODE[st.lan].classList.toggle('hid', s.hid[i]));
+  const cl = svg.getAttribute('class') || ''; if (s.svgCls != null && cl.split(' ').sort().join(' ') === s.svgCls.split(' ').sort().join(' ')) svg.setAttribute('class', s.svgCls); $('#hint').style.display = s.hint;
   if (s.sheet) { const b = document.querySelector(`.rail button[data-sheet="${s.sheet.kind}"]`); if (b) { openSheet(s.sheet.kind, b); sheet.scrollTop = s.sheet.top; } }
   say('The journey is closed. The Garden is as it was.'); }
 function nzLight() { if (!NZS) return; svg.classList.add('focus');
@@ -151,9 +154,9 @@ function nzChapter(P, i, lv) { const S = NZJ.stops[i], n = N[S.lan] || {}, f = f
   const ln = el('div', 'lin nz-lin', P); ln.append('the lantern: ' + S.lanDate + ' · '); const sp = el('span', 'nz-spire', ln, FT(f)); sp.style.color = FC(f); sp.style.borderColor = FC(f); ln.append(' · ' + ERANAME(n.period) + ' storey');
   const oc = el('button', 'jr-b nz-card-b', P, 'Open its card'); oc.type = 'button'; oc.title = 'Open the lantern card (you can come back to this chapter)'; oc.onclick = () => choose(S.lan, true);
   if (S.lead) { const p = el('p', 'nz-lead', P); el('b', '', p, S.lead); }
-  nzIn(S.intro, lv).forEach(x => nzP(P, 'nz-intro', x.t));
-  el('h4', '', P, S.meansHead); nzIn(S.means, lv).forEach(x => nzP(P, '', x.t));
-  el('h4', '', P, S.changedHead); nzIn(S.changed, lv).forEach(x => { if (x.scope) el('p', 'nz-scope', P, x.scope); nzP(P, '', x.t); });
+  nzIn(S.intro, lv).forEach(x => { const q = el('p', 'nz-intro', P); if (x.label) el('span', 'nz-lvl', q, x.label + ': '); nzRich(q, x.t); });
+  el('h4', '', P, nzHd(S.meansHead)); nzIn(S.means, lv).forEach(x => nzP(P, '', x.t));
+  el('h4', '', P, nzHd(S.changedHead)); nzIn(S.changed, lv).forEach(x => { if (x.scope) el('p', 'nz-scope', P, x.scope); nzP(P, '', x.t); });
   const ws = nzWorks(i, lv); const wh = el('h4', '', P, ws.length === 1 ? 'The work' : 'The works · ' + ws.length);
   if (ws.some(w => !w.core)) { const key = el('span', 'nz-wkey', wh); nzFruitMark(key, true); key.append('core '); nzFruitMark(key, false); key.append('added at ' + NZLV[Math.min(...ws.filter(w => !w.core).map(w => Math.min(...w.lv)))]); }
   ws.forEach(w => nzWork(P, i, w, lv));
@@ -210,7 +213,7 @@ function nzMail(i, lv, name) { const S = NZJ.stops[i], ch = nzIn(S.check, lv)[0]
 /* ---- What I learned ---- */
 function nzLearned(P, lv) { const Lr = NZJ.learned;
   el('div', 'nz-cap', P, 'At the end'); el('h2', 'jr-stopname nz-focus', P, Lr.head);
-  const ol = el('ol', 'nz-prompts', P); Lr.prompts.forEach(t => { const li = el('li', '', ol), b = el('div', 'research nz-qbox', li); el('small', '', b, 'a question for you'); nzP(b, '', t); });
+  const ol = el('ol', 'nz-prompts', P); Lr.prompts.forEach((t, n) => { const li = el('li', '', ol), b = el('div', 'research nz-qbox', li); el('small', '', b, `${n + 1} · a question for you`); nzP(b, '', t); });
   nzTeach(P, Lr.teachers);
   el('h4', '', P, 'Your notes'); let any = false;
   NZJ.stops.forEach((S, i) => { const ws = S.works.filter(w => nzNote(i, w.id).trim()); const d = el('div', 'nz-mine', P); const h = el('button', 'nz-mh', d); h.type = 'button'; el('small', '', h, `${nzLabel(i)} · ${S.year}`); h.append(S.name); h.onclick = () => nzShow(i);
@@ -244,7 +247,7 @@ function nzMapOn() { const first = cam.querySelector(':scope > .fm');
   mk.addEventListener('mouseover', e => { const t = e.target.closest('.nz-fr'); if (t) { const W = document.getElementById('nzw-' + t.dataset.w); if (W) W.classList.add('hot'); } });
   mk.addEventListener('mouseout', e => { const t = e.target.closest('.nz-fr'); if (t) { const W = document.getElementById('nzw-' + t.dataset.w); if (W) W.classList.remove('hot'); } });
   NZS.map = {veil, g, mk, segs}; }
-function nzMapOff() { document.querySelectorAll('#nzveil,#nzg,#nzmk').forEach(x => x.remove()); document.querySelectorAll('#map .fm.nzt').forEach(x => x.classList.remove('nzt')); }
+function nzMapOff() { document.querySelectorAll('#nzveil,#nzg,#nzmk').forEach(x => x.remove()); document.querySelectorAll('#map .fm.nzt').forEach(x => x.classList.remove('nzt', 'hid')); }      /* hid: the Garden's declutter may have hidden a thread lantern's name while the journey lit it, and never clears it */
 function nzThreadState(prev, at) { const M = NZS.map; if (!M) return; const whole = at === 'overview' || at === 'learned', walk = i => whole || (nzIsCh(at) && i < at);
   const fade = prev == null || !nzIsCh(prev) || !nzIsCh(at), rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const set = () => M.segs.forEach(s => { const on = walk(s.i); s.sg.classList.toggle('on', on); if (!s.leap) [s.glow, s.line].forEach(p => { p.style.strokeDashoffset = on ? 0 : (s.fwd ? 100 : -100); }); });
@@ -253,14 +256,15 @@ function nzThreadState(prev, at) { const M = NZS.map; if (!M) return; const whol
   else set(); }
 
 /* ---- framing: the chapter (with the stop before when names stay readable), or the whole thread ---- */
-function nzSafe() { const R = svg.getBoundingClientRect(); let l = 0, t = 0, r = R.width, b = R.height;
+function nzSafe(dx, dy) { const R = svg.getBoundingClientRect(); let l = 0, t = 0, r = R.width, b = R.height; dx = dx || 1; dy = dy || 1;
   document.querySelectorAll('#fams .fam,.ladder,#lensbar>span,#foot,#trail,#hint').forEach(e => { if (!e.getClientRects().length) return; const cs = getComputedStyle(e); if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity < .05) return;
     const q = e.getBoundingClientRect(), x0 = q.left - R.left, x1 = q.right - R.left, y0 = q.top - R.top, y1 = q.bottom - R.top; if (x1 <= l || x0 >= r || y1 <= t || y0 >= b) return;
-    const c = [['t', (y1 - t) * (r - l)], ['b', (b - y0) * (r - l)], ['l', (x1 - l) * (b - t)], ['r', (r - x0) * (b - t)]].sort((u, v) => u[1] - v[1])[0][0];
+    const fit = (w, h) => Math.min(w / dx, h / dy), c = [['t', fit(r - l, b - y1)], ['b', fit(r - l, y0 - t)], ['l', fit(r - x1, b - t)], ['r', fit(x0 - l, b - t)]].sort((u, v) => v[1] - u[1])[0][0];
     if (c === 't') t = y1; else if (c === 'b') b = y0; else if (c === 'l') l = x1; else r = x0; });
   return {l: l + 8, t: t + 8, r: r - 8, b: b - 8}; }
-function nzFrame() { if (!NZS) return; measure(); const S = nzSafe(), W = S.r - S.l, Hh = S.b - S.t, phone = aw < 700; if (W < 40 || Hh < 40) return;
-  const at = NZS.at, P = i => LAY.nodes[NZJ.stops[i].lan]; let k, cx, cy;
+function nzFrame() { if (!NZS) return; measure(); const at = NZS.at, P = i => LAY.nodes[NZJ.stops[i].lan], phone = aw < 700; let k, cx, cy;
+  const ext = nzIsCh(at) ? (at > 0 && !phone ? [Math.abs(P(at).x - P(at - 1).x) + 250 / 3, Math.abs(P(at).y - P(at - 1).y) + 170 / 3] : [1, 1]) : [Math.max(...NZJ.stops.map((s, i) => P(i).x)) - Math.min(...NZJ.stops.map((s, i) => P(i).x)), Math.max(...NZJ.stops.map((s, i) => P(i).y)) - Math.min(...NZJ.stops.map((s, i) => P(i).y))];
+  const S = nzSafe(ext[0], ext[1]), W = S.r - S.l, Hh = S.b - S.t; if (W < 40 || Hh < 40) { NZS.pending = false; return; }
   if (nzIsCh(at)) { const p = P(at), q = at > 0 ? P(at - 1) : null, mx = phone ? 70 : 125, my = phone ? 60 : 85;
     const kb = q ? Math.min((W - 2 * mx) / Math.max(1, Math.abs(p.x - q.x)), (Hh - 2 * my) / Math.max(1, Math.abs(p.y - q.y))) : 0;
     if (q && !phone && kb >= 2.4) { k = Math.min(kb, 4.2); cx = (p.x + q.x) / 2; cy = (p.y + q.y) / 2; }
@@ -269,16 +273,20 @@ function nzFrame() { if (!NZS) return; measure(); const S = nzSafe(), W = S.r - 
     curFam = famAt(p.x); curEra = eraOf(NZJ.stops[at].lan); }
   else { const xs = NZJ.stops.map((s, i) => P(i).x), ys = NZJ.stops.map((s, i) => P(i).y), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), mx = phone ? 40 : 90, my = phone ? 45 : 80;
     k = Math.min((W - 2 * mx) / (x1 - x0), (Hh - 2 * my) / (y1 - y0)); if (phone) k = Math.min(k, fitK * 2.65); cx = (x0 + x1) / 2; cy = (y0 + y1) / 2; curFam = curEra = null; }
-  k = Math.max(KMIN(), Math.min(KMAX, k)); const ox = ((S.l + S.r) / 2 - aw / 2) / k, oy = ((S.t + S.b) / 2 - ah / 2) / k;
-  if (NZS.map) NZS.map.mk.classList.add('nzfade');
-  flyTo(k, cx - ox, cy - oy); nav = nzIsCh(at) ? 3 : 0;
-  clearTimeout(nzFrame.t); nzFrame.t = setTimeout(() => { if (!NZS) return; nzSettle(); NZS.map && NZS.map.mk.classList.remove('nzfade'); }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 20 : 700); }
+  k = Math.max(KMIN(), Math.min(KMAX, k)); let ox = ((S.l + S.r) / 2 - aw / 2) / k, oy = ((S.t + S.b) / 2 - ah / 2) / k;
+  const need = nzIsCh(at) ? [at] : NZJ.stops.map((s, i) => i), m2 = phone ? 24 : 40;      /* the Garden's edges can stop the camera short: then come a little closer until the stops sit clear of the frame */
+  for (let n = 0; n < 16; n++) { const v = clamp({k, tx: aw / 2 - (cx - ox) * k, ty: ah / 2 - (cy - oy) * k});
+    if (need.every(i => { const p = P(i), x = v.tx + p.x * v.k, y = v.ty + p.y * v.k; return x > S.l + m2 && x < S.r - m2 && y > S.t + m2 && y < S.b - m2; })) break;
+    k = Math.min(KMAX, k * 1.05); ox = ((S.l + S.r) / 2 - aw / 2) / k; oy = ((S.t + S.b) / 2 - ah / 2) / k; }
+  if (NZS.map) NZS.map.mk.classList.add('nzfade'); NZS.pending = true;
+  flyTo(k, cx - ox, cy - oy); nav = nzIsCh(at) ? 3 : 0; nzFrame.busy = true;
+  clearTimeout(nzFrame.t); nzFrame.t = setTimeout(() => { nzFrame.busy = false; if (!NZS) return; nzSettle(); NZS.map && NZS.map.mk.classList.remove('nzfade'); }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 20 : 700); }
 
 /* ---- the marks: names, captions, fruits on stems, the root sign and the leap's words, placed so that none touches another,
    the thread, a lantern ring or a name of the Garden's, and none sits under the frame ---- */
 let nzT = 0;
 const nzScr = p => [view.tx + p.x * view.k, view.ty + p.y * view.k];
-function nzOnApply() { if (!NZS || !NZS.map) return; nzPos(); clearTimeout(nzT); nzT = setTimeout(nzSettle, 110); }
+function nzOnApply() { if (!NZS || !NZS.map) return; nzPos(); clearTimeout(nzT); NZS.pending = true; nzT = setTimeout(nzSettle, 110); }
 function nzSettle(n) { if (!NZS) return; n = n || 0;      /* wait until the Garden's names have finished fading in or out, so what is measured is what is seen */
   const busy = document.getAnimations ? document.getAnimations().some(a => a.playState === 'running' && a.effect && a.effect.target && a.effect.target.closest && a.effect.target.closest('#map') && !a.effect.target.closest('#nzg,#nzmk')) : false;
   if (busy && n < 8) { nzT = setTimeout(() => nzSettle(n + 1), 90); return; } nzSolve(); }
@@ -303,7 +311,7 @@ const nzW = (() => { const c = {}; return (txt, cls) => { const k = cls + '|' + 
 function nzSolve() { if (!NZS || !NZS.map) return; const R = svg.getBoundingClientRect(); if (R.width < 60 || R.height < 60 || !(view.k > .02)) return;
   nzPos(); const OB = nzObstacles(R), TP = nzThreadPts(R), BOX = {l: 3, t: 3, r: R.width - 3, b: R.height - 3};
   let L = nzPlace(R, OB, TP, BOX, 0); if (L.forced.length) { const L2 = nzPlace(R, OB, TP, BOX, 1); if (L2.forced.length < L.forced.length || (L2.forced.length === L.forced.length && L2.hidden.length < L.hidden.length)) L = L2; else L = nzPlace(R, OB, TP, BOX, 0); }
-  NZS.layout = {hidden: L.hidden, forced: L.forced, off: L.off, soft: L.soft, k: view.k}; NZS.dbg = {OB, TP, PL: L.PL, BOX, SP: L.SP}; }
+  NZS.layout = {hidden: L.hidden, forced: L.forced, off: L.off, soft: L.soft, k: view.k}; NZS.pending = !!nzFrame.busy; NZS.dbg = {OB, TP, PL: L.PL, BOX, SP: L.SP}; }
 /* one placement. mode 0: the chapter's core works first, then the names; mode 1: the names first */
 function nzPlace(R, OB, TP, BOX, mode) { const M = NZS.map, mk = M.mk, at = NZS.at, lv = NZS.lv, cur = nzIsCh(at) ? at : -1, labels = cur >= 0 && view.k >= 2.3;
   mk.innerHTML = ''; M.st = []; M.lg = null; const PL = [], hidden = [], forced = [], off = [], soft = [];
@@ -313,25 +321,25 @@ function nzPlace(R, OB, TP, BOX, mode) { const M = NZS.map, mk = M.mk, at = NZS.
   const GARDEN = o => o.tag === 'name' || o.tag === 'pt' || o.tag === 'mark';
   /* cost of a set of rects: [hard, soft]. Soft: the faint points of the Garden's other lanterns, and (isSoft) whatever the caller allows */
   const cost = (rs, lists, skip, isSoft) => { let h = 0, sf = 0; for (const r of rs) { if (r.l < BOX.l || r.t < BOX.t || r.r > BOX.r || r.b > BOX.b) return [1e9, 0];
-      for (const Ls of lists) for (const o of Ls) { if (skip && skip(o)) continue; if (o.l < r.r + 1.5 && o.r > r.l - 1.5 && o.t < r.b + 1.5 && o.b > r.t - 1.5) { const a = ov(r, o) + 1; if (o.tag === 'pt' || (isSoft && isSoft(o))) sf += a; else h += a; } } } return [h, sf]; };
-  const seen = i => { const [x, y] = SP[i]; return x > BOX.l + 4 && x < BOX.r - 4 && y > BOX.t + 4 && y < BOX.b - 4; };
+      for (const Ls of lists) for (const o of Ls) { if (skip && skip(o)) continue; if (o.l < r.r + 1.5 && o.r > r.l - 1.5 && o.t < r.b + 1.5 && o.b > r.t - 1.5) { const a = ov(r, o) + 1; if (o.tag === 'pt' || (isSoft && isSoft(o))) sf += a; else h += o.tag === 'ui' ? a * 40 : a; } } } return [h, sf]; };
+  const UI = OB.filter(o => o.tag === 'ui'), seen = i => { const [x, y] = SP[i]; return x > BOX.l + 4 && x < BOX.r - 4 && y > BOX.t + 4 && y < BOX.b - 4 && !UI.some(u => x > u.l && x < u.r && y > u.t && y < u.b); };
   const g0 = NZJ.stops.map((s, i) => { const g = nzS('g', {class: 'nz-st' + (i === cur ? ' cur' : '') + (cur >= 0 && i !== cur ? ' other' : '')}, mk); M.st.push(g); return g; }); nzPos();
   const leapSeg = M.segs.find(s => s.leap);
   /* stop names with their caption, in the Garden's own line breaks: never hidden */
   const nameBlock = (i, fs) => { const s = NZJ.stops[i], lines = [...(NODE[s.lan] ? NODE[s.lan].querySelectorAll('text') : [])].map(t => t.textContent.trim()).filter(Boolean), cap = `${i ? 'CHAPTER ' + i : 'ROOT'} · ${s.year}${at === 'learned' && s.works.some(w => nzNote(i, w.id).trim()) ? '  ✎ NOTE' : ''}`;
-    const w = Math.max(nzW(cap, 'nz-cap'), ...lines.map(t => nzW(t, 'nz-nm f' + fs))) + 2, lh = fs + 2.5; return {cap, lines, w, h: 11 + lines.length * lh, fs, lh}; };
+    const nc = fs < 0, f2 = Math.abs(fs), w = Math.max(nc ? 0 : nzW(cap, 'nz-cap'), ...lines.map(t => nzW(t, 'nz-nm f' + f2))) + 2, lh = f2 + 2.5, top = nc ? 0 : 11; return {cap: nc ? '' : cap, lines, w, h: top + lines.length * lh + 2, fs: f2, lh, top}; };
   const placeName = i => { if (!seen(i)) { off.push('name:' + i); return; } const [px, py] = SP[i], lists = [near(px, py, 280), PL]; let best = null;
-    for (const fs of [11, 10, 9]) { const B2 = nameBlock(i, fs), w = B2.w, h = B2.h, cand = [];
-      [1, 1.6, 2.3, 3.2, 4.4].forEach(m => { const g = 6 * m; cand.push([-w / 2, -h - g, 'm'], [g + 2, -h / 2, 's'], [-w - g - 2, -h / 2, 'e'], [-w / 2, g + 1, 'm'], [g, -h - g * .6, 's'], [-w - g, -h - g * .6, 'e'], [g, g * .6, 's'], [-w - g, g * .6, 'e']); });
-      for (const [dx, dy, al] of cand) { const r = {l: px + dx, t: py + dy, r: px + dx + w, b: py + dy + h}, [hd, sf] = cost([r], lists), key = hd * 1e4 + sf + (11 - fs) * 30;
+    for (const fs of [11, 10, 9, -10, -9]) { const B2 = nameBlock(i, fs), w = B2.w, h = B2.h, cand = [];
+      [1, 1.6, 2.3, 3.2, 4.4, 5.8, 7.4].forEach(m => { const g = 6 * m; cand.push([-w / 2, -h - g, 'm'], [g + 2, -h / 2, 's'], [-w - g - 2, -h / 2, 'e'], [-w / 2, g + 1, 'm'], [g, -h - g * .6, 's'], [-w - g, -h - g * .6, 'e'], [g, g * .6, 's'], [-w - g, g * .6, 'e']); });
+      for (const [dx, dy, al] of cand) { const r = {l: px + dx, t: py + dy, r: px + dx + w, b: py + dy + h}, [hd, sf] = cost([r], lists), key = hd * 1e4 + sf + (11 - Math.abs(fs)) * 30 + (fs < 0 ? 200 : 0);
         if (!best || key < best.key) best = {key, hd, sf, dx, dy, al, B2, r}; if (!hd && !sf) break; }
       if (best && !best.hd && !best.sf) break; }
     if (best.hd) { forced.push('name:' + i); best.dx = Math.max(BOX.l - px, Math.min(BOX.r - px - best.B2.w, best.dx)); best.dy = Math.max(BOX.t - py, Math.min(BOX.b - py - best.B2.h, best.dy)); best.r = {l: px + best.dx, t: py + best.dy, r: px + best.dx + best.B2.w, b: py + best.dy + best.B2.h}; }
     else if (best.sf) soft.push('name:' + i);
     const {dx, dy, al, B2} = best, g = nzS('g', {class: 'nz-nmb' + (i === cur ? ' cur' : ''), 'data-go': i, role: 'button', 'aria-label': `${nzLabel(i)}: ${NZJ.stops[i].name}`}, g0[i]), ax = al === 'm' ? dx + B2.w / 2 : al === 'e' ? dx + B2.w : dx, an = al === 'm' ? 'middle' : al === 'e' ? 'end' : 'start';
     nzS('rect', {x: dx, y: dy, width: B2.w, height: B2.h, class: 'nz-hit'}, g);
-    nzS('text', {class: 'nz-cap', x: ax, y: dy + 8, 'text-anchor': an}, g).textContent = B2.cap;
-    B2.lines.forEach((t, j) => { nzS('text', {class: 'nz-nm f' + B2.fs, x: ax, y: dy + 11 + B2.lh * (j + 1) - 2.5, 'text-anchor': an}, g).textContent = t; });
+    if (B2.cap) nzS('text', {class: 'nz-cap', x: ax, y: dy + 8, 'text-anchor': an}, g).textContent = B2.cap; else soft.push('caption:' + i);
+    B2.lines.forEach((t, j) => { nzS('text', {class: 'nz-nm f' + B2.fs, x: ax, y: dy + B2.top + B2.lh * (j + 1) - 2.5, 'text-anchor': an}, g).textContent = t; });
     PL.push(best.r); };
   /* fruits: hanging down first, longer stems before turning upward, then smaller, then without a label */
   const ANG = []; for (let j = 0; j <= 12; j++) { ANG.push(90 + j * 15); if (j && j < 12) ANG.push(90 - j * 15); }
@@ -341,8 +349,8 @@ function nzPlace(R, OB, TP, BOX, mode) { const M = NZS.map, mk = M.mk, at = NZS.
     const tryAll = (sizes, withLab) => { for (const rr of sizes) for (const [a, Ln] of CAND) { const t = a * Math.PI / 180, ux = Math.cos(t), uy = Math.sin(t), fx = px + ux * (Ln + rr), fy = py + uy * (Ln + rr);
         const rs = [{l: fx - rr - 1, t: fy - rr - 1, r: fx + rr + 1, b: fy + rr + 1}], side = ux >= -.15 ? 1 : -1, stem = [];
         const cxq = (px + fx) / 2 - uy * Ln * .12 * side, cyq = (py + fy) / 2 + Math.abs(ux) * Ln * .12;
-        for (let k = 1; k <= 6; k++) { const u = .12 + k * .13; if (u > .92) break; const qx = (1 - u) * (1 - u) * px + 2 * (1 - u) * u * cxq + u * u * fx, qy = (1 - u) * (1 - u) * py + 2 * (1 - u) * u * cyq + u * u * fy; stem.push({l: qx - 1, t: qy - 1, r: qx + 1, b: qy + 1}); }
-        let lr = null; if (withLab) { lr = side > 0 ? {l: fx + rr + 3, t: fy - 6.5, r: fx + rr + 3 + lw, b: fy + 5.5} : {l: fx - rr - 3 - lw, t: fy - 6.5, r: fx - rr - 3, b: fy + 5.5}; rs.push(lr); }
+        const ns = Math.max(6, Math.ceil(Ln / 3)); for (let k = 1; k < ns; k++) { const u = k / ns; if (u < .14) continue; const qx = (1 - u) * (1 - u) * px + 2 * (1 - u) * u * cxq + u * u * fx, qy = (1 - u) * (1 - u) * py + 2 * (1 - u) * u * cyq + u * u * fy; stem.push({l: qx - 1, t: qy - 1, r: qx + 1, b: qy + 1}); }
+        let lr = null; if (withLab) { lr = side > 0 ? {l: fx + rr + 3, t: fy - 8, r: fx + rr + 3 + lw, b: fy + 7} : {l: fx - rr - 3 - lw, t: fy - 8, r: fx - rr - 3, b: fy + 7}; rs.push(lr); }
         const a1 = cost(rs, lists), a2 = cost(stem, lists, o => o.tag === own, GARDEN), hd = a1[0] + a2[0]; if (hd >= 1e9) continue;
         const sf = a1[1] + a2[1], key = hd * 1e4 + sf * 2 + (withLab ? 0 : 60) + (sizes[0] - rr) * 12;
         if (!best || key < best.key) best = {key, hd, sf, fx, fy, rr, cxq, cyq, lr, side, rs: rs.concat(stem), withLab}; if (!hd && !sf) return true; } return false; };
@@ -379,4 +387,4 @@ function nzPlace(R, OB, TP, BOX, mode) { const M = NZS.map, mk = M.mk, at = NZS.
   order.filter(i => i !== cur).forEach(i => nzWorks(i, lv).filter(w => !w.core).forEach(w => placeFruit(i, w, {label: false, sizes: [3.4, 2.7, 2.1], must: false})));
   placeLeap();
   return {hidden, forced, off, soft, PL, SP}; }
-window.__nz = {begin: nzBegin, show: nzShow, end: nzEnd, back: nzBack, solve: nzSolve, frame: nzFrame, open: () => NZS ? NZS.at : null, state: () => NZS, store: () => NZ, mail: nzMail, data: NZJ};
+window.__nz = {begin: nzBegin, show: nzShow, end: nzEnd, back: nzBack, solve: nzSolve, frame: nzFrame, open: () => NZS ? NZS.at : null, pending: () => !!(NZS && (NZS.pending || nzFrame.busy)), state: () => NZS, store: () => NZ, mail: nzMail, data: NZJ};

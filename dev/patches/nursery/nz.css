@@ -32,7 +32,8 @@
 
 /* the reader: only while a journey is open */
 aside.nz-read .nz-lvbar{display:flex;justify-content:flex-end;align-items:center;min-height:30px;margin:-8px 40px 8px 0}
-aside.nz-read>.k .nz-ok{color:var(--gold)}
+aside.nz-read>.k{padding-right:40px} aside.nz-read>.k .nz-ok{color:var(--gold)}
+aside.nz-read .nz-lvl{font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold)}
 aside.nz-read .jr-jt{margin:6px 0 0;color:var(--ivory)} aside.nz-read .jr-jt small{display:block;font:400 14px Outfit,sans-serif;letter-spacing:.3px;color:var(--ivory);margin-top:3px}
 aside.nz-read .nz-dots{margin:14px 0 4px} aside.nz-read .nz-dots .nz-seed{width:11px;height:13px} aside.nz-read .nz-dots button.nz-noted::after{content:"";position:absolute;margin:-19px 0 0 19px;width:5px;height:5px;border-radius:50%;background:var(--green)}
 aside.nz-read .nz-cap{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:18px 0 0}

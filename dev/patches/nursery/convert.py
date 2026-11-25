@@ -24,7 +24,7 @@ ALL = [4, 5, 6]
 # Level names where the text uses a stage as a level label (Justin, 25 Nov 18:49: "keep seed shoot bloom")
 LEVEL_MAP = [("How the stages use this journey", "How the levels use this journey"), ("Stages 4, 5 and 6", "Seed, Shoot and Bloom"),
              ("the Garden's own Stage 6 text", "the Garden's own Bloom text"), ("Stage 5 adds", "Shoot adds"), ("Stage 6 only", "Bloom only"),
-             ("for every stage", "for every level")]
+             ("for every stage", "for every level"), ("Stages 5 and 6: the first work here", "Shoot and Bloom: the first work here")]
 
 
 def lvmap(t):
@@ -38,6 +38,7 @@ def levels(s):
     return sorted({int(x) for x in re.findall(r'[456]', s)})
 
 
+NAMES_56 = 'Shoot and Bloom'
 LVTAG = re.compile(r'\s*\*(Stages? [456](?:(?:, | and )[456])*\.|Core work for every stage\.)\*\s*$')
 LVLEAD = re.compile(r'^(Stages? [456](?:(?:, | and )[456])*)(?: \(([^)]*)\))?: ')
 
@@ -113,7 +114,7 @@ def parse_stop(h, body):
                 mm = re.match(r'^\*\*(.+?)\*\* (.*)$', l); S['lead'] = mm.group(1); l = mm.group(2)
             parts = re.split(r' (?=Stages 5 and 6: )', l)
             S['intro'].append({'lv': ALL, 't': lvmap(parts[0])})
-            if len(parts) > 1: S['intro'].append(lvline(parts[1]))
+            if len(parts) > 1: S['intro'].append(dict(lvline(parts[1]), label=NAMES_56))
             i += 1; continue
         if l.startswith('**What "sonata" means here.**'):
             S['meansHead'] = 'What "sonata" means here.'; mode = 'means'; i += 1; continue
@@ -216,7 +217,7 @@ def check(J):
         t = LVTAG.sub('', t)
         t = lvmap(t)
         t = re.sub(r'^(Stages? [456](?:(?:, | and )[456])*)(?: \(([^)]*)\))?: ', lambda m: (m.group(2) + ' \u2016 ') if m.group(2) else '', t)
-        t = t.replace(' Stages 5 and 6: ', ' \u2016 ')
+        t = t.replace(' Stages 5 and 6: ', ' \u2016 ').replace(' Shoot and Bloom: ', ' \u2016 Shoot and Bloom \u2016 ')
         for lab in ('**What "sonata" means here.**', '**Listen for.**', '**Find out by listening.**', '**New words.**', '**Check question.**', '**For teachers.**',
                     '**Send it to the Garden.**', '**The work.**', 'Listen for:', 'Find out by listening:', 'For teachers:', 'Recording:', 'Big question:', 'Label:', '**Keep**'):
             t = t.replace(lab, ' \u2016 ')

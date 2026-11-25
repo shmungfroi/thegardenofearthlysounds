@@ -99,7 +99,7 @@ def main():
                    'runs the 16 regression suites (every one should print `errors []`; `livetest` is stale and fails with `__map is not defined`, and `nowtest` prints `[]` without the label).')
     if 'nurserytest.py' not in t2:
         t2 = t2.replace('- The other scripts in `tests/`',
-                        '- `tests/nurserytest.py` checks the Nursery (The Branches and the Fruits): the Garden at rest against a base built from git c288402, the journey text at every level, the map marks at five screen sizes, notes, Send it to the Garden, links and keys. It needs the base build at `/tmp/nzbase` (it makes it with `git worktree` if missing).\n- The other scripts in `tests/`')
+                        '- `tests/nurserytest.py` checks the Nursery (The Branches and the Fruits): the Garden at rest against a base built from git c288402, the journey text at every level, the map marks at five screen sizes, notes, Send it to the Garden, links and keys. It serves the base from `/tmp/nzbase` (made from `git archive c288402` when missing).\n- The other scripts in `tests/`')
     if t2 != t:
         open(rd, 'w', encoding='utf-8').write(t2)
     print('nursery: applied')
