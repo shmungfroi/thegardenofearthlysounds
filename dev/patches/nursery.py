@@ -3,7 +3,7 @@
 
 Approved: framework 22 Nov 10:04, design 22 Nov 10:30; Justin's answers of 25 Nov 18:49 built in
 (Seed / Shoot / Bloom, Send muted until a note is written, one note per work, a route chosen from search keeps the
-journey open, a 40-character chosen name).
+journey open; and on 26 Nov: the NSW sentence kept, a 49-character chosen name).
 
 What it does (run from the repo root after phone_zoom.py, then ./build.sh):
 1. runs nursery/convert.py: the checked journey text -> nursery_data.js (window.NURSERY), reporting words not carried;
