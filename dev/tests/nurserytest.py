@@ -488,6 +488,30 @@ async def misc(b):
         await ctx.close()
 
 
+async def followup(b):
+    """26 Nov follow-up: numbered dots at 768x1024; no bare ring after + / ++ / k=9; landscape phone. Screenshots for review."""
+    O = SHOTS + '/followup'; os.makedirs(O, exist_ok=True)
+    cases = [((768, 1024), 5, 'overview', []), ((768, 1024), 5, 'learned', []), ((1366, 768), 5, 3, ['+']), ((360, 640), 5, 'overview', ['+']), ((320, 568), 5, 'learned', ['+']),
+             ((1440, 900), 6, 3, ['+', '+']), ((1440, 900), 6, 3, ['k9']), ((667, 375), 5, 0, ['+']), ((667, 375), 5, 2, [])]
+    for (W, H), lv, v, keys in cases:
+        ctx, pg = await newpage(b, W, H, rm=True); ev = pg.evaluate
+        await ev("__nz.begin('overview')"); await ev(f"document.querySelector('#panel .nz-lv button:nth-of-type({lv - 3})').click()")
+        await ev(f"__nz.show({json.dumps(v)})"); await settle(pg); await ev("document.querySelector('#map').focus()")
+        for k in keys:
+            if k == 'k9': await ev("(() => { const v = __map.view, r = document.getElementById('map').getBoundingClientRect(), c = [(r.width / 2 - v.tx) / v.k, (r.height / 2 - v.ty) / v.k]; v.k = 9; v.tx = r.width / 2 - c[0] * 9; v.ty = r.height / 2 - c[1] * 9; window.dispatchEvent(new Event('resize')); })()")
+            else: await pg.keyboard.press(k); await pg.wait_for_timeout(80)
+        await settle(pg); r = await ev(CHECK, not keys)
+        tag = f'{W}x{H}-{NAMES[lv]}-{v}' + ('-' + ''.join(keys) if keys else '')
+        for x in (r or {}).get('bad', ['journey lost']): err('follow-up', tag, x)
+        await pg.screenshot(path=f'{O}/{tag}.png')
+        if (W, H) == (768, 1024):
+            d = await ev("[document.querySelectorAll('#nzmk .nz-nmb.nz-dot').length, document.querySelectorAll('#nzmk .nz-nmb').length]")
+            if d[0] == 0 or d[0] != d[1]: err('follow-up 768x1024: stops not all shown as dots', d)
+            await ev(TAP); await ev("(() => { const g = document.querySelector('#nzmk .nz-dot[data-go=\"2\"]'); if (g) g.dispatchEvent(new MouseEvent('click', {bubbles: true})); })()"); await pg.wait_for_timeout(200)
+            if await ev("__nz.open()") != 2: err('follow-up 768x1024: a dot does not open its chapter')
+        pg._errs and err('follow-up console', tag, pg._errs[:2]); await ctx.close()
+
+
 async def main():
     async with async_playwright() as p:
         b = await p.chromium.launch(executable_path='/usr/bin/google-chrome'); sem = asyncio.Semaphore(3)
@@ -498,7 +522,7 @@ async def main():
                 except Exception as e: err(f.__name__, a, 'crashed:', repr(e)[:300])
                 notes.append(f'{f.__name__}{a} {time.time() - t:.0f}s')
         only = os.environ.get('NZ_ONLY', '').split(',')
-        jobs = [(f, ()) for f in (rest, content, listener, controls, misc)] + [(restore, (sz,)) for sz in ((1440, 900), (390, 844))] + [(collisions, (sz,)) for sz in SIZES]
+        jobs = [(f, ()) for f in (rest, content, listener, controls, misc, followup)] + [(restore, (sz,)) for sz in ((1440, 900), (390, 844))] + [(collisions, (sz,)) for sz in SIZES]
         await asyncio.gather(*[run(f, *a) for f, a in jobs if only == [''] or f.__name__ in only])
         await b.close()
     for s in SRV: s.kill()
