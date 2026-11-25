@@ -40,7 +40,8 @@ STYLES = """(a) => { const [sel, skip] = a; const P = %s; const root = document.
 INIT = """(() => { window.__sound = 0; const AC = window.AudioContext || window.webkitAudioContext; if (AC) { const W = function () { window.__sound++; return new AC(); }; window.AudioContext = W; window.webkitAudioContext = W; }
   const play = HTMLMediaElement.prototype.play; HTMLMediaElement.prototype.play = function () { window.__sound++; return play.apply(this, arguments); }; })();"""
 VIEWS = ['overview', 0, 1, 2, 3, 'learned']
-SIZES = [(1440, 900), (1280, 720), (1024, 768), (390, 844), (360, 640)]
+SIZES = [(1440, 900), (1280, 720), (1024, 768), (390, 844), (360, 640), (768, 1024), (1180, 820), (820, 1180), (1920, 1080)]
+EXTRA = {(768, 1024), (1180, 820), (820, 1180), (1920, 1080)}
 TAP = "document.getElementById('map').dispatchEvent(new PointerEvent('pointerdown', {clientX: 5, clientY: 5, bubbles: true})); window.dispatchEvent(new PointerEvent('pointerup', {bubbles: true}))"
 def norm(t): return re.sub(r'\s+', ' ', str(t).replace('**', '').replace('*', '')).strip()
 
@@ -141,6 +142,8 @@ async def content(b):
                 if on and not has: err('content', lv, i, 'missing:', t[:70])
                 if not on and has and not any(t in s for s in shown): err('content', lv, i, 'shown at the wrong level:', t[:70])
             if 'Stage' in txt.replace(norm("For teachers in New South Wales: Seed is Stage 4, Shoot is Stage 5 and Bloom is Stage 6."), ''): err('content', lv, i, 'a stage label is shown')
+            orph = await ev("[...document.querySelectorAll('#panel button.kw')].filter(b => { if (b.parentNode.classList.contains('nz-nb')) return false; const p = b.previousSibling; return p && p.nodeType === 3 && /[(“\"‘]$/.test(p.data); }).length")
+            if orph: err('content', lv, i, orph, 'glossary words can leave an opening bracket at a line end')
             if lv == 6:
                 for k in range(await ev("document.querySelectorAll('#panel button.kw, #panel .nz-words button').length")):
                     r = await ev(f"(() => {{ const b = [...document.querySelectorAll('#panel button.kw, #panel .nz-words button')][{k}]; b.click(); const d = document.querySelector('#panel .gdef'); const ok = !!d && d.querySelector('.gd-h b') && d.querySelector('.gd-h b').textContent.toLowerCase(); if (d) b.click(); return [b.textContent, ok]; }})()")
@@ -158,6 +161,7 @@ async def content(b):
     await ev("__nz.show(3)"); await ev("document.querySelector('#panel .nz-lv button:nth-of-type(1)').click()"); await pg.wait_for_timeout(100)
     if 'How many movements does Giustini' in await ev("document.querySelector('#panel').textContent"): err('Chapter 3 Find out shows at Seed')
     await ev("__nz.show('learned')"); t = norm(await ev("document.querySelector('#panel').textContent"))
+    if t.count('Keep') != 1 or await ev("[...document.querySelectorAll('#panel h4')].some(h => h.textContent === 'Keep')"): err('Keep shown twice')
     for x in J['learned']['prompts'] + [J['learned']['teachers'], J['apply']['text'], J['apply']['cjg'], J['keep']['text']] + J['sources']['lines']:
         frags += 1
         if norm(x) not in t: err('What I learned missing', norm(x)[:60])
@@ -200,8 +204,8 @@ async def listener(b):
     if await ev("document.querySelector('#panel .nz-sendb').hasAttribute('aria-disabled')"): err('Send still muted with a note')
     st = await ev("JSON.parse(localStorage.getItem('garden.nursery'))")
     if (st.get('notes', {}).get('sonata', {}).get('1') or {}) != {'rossi': 'The bass repeats under the violins.', 'castello': 'About ten changes of speed.'}: err('stored notes per work', st.get('notes'))
-    await pg.fill('#panel .nz-name', 'M' * 45)
-    if len(await ev("document.querySelector('#panel .nz-name').value")) != 40: err('chosen name limit 40')
+    await pg.fill('#panel .nz-name', 'M' * 55)
+    if len(await ev("document.querySelector('#panel .nz-name').value")) != 49: err('chosen name limit 49 (Justin, 26 Nov)')
     await pg.fill('#panel .nz-name', 'Mira K.')
     await pg.click('#panel .nz-sendb'); await pg.wait_for_timeout(200)
     m = await ev("window.__nzMail || ''"); t = await ev("document.querySelector('#toast').textContent")
@@ -331,7 +335,7 @@ async def controls(b):
 SNAP = """() => { const p = document.getElementById('panel'), sh = document.getElementById('sheet'); const ls = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k !== 'garden.nursery') ls[k] = localStorage.getItem(k); }
   const shc = sh.cloneNode(true); shc.querySelectorAll('.nz-sec').forEach(x => x.remove());
   return {map: document.getElementById('map').outerHTML, view: [__map.view.k, __map.view.tx, __map.view.ty], body: [...document.body.classList].sort().join(' '), panel: p.classList.contains('nz-read') ? 'NZ' : p.innerHTML, ps: Math.round(p.scrollTop),
-    sheet: [sh.classList.contains('open'), sh.dataset.kind, Math.round(sh.scrollTop), shc.innerHTML], hash: location.hash, ls, spot: __map.spot(), tkey: __map.tkey(), ekey: __map.ekey(), hint: document.getElementById('hint').style.display, crumbs: document.getElementById('crumbs').textContent}; }"""
+    sheet: [sh.classList.contains('open'), sh.dataset.kind, Math.round(sh.scrollTop), shc.innerHTML], hash: location.hash, ls, spot: __map.spot(), tkey: __map.tkey(), ekey: __map.ekey(), hint: document.getElementById('hint').style.display, fams: [...document.querySelectorAll('#fams .fam')].map(f => f.className + ':' + f.style.display).join('|'), crumbs: document.getElementById('crumbs').textContent}; }"""
 async def restore(b, size):
     runs = 0
     starts = [('home', ''), ('card', '#l=canzona'), ('pin', '#p=triosonata'), ('voice', '#v=corelli'), ('voice pinned', '#vp=corelli'), ('event', None), ('lens and storey', '#lens=w'), ('shared trail', '#trail=fugue,canzona,triosonata')]
@@ -347,7 +351,7 @@ async def restore(b, size):
                     await ev("document.querySelector('.rail button[data-sheet=journeys]').click()"); await pg.wait_for_timeout(150)
                     await ev("document.querySelector('#sheet .nz-jump').click()"); await pg.wait_for_timeout(250)
                 await pg.wait_for_timeout(450); before = await ev(SNAP)
-                if way == 0: await ev("document.querySelector('#sheet .nz-go').click()")
+                if way == 0: await ev("(() => { const b = document.querySelector('#sheet .nz-go'); b.focus(); b.click(); })()")
                 else: await ev("__nz.begin(null)")
                 await pg.wait_for_timeout(150)
                 for step in range(3):
@@ -362,6 +366,7 @@ async def restore(b, size):
                 else:
                     await ev("__nz.show('overview')"); await pg.wait_for_timeout(80); await ev("[...document.querySelectorAll('#panel .jr-b')].find(x => x.textContent === 'Leave the journey').click()")
                 await pg.wait_for_timeout(650); after = await ev(SNAP); runs += 1
+                if way == 0 and not await ev("!!document.activeElement && document.activeElement.matches('#sheet .nz-go')"): err('restore', W, name, 'focus did not return to Begin', await ev("document.activeElement && document.activeElement.className"))
                 for k in before:
                     if before[k] != after[k]:
                         if k == 'body' and sorted(before[k].split()) == sorted(after[k].split()): continue
@@ -373,7 +378,7 @@ async def restore(b, size):
 
 
 # ---------------- 6. collisions ----------------
-CHECK = """() => { const svg = document.getElementById('map'), R = svg.getBoundingClientRect(), S = __nz.state(); if (!S) return null;
+CHECK = """(frame) => { const svg = document.getElementById('map'), R = svg.getBoundingClientRect(), S = __nz.state(); if (!S) return null;
   const rect = q => ({l: q.left, t: q.top, r: q.right, b: q.bottom}), ov = (a, o) => Math.max(0, Math.min(a.r, o.r) - Math.max(a.l, o.l)) * Math.max(0, Math.min(a.b, o.b) - Math.max(a.t, o.t));
   const vis = e => { const cs = getComputedStyle(e); return cs.display !== 'none' && cs.visibility !== 'hidden' && +cs.opacity > .05; };
   const marks = []; document.querySelectorAll('#nzmk text, #nzmk circle.nz-fruit, #nzmk path.nz-root').forEach(e => { const q = e.getBoundingClientRect(); if (!q.width) return; const grp = e.closest('.nz-nmb,.nz-fr,.nz-lpg') || e; marks.push({e, r: rect(q), grp, what: (e.getAttribute('class') || '') + ':' + (e.textContent || (e.closest('.nz-fr') ? e.closest('.nz-fr').dataset.w : 'root'))}); });
@@ -398,28 +403,40 @@ CHECK = """() => { const svg = document.getElementById('map'), R = svg.getBoundi
   __nz.data.stops.forEach((s, i) => { const c = document.querySelector('#map .fm[data-id="' + s.lan + '"] circle').getBoundingClientRect(), x = c.left + c.width / 2, y = c.top + c.height / 2; if (!free(x, y)) return; seenStop.push(i);
     if (!document.querySelector('#nzmk .nz-nmb[data-go="' + i + '"]')) bad.push('stop name hidden: ' + s.name);
     s.works.filter(w => w.core && w.lv.includes(S.lv)).forEach(w => { if (!document.querySelector('#nzmk .nz-fr[data-w="' + w.id + '"]')) bad.push('core work hidden: ' + w.id); }); });
+  const Rv = {l: R.left, t: R.top, r: R.right, b: R.bottom};
+  __nz.data.stops.forEach((s, i) => { const ring = rings.find(x => x.lan === s.lan); if (!ring || !frame) return; const vis = ov(ring.r, Rv) > 2 && !ui.some(u => ring.r.l >= u.r.l && ring.r.r <= u.r.r && ring.r.t >= u.r.t && ring.r.b <= u.r.b);
+    if (vis && !document.querySelector('#nzmk .nz-nmb[data-go="' + i + '"]')) bad.push('a thread ring in view without its name: ' + s.name);
+    if (vis && s.works.some(w => w.core && w.lv.includes(S.lv) && !document.querySelector('#nzmk .nz-fr[data-w="' + w.id + '"]'))) bad.push('a thread ring in view without its core work: ' + s.name); });
+  const cur = typeof S.at === 'number' ? document.querySelector('#nzmk .nz-nmb[data-go="' + S.at + '"]') : null;
+  if (cur && !cur.querySelector('.nz-cap') && document.querySelector('#nzmk .nz-nmb:not([data-go="' + S.at + '"]) .nz-cap')) bad.push('the current chapter lost its caption while another stop kept one');
+  const lp = document.querySelector('#nzmk .nz-lp');
+  if (lp) { const c2 = document.querySelector('#map .fm[data-id="triosonata"] circle').getBoundingClientRect(), c3 = document.querySelector('#map .fm[data-id="kbsonata"] circle').getBoundingClientRect(), q = lp.getBoundingClientRect();
+    const a = [c2.left + c2.width / 2, c2.top + c2.height / 2], b = [c3.left + c3.width / 2, c3.top + c3.height / 2], m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+    const inR = p => p[0] > R.left && p[0] < R.right && p[1] > R.top && p[1] < R.bottom;
+    if (!inR(a) || !inR(b)) bad.push('leap words shown without both ends in view');
+    if (Math.hypot(q.left + q.width / 2 - m[0], q.top + q.height / 2 - m[1]) > d * .25 + 30) bad.push('leap words far from the gap'); }
   return {bad: [...new Set(bad)], hidden: S.layout ? S.layout.hidden : [], k: __map.view.k, n: marks.length, seen: seenStop}; }"""
 async def collisions(b, size):
     views = 0; hid = {}
     for W, H in (size,):
         ctx, pg = await newpage(b, W, H, rm=True); ev = pg.evaluate
         if W == 1280: await ev("localStorage.setItem('garden.journeys', JSON.stringify(Array.from({length: 6}, (_, i) => ({id: 'j' + i, title: 'Saved journey ' + (i + 1), by: '', made: '', task: null, stops: [{id: 'fugue', how: {k: 'pick'}, w: null, note: ''}]}))))")
-        for lv in (4, 5, 6):
+        for lv in ((5,) if (W, H) in EXTRA else (4, 5, 6)):
             await ev("__nz.end(false)"); await ev("__nz.begin('overview')"); await ev(f"document.querySelector('#panel .nz-lv button:nth-of-type({lv - 3})').click()")
             for v in VIEWS:
                 await ev(f"__nz.show({json.dumps(v)})"); await settle(pg)
-                zooms = [None] + (['+', '-'] if v not in ('overview', 'learned') else ['+'])
+                zooms = [None, '+'] if (W, H) in EXTRA else [None] + (['+', '-'] if v not in ('overview', 'learned') else ['+'])
                 if W in (1440, 390) and lv == 6: zooms += ['k0.8', 'k1.6', 'k6', 'k9']
                 for z in zooms:
                     if z in ('+', '-'):
                         await ev("__nz.frame()"); await settle(pg); await ev("document.querySelector('#map').focus()"); await pg.keyboard.press(z if z == '+' else '-')
                     elif z:
                         await ev(f"(() => {{ const v = __map.view, k = {z[1:]}, r = document.getElementById('map').getBoundingClientRect(), c = [(r.width / 2 - v.tx) / v.k, (r.height / 2 - v.ty) / v.k]; v.k = k; v.tx = r.width / 2 - c[0] * k; v.ty = r.height / 2 - c[1] * k; window.dispatchEvent(new Event('resize')); }})()")
-                    await settle(pg); r = await ev(CHECK); views += 1
+                    await settle(pg); r = await ev(CHECK, z is None); views += 1
                     if r is None: err('collision view lost the journey', W, lv, v, z); await ev(f"__nz.begin({json.dumps(v)})"); continue
                     for x in r['bad']: err('collision', f'{W}x{H}', NAMES[lv], v, z or 'frame', 'k=%.2f' % r['k'], x)
                     for x in r['hidden']: hid[x] = hid.get(x, 0) + 1
-                    if z is None and W in (1440, 390) and lv == 5: await pg.screenshot(path=f'{SHOTS}/z-{W}-{v}.png')
+                    if z is None and (W in (1440, 390) or (W, H) in EXTRA) and lv == 5: await pg.screenshot(path=f'{SHOTS}/z-{W}x{H}-{v}.png')
         pg._errs and err('collisions console', W, pg._errs[:3]); await ctx.close()
     notes.append(f'collisions {W}x{H}: {views} views; stepped aside (another chapter\'s added work, leap words or root sign) {hid}')
 NAMES = {4: 'Seed', 5: 'Shoot', 6: 'Bloom'}
@@ -434,6 +451,7 @@ async def misc(b):
     r = await ev("(() => { const h = document.querySelector('#sheet .nz-h').getBoundingClientRect(), s = document.getElementById('sheet').getBoundingClientRect(); return [h.top >= s.top, h.bottom <= s.bottom, document.activeElement === document.querySelector('#sheet .nz-h'), getComputedStyle(document.querySelector('#sheet .nz-h')).outlineStyle, document.getElementById('sheet').scrollTop]; })()")
     if not (r[0] and r[1] and r[2]): err('jump link at 1280x720 with 6 journeys', r)
     if r[3] != 'none': err('focus ring after a mouse click on the jump link', r[3])
+    if await ev("document.querySelector('#sheet .nz-grow small').getClientRects().length") != 1: err('Journeys card: "coming soon" breaks over two lines')
     await ctx.close()
     ctx, pg = await newpage(b, 1440, 900, rm=True); ev = pg.evaluate
     await ev("__nz.begin(1)"); await pg.wait_for_timeout(60)

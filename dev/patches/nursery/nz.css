@@ -13,7 +13,7 @@
 .sheet .nz-tt{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 9px}
 .sheet .nz-tt b{font:400 24px/1.1 "Poiret One",Outfit,sans-serif;letter-spacing:.6px;color:var(--goldhi)}
 .sheet .nz-tt span:not(.nz-lab){font-size:14px;color:var(--ivory)}
-.sheet .nz-tt .nz-lab{margin-left:auto;align-self:center}
+.sheet .nz-tt .nz-lab{align-self:center}
 .nz-lab{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;line-height:1.55;border-radius:8px;padding:0 7px;white-space:nowrap}
 .nz-lab.ok{border:1px solid var(--gold);color:var(--goldhi)} .nz-lab.grow{border:1px dashed #6fbf5a;color:#a9dc8c}
 .sheet .nz-meta{font-size:12px;color:var(--muted);margin:5px 0 11px}
@@ -26,8 +26,8 @@
 .sheet .nz-lv button:focus-visible,aside.nz-read .nz-lv button:focus-visible{outline:2px solid var(--goldhi);outline-offset:2px}
 .sheet .nz-go{all:unset;box-sizing:border-box;cursor:pointer;display:inline-block;width:auto;font-size:13px;border-radius:16px;padding:6px 15px;background:var(--gold);color:#111}
 .sheet .nz-go:hover{background:var(--goldhi);color:#111} .sheet .nz-go:focus-visible{outline:2px solid var(--goldhi);outline-offset:2px}
-.sheet .nz-grow{margin:10px 0 0;padding:7px 11px;border:1px dashed #4a4030;border-radius:9px;font-size:13px;color:var(--ivory)}
-.sheet .nz-grow small{color:var(--muted);font-size:12px}
+.sheet .nz-grow{margin:10px 0 0;padding:7px 10px;border:1px dashed #4a4030;border-radius:9px;font-size:12.5px;color:var(--ivory)}
+.sheet .nz-grow small{color:var(--muted);font-size:11.5px;white-space:nowrap}
 .sheet .nz-key{margin:12px 0 2px} .sheet .nz-key p{margin:0 0 5px;font-size:12px;color:var(--muted)} .sheet .nz-key .nz-lab{margin-right:6px}
 
 /* the reader: only while a journey is open */
@@ -84,7 +84,7 @@ aside.nz-read .nz-st span{font-size:14.5px;color:var(--ivory)} aside.nz-read .nz
 aside.nz-read .nz-nw,aside.nz-read .nz-leap{font-style:normal;font-size:11.5px;color:var(--muted);text-align:right} aside.nz-read .nz-leap{grid-column:3;font-style:italic;color:#bfa86a}
 aside.nz-read .nz-here{grid-column:2/4;font-size:11px;color:var(--green);letter-spacing:.4px}
 aside.nz-read .nz-tb{border-collapse:collapse;font-size:12px;width:100%;margin:6px 0} aside.nz-read .nz-tb th,aside.nz-read .nz-tb td{border:1px solid #2a2418;padding:3px 6px;text-align:left;vertical-align:top} aside.nz-read .nz-tb th{color:var(--gold);font-weight:500}
-aside.nz-read .nz-small,aside.nz-read .nz-src{font-size:12.5px;color:var(--muted)}
+aside.nz-read .nz-small,aside.nz-read .nz-src{font-size:12.5px;color:var(--muted)} aside.nz-read .nz-keep b{font-weight:500} aside.nz-read .nz-nb{white-space:nowrap}
 aside.nz-read .nz-prompts{padding-left:0;list-style:none;counter-reset:nzp} aside.nz-read .nz-prompts li{margin:0 0 4px}
 aside.nz-read .nz-mine{margin:0 0 12px} aside.nz-read .nz-mh{all:unset;cursor:pointer;display:block;font-size:14.5px;color:var(--ivory)} aside.nz-read .nz-mh small{display:block;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold)}
 aside.nz-read .nz-mh:hover{color:var(--goldhi)} aside.nz-read .nz-mh:focus-visible{outline:2px solid var(--goldhi);outline-offset:2px}
@@ -121,4 +121,5 @@ body.nzon #map .fm.nzt text{opacity:0!important}
 #nzmk .nz-fl{font-size:10.5px;fill:var(--ivory);letter-spacing:.2px}
 #nzmk .nz-st.other .nz-fr{opacity:.72}
 #nzmk .nz-root{fill:none;stroke:var(--goldhi);stroke-width:1.1;stroke-linecap:round;pointer-events:none}
+#nzmk .nz-num{font-size:11px;font-weight:700;letter-spacing:1px;fill:var(--gold)} #nzmk .nz-nmb.cur .nz-num{fill:var(--goldhi)}
 #nzmk .nz-lp{font-size:10px;font-style:italic;fill:#bfa86a;letter-spacing:.3px}
