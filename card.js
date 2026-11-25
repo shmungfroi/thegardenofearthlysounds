@@ -453,5 +453,5 @@ function renderEvent(panel, eid, ctx) {
     to.slice().sort((a, b) => N[a].y - N[b].y).forEach(i => { const li = h('li', '', ul), b = h('button', 'lk-b', li, N[i].t); b.type = 'button'; b.addEventListener('click', () => ctx.go(i)); h('small', '', li, ` ${N[i].d} · ${cap(ctx.famName(i))} spire`); }); }
   h('p', 'respect', panel, 'This Garden is presented with respect for every musician and culture it includes. To raise a cultural concern or report an incorrect link, contact Justin Ossher, the creator of this Garden, at any time.'); { const lv = h('p', 'living', panel, 'This is a living document in the form of an interactive page. Please e-mail '); const a = h('a', '', lv, 'shmungfroi@gmail.com'); a.href = 'mailto:shmungfroi@gmail.com'; lv.append(' to make any suggestions, comments or corrections.'); }
 }
-window.GardenCard = {render, renderComposer, renderEvent, VOICES, voiceTags, EVENTS: E, NSW, STRAND, COURSES, WINS, LEVELS, ELX};
+window.GardenCard = {render, renderComposer, renderEvent, VOICES, voiceTags, EVENTS: E, NSW, STRAND, COURSES, WINS, LEVELS, ELX, glossKey, gloss: (b, key, root) => { card = root; toggleGloss(b, key); }};
 })();

@@ -574,6 +574,131 @@ button.mg-go:focus-visible,.sheet button.mg-go:focus-visible{outline:2px solid v
 }
 .sheet .mg-keep .mg-clear{margin:14px 0 2px}
 .sheet .mg-keep .mg-namenote{margin:4px 0 10px;font-size:12px}
+/* nursery:css:start */
+/* ---- The Nursery: The Branches and the Fruits (26 Nov 2026). Every rule is scoped to the Nursery's own parts:
+   .nz-* in the Journeys tab, aside.nz-read (only while a journey is open), body.nzon, #nzveil, #nzg, #nzmk ---- */
+/* the Journeys tab: the jump link and the Nursery at its foot */
+.sheet .nz-jump{all:unset;box-sizing:border-box;position:absolute;right:12px;top:15px;cursor:pointer;font-size:12px;letter-spacing:.4px;color:#a9dc8c;padding:3px 8px;border-radius:12px;border:1px solid transparent;white-space:nowrap}
+.sheet .nz-jump:hover{border-color:#3d5a2c;color:#c4ebad;background:none}
+.sheet .nz-jump:focus-visible{outline:2px solid var(--goldhi);outline-offset:2px}
+.sheet .nz-sec{margin:26px 0 2px;padding:16px 6px 4px;border-top:1px dashed #6fbf5a}
+.sheet .nz-sec h3.nz-h{margin:0 0 3px;font-size:18px;letter-spacing:3.4px;color:#a9dc8c}
+.sheet .nz-sec h3.nz-h:focus{outline:none} .sheet .nz-sec h3.nz-h:focus-visible{outline:2px solid var(--goldhi);outline-offset:3px}
+.sheet .nz-tag{margin:0 0 14px;font-size:12.5px;line-height:1.5;color:var(--muted);font-style:italic}
+.sheet .nz-feat{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 7px}
+.sheet .nz-card{border:1px solid #3a3222;border-radius:10px;background:#14110b;padding:10px 12px 12px}
+.sheet .nz-tt{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 9px}
+.sheet .nz-tt b{font:400 24px/1.1 "Poiret One",Outfit,sans-serif;letter-spacing:.6px;color:var(--goldhi)}
+.sheet .nz-tt span:not(.nz-lab){font-size:14px;color:var(--ivory)}
+.sheet .nz-tt .nz-lab{margin-left:auto;align-self:center}
+.nz-lab{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;line-height:1.55;border-radius:8px;padding:0 7px;white-space:nowrap}
+.nz-lab.ok{border:1px solid var(--gold);color:var(--goldhi)} .nz-lab.grow{border:1px dashed #6fbf5a;color:#a9dc8c}
+.sheet .nz-meta{font-size:12px;color:var(--muted);margin:5px 0 11px}
+.sheet .nz-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.nz-lv{display:inline-flex;align-items:center;gap:3px}
+.nz-lv>span{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.sheet .nz-lv button,aside.nz-read .nz-lv button{all:unset;box-sizing:border-box;cursor:pointer;display:inline-block;width:auto;font-size:12px;line-height:1.4;border:1px solid #3a3222;border-radius:12px;padding:2px 9px;color:var(--muted)}
+.sheet .nz-lv button:hover,aside.nz-read .nz-lv button:hover{background:none;border-color:var(--gold);color:var(--ivory)}
+.sheet .nz-lv button[aria-pressed=true],aside.nz-read .nz-lv button[aria-pressed=true]{background:var(--goldhi);border-color:var(--goldhi);color:#111}
+.sheet .nz-lv button:focus-visible,aside.nz-read .nz-lv button:focus-visible{outline:2px solid var(--goldhi);outline-offset:2px}
+.sheet .nz-go{all:unset;box-sizing:border-box;cursor:pointer;display:inline-block;width:auto;font-size:13px;border-radius:16px;padding:6px 15px;background:var(--gold);color:#111}
+.sheet .nz-go:hover{background:var(--goldhi);color:#111} .sheet .nz-go:focus-visible{outline:2px solid var(--goldhi);outline-offset:2px}
+.sheet .nz-grow{margin:10px 0 0;padding:7px 11px;border:1px dashed #4a4030;border-radius:9px;font-size:13px;color:var(--ivory)}
+.sheet .nz-grow small{color:var(--muted);font-size:12px}
+.sheet .nz-key{margin:12px 0 2px} .sheet .nz-key p{margin:0 0 5px;font-size:12px;color:var(--muted)} .sheet .nz-key .nz-lab{margin-right:6px}
+
+/* the reader: only while a journey is open */
+aside.nz-read .nz-lvbar{display:flex;justify-content:flex-end;align-items:center;min-height:30px;margin:-8px 40px 8px 0}
+aside.nz-read>.k .nz-ok{color:var(--gold)}
+aside.nz-read .jr-jt{margin:6px 0 0;color:var(--ivory)} aside.nz-read .jr-jt small{display:block;font:400 14px Outfit,sans-serif;letter-spacing:.3px;color:var(--ivory);margin-top:3px}
+aside.nz-read .nz-dots{margin:14px 0 4px} aside.nz-read .nz-dots .nz-seed{width:11px;height:13px} aside.nz-read .nz-dots button.nz-noted::after{content:"";position:absolute;margin:-19px 0 0 19px;width:5px;height:5px;border-radius:50%;background:var(--green)}
+aside.nz-read .nz-cap{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:18px 0 0}
+aside.nz-read h2.jr-stopname{margin:2px 0 0;line-height:1.15} aside.nz-read h2.jr-stopname:focus{outline:none}
+aside.nz-read .nz-lin{display:flex;flex-wrap:wrap;align-items:center;gap:0 5px;margin:4px 0 8px}
+aside.nz-read .nz-spire{font-size:11px;border:1px solid;border-radius:10px;padding:0 8px;line-height:1.55}
+aside.nz-read .nz-card-b{font-size:12px;padding:3px 12px;margin:0 0 6px}
+aside.nz-read .nz-lead{margin:14px 0 2px} aside.nz-read .nz-lead b{font:400 19px "Poiret One",Outfit,sans-serif;letter-spacing:.6px;color:var(--goldhi)}
+aside.nz-read .nz-intro{margin:10px 0;color:var(--ivory)}
+aside.nz-read .nz-scope{margin:0 0 2px;font-size:11.5px;letter-spacing:.3px;color:var(--muted);font-style:italic}
+aside.nz-read h4 .nz-wkey{float:right;display:inline-flex;align-items:center;gap:4px;font-size:10px;letter-spacing:.6px;text-transform:none;color:var(--muted)}
+aside.nz-read .nz-fm{width:12px;height:12px;flex:none;vertical-align:-1px} aside.nz-read h4 .nz-fm{width:9px;height:9px}
+aside.nz-read .nz-work{border-top:1px solid var(--line);padding:13px 10px 8px;margin:10px -10px 0;border-radius:2px;transition:background .3s}
+aside.nz-read .nz-work.hot,aside.nz-read .nz-work.flash{background:#1a160e}
+aside.nz-read .nz-wh{display:flex;gap:10px;align-items:flex-start} aside.nz-read .nz-wh .nz-fm{margin-top:5px;width:13px;height:13px}
+aside.nz-read .nz-wt{font-size:15px;line-height:1.4} aside.nz-read .nz-ti em{font-style:italic}
+aside.nz-read .nz-by{font-size:12.5px;color:var(--muted);margin-top:1px}
+aside.nz-read .nz-pre{font-size:13px;color:var(--muted);margin:8px 0 4px}
+aside.nz-read .nz-k{display:block;font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold);margin:14px 0 4px}
+aside.nz-read .nz-k.me{color:var(--green)}
+aside.nz-read .nz-cues{list-style:none;margin:0;padding:0} aside.nz-read .nz-cues li{position:relative;margin:0 0 5px;padding-left:16px;font-size:14px;line-height:1.5}
+aside.nz-read .nz-cues li::before{content:"";position:absolute;left:0;top:.78em;width:8px;border-top:1px solid var(--gold)}
+aside.nz-read .nz-qbox{margin:4px 0 6px} aside.nz-read .nz-qbox p{font-size:14px}
+aside.nz-read .nz-rec{align-items:baseline;margin:12px 0 4px} aside.nz-read .nz-rec a{font-size:12.5px;padding:2px 12px}
+aside.nz-read .nz-perf{font-size:12px;color:var(--muted)}
+aside.nz-read details.nz-t{margin:8px 0}
+aside.nz-read .nz-nl{display:block;margin:12px 0 0} aside.nz-read .nz-nl .nz-k{margin-top:4px}
+aside.nz-read textarea.nz-note{box-sizing:border-box;display:block;width:100%;min-height:64px;border:1px solid #3a3222;border-left:2px solid var(--green);border-radius:2px 8px 8px 2px;background:#14110b;color:var(--ivory);font:14px/1.45 Outfit,sans-serif;padding:7px 9px;resize:vertical;outline:none}
+aside.nz-read textarea.nz-note:focus{border-color:var(--gold);border-left-color:var(--green)} aside.nz-read textarea.nz-note::placeholder{color:#8a806b}
+aside.nz-read .nz-notice{margin:12px 0 2px;font-size:13.5px;color:var(--ivory)} aside.nz-read .nz-notice>em:first-child{font-style:normal;font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold)}
+aside.nz-read .nz-words{margin-top:2px}
+aside.nz-read .nz-send{margin:22px 0 6px;padding:2px 14px 12px;border:1px solid #3a3222;border-radius:10px;background:#14120c}
+aside.nz-read .nz-to{margin:4px 0 8px} aside.nz-read .nz-addr{color:var(--goldhi);user-select:all;-webkit-user-select:all;overflow-wrap:anywhere}
+aside.nz-read .nz-send .jr-f{margin:8px 0 0} aside.nz-read .nz-send .jr-chk{margin:8px 0 12px;font-size:13.5px}
+aside.nz-read .nz-sendb[aria-disabled=true]{opacity:.55} aside.nz-read .nz-sendb[aria-disabled=true]:hover{background:var(--gold)}
+aside.nz-read .nz-fine{margin:10px 0 0;line-height:1.5}
+aside.nz-read .jr-nav{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);gap:8px}
+aside.nz-read .nz-foot{margin-top:10px}
+aside.nz-read .nz-big{font-family:"Poiret One",Outfit,sans-serif;font-size:19px;line-height:1.4;letter-spacing:.3px}
+aside.nz-read .nz-stops{list-style:none;padding:0;margin:4px 0 0}
+aside.nz-read .nz-stops li{margin:0}
+aside.nz-read .nz-stop{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:24px minmax(0,1fr) auto;column-gap:10px;align-items:baseline;width:100%;padding:8px 6px;border-top:1px solid var(--line)}
+aside.nz-read .nz-stop:hover{background:#1a160e} aside.nz-read .nz-stop:focus-visible{outline:2px solid var(--goldhi);outline-offset:-2px}
+aside.nz-read .nz-sm{grid-row:1/3;align-self:center;width:22px;height:22px;border-radius:50%;border:1px solid #3a3222;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold)}
+aside.nz-read .nz-sm .nz-seed{width:10px;height:12px}
+aside.nz-read .nz-st{display:flex;flex-direction:column} aside.nz-read .nz-st small{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold)}
+aside.nz-read .nz-st span{font-size:14.5px;color:var(--ivory)} aside.nz-read .nz-st em{font-style:normal;font-size:12px;color:var(--muted)}
+aside.nz-read .nz-nw,aside.nz-read .nz-leap{font-style:normal;font-size:11.5px;color:var(--muted);text-align:right} aside.nz-read .nz-leap{grid-column:3;font-style:italic;color:#bfa86a}
+aside.nz-read .nz-here{grid-column:2/4;font-size:11px;color:var(--green);letter-spacing:.4px}
+aside.nz-read .nz-tb{border-collapse:collapse;font-size:12px;width:100%;margin:6px 0} aside.nz-read .nz-tb th,aside.nz-read .nz-tb td{border:1px solid #2a2418;padding:3px 6px;text-align:left;vertical-align:top} aside.nz-read .nz-tb th{color:var(--gold);font-weight:500}
+aside.nz-read .nz-small,aside.nz-read .nz-src{font-size:12.5px;color:var(--muted)}
+aside.nz-read .nz-prompts{padding-left:0;list-style:none;counter-reset:nzp} aside.nz-read .nz-prompts li{margin:0 0 4px}
+aside.nz-read .nz-mine{margin:0 0 12px} aside.nz-read .nz-mh{all:unset;cursor:pointer;display:block;font-size:14.5px;color:var(--ivory)} aside.nz-read .nz-mh small{display:block;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold)}
+aside.nz-read .nz-mh:hover{color:var(--goldhi)} aside.nz-read .nz-mh:focus-visible{outline:2px solid var(--goldhi);outline-offset:2px}
+aside.nz-read .nz-mq{margin:6px 0 0;font-size:14.5px} aside.nz-read .nz-none{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+aside.nz-read button.kw:focus-visible,aside.nz-read .chips button:focus-visible,aside.nz-read details summary:focus-visible,aside.nz-read .nz-rec a:focus-visible{outline:2px solid var(--goldhi);outline-offset:2px}
+@media (max-width:760px){
+  aside.nz-read .nz-lvbar{margin:-6px 38px 8px 0}
+  aside.nz-read .nz-lv button{padding:5px 12px;font-size:13px}
+  aside.nz-read .jr-dots button{width:32px;height:32px}
+  aside.nz-read textarea.nz-note,aside.nz-read .nz-name{font-size:16px}
+  .sheet .nz-lv button{padding:5px 11px;font-size:13px} .sheet .nz-go{padding:9px 16px}
+}
+
+/* the map: a veil, the thread, and the marks (only while a journey is open) */
+#nzveil{fill:#0b0906;fill-opacity:.34;pointer-events:none}
+body.nzon #map .fm.nzt text{opacity:0!important}
+#nzg{pointer-events:none;transition:opacity .3s} #nzg.nzfade{opacity:0}
+#nzg .nz-faint{fill:none;stroke:var(--goldhi);stroke-opacity:.26;stroke-width:.6;stroke-linecap:round}
+#nzg .nz-glow{fill:none;stroke:var(--goldhi);stroke-opacity:.18;stroke-width:3.2;stroke-linecap:round}
+#nzg .nz-line{fill:none;stroke:var(--goldhi);stroke-opacity:.95;stroke-width:.9;stroke-linecap:round}
+#nzg .nz-dr{transition:stroke-dashoffset .9s cubic-bezier(.45,0,.25,1)} #nzg .nz-now .nz-dr{transition:none}
+#nzg .leap .nz-glow,#nzg .leap .nz-line{opacity:0;transition:opacity .5s} #nzg .leap.on .nz-glow,#nzg .leap.on .nz-line{opacity:1}
+#nzg .nz-ring{fill:none;stroke:var(--goldhi);stroke-width:.6} #nzg .nz-ring.first{stroke-width:1.1}
+#nzmk{transition:opacity .3s} #nzmk.nzfade{opacity:0}
+#nzmk text{font-family:Outfit,sans-serif;pointer-events:none}
+#nzmk .nz-cap{font-size:9px;letter-spacing:1.5px;fill:var(--gold)}
+#nzmk .nz-nm{fill:var(--ivory);letter-spacing:.9px} #nzmk .nz-nm.f11{font-size:11px} #nzmk .nz-nm.f10{font-size:10px} #nzmk .nz-nm.f9{font-size:9px}
+#nzmk .nz-nmb.cur .nz-nm{fill:var(--goldhi);font-weight:700} #nzmk .nz-nmb.cur .nz-cap{fill:var(--goldhi)}
+#nzmk .nz-nmb,#nzmk .nz-fr{cursor:pointer} #nzmk .nz-nmb:hover .nz-nm{fill:var(--goldhi)}
+#nzmk .nz-hit{fill:#000;fill-opacity:0}
+#nzmk .nz-stem{fill:none;stroke:var(--gold);stroke-width:1;stroke-opacity:.8}
+#nzmk .nz-fruit{fill:var(--goldhi);stroke:#0b0906;stroke-width:.8} #nzmk .nz-fr:not(.core) .nz-fruit{fill:#0b0906;stroke:var(--goldhi);stroke-width:1.4}
+#nzmk .nz-fr.hot .nz-fruit,#nzmk .nz-fr:hover .nz-fruit{stroke:#fff;stroke-width:1.6} #nzmk .nz-fr.hot .nz-fl,#nzmk .nz-fr:hover .nz-fl{fill:var(--goldhi)}
+#nzmk .nz-fl{font-size:10.5px;fill:var(--ivory);letter-spacing:.2px}
+#nzmk .nz-st.other .nz-fr{opacity:.72}
+#nzmk .nz-root{fill:none;stroke:var(--goldhi);stroke-width:1.1;stroke-linecap:round;pointer-events:none}
+#nzmk .nz-lp{font-size:10px;font-style:italic;fill:#bfa86a;letter-spacing:.3px}
+/* nursery:css:end */
 </style></head>
 <body>
 <a class="skip" href="#q">Skip to search</a>
@@ -615,6 +740,7 @@ button.mg-go:focus-visible,.sheet button.mg-go:focus-visible{outline:2px solid v
 
 <script src="gx_data.js"></script>
 <script src="card.js"></script>
+<script src="nursery_data.js"></script>
 <script>
 (() => {
 const LAY = %%LAYOUT%%;
@@ -655,7 +781,7 @@ function apply() {
   if (co !== apply._co) { apply._co = co; document.querySelectorAll('#map .crown').forEach(g => { g.style.opacity = co; g.style.pointerEvents = co < .5 ? 'none' : ''; }); }
   svg.classList.toggle('closer', view.k > 5); document.body.classList.toggle('starnear', view.k >= 2.4); /* the star key shows only once the stars are big enough to see */ const ss = Math.min(1, 6.5 / view.k);      // stars stay small when the view is very close
   if (ss !== apply._ss) { apply._ss = ss; document.querySelectorAll('#stars .st').forEach(g => { const x = +g.dataset.x, y = +g.dataset.y; g.setAttribute('transform', ss < 1 ? `translate(${x},${y}) scale(${ss}) translate(${-x},${-y})` : ''); }); } clearTimeout(apply._t); apply._t = setTimeout(() => typeof starNames === 'function' && starNames(), 120);
-  declutter(); chrome(); }
+  declutter(); chrome(); if (NZS) nzOnApply(); }
 function declutter() {      // among lit names, any that would touch an earlier one hides its words (its point stays) until zooming makes room
   const gs = [...document.querySelectorAll('#map .fm.me:not(.soil),#map .fm.on:not(.soil),#map .fm.rtn:not(.soil)')]; gs.forEach(g => g.classList.remove('hid')); if (!gs.length || gs.length > 60) return;
   gs.sort((a, b) => b.classList.contains('me') - a.classList.contains('me')); const placed = [];
@@ -694,7 +820,7 @@ function goLevel(l) {
   if (l >= 3) { if (sel) return frameNet(sel, true); flyTo(Math.min(KMAX, view.k * 1.6), cx, cy); } }
 
 /* ---------- light a form's web ---------- */
-function light(id) {
+function light(id) { if (NZS) return nzLight();
   svg.classList.toggle('focus', !!id);
   document.querySelectorAll('#map .on,#map .me').forEach(x => { x.classList.remove('on', 'me', 'fade'); if (x.classList.contains('fm')) x.removeAttribute('transform'); });
   if (id) { NODE[id] && NODE[id].classList.add('me'); (BY[id] || []).forEach(p => { p.classList.add('on'); [p.dataset.a, p.dataset.b].forEach(j => j !== id && NODE[j] && NODE[j].classList.add('on')); p.parentNode.appendChild(p); });
@@ -723,14 +849,14 @@ function hidePill() { $('#hint').style.display = 'none'; document.body.classList
 function openPinned() { if (spot) return choose(spot, view.k < 2.2); if (tkey) return showThread(tkey); if (ekey) return showEvent(ekey); }
 function releasePin() { clearTrace(); clearThread(); clearEvent(); spot = null; hidePill(); if (!sel) light(null); }
 function stepBack() {      // Esc and the card's close button step back one layer: card, then pinned web, then the clean Garden
-  if (walking || jpanel) { endJourneyPanel(); return true; }
+  if (NZS) return nzBack(); if (walking || jpanel) { endJourneyPanel(); return true; }
   if (document.body.classList.contains('pan')) { const was = sel; sel = null; document.body.classList.remove('pan'); measure(); clamp(view); if (was) { spot = was; light(was); } apply(); pinPill(); return true; }
   if (spot || tkey || ekey) { releasePin(); return true; } return false; }
 function clearSpot() { clearTrace(); spot = null; hidePill(); if (!sel) light(null); }
 function choose(id, frame) { quitWalk(); $("#cpop") && $("#cpop").classList.remove("show");
   clearThread(); clearEvent(); hidePill(); spot = null; sel = id; curFam = famAt(LAY.nodes[id].x); curEra = eraOf(id);
   light(id); card(id); addShare(); document.body.classList.add('pan'); measure(); clamp(view); if (frame) frameNet(id, true); else apply(); }
-function closePanel() { if (!sel && !tkey && !ekey && !document.body.classList.contains('pan')) return; if (tkey || ekey) { clearThread(); clearEvent(); light(null); } sel = null; document.body.classList.remove('pan'); measure(); clamp(view); light(spot); }
+function closePanel() { if (NZS) return; if (!sel && !tkey && !ekey && !document.body.classList.contains('pan')) return; if (tkey || ekey) { clearThread(); clearEvent(); light(null); } sel = null; document.body.classList.remove('pan'); measure(); clamp(view); light(spot); }
 
 /* ---------- the card ---------- */
 const MINARET = {}; G.MIN.genres.forEach(g => g.lanterns.forEach(id => MINARET[id] = g.t));
@@ -960,7 +1086,7 @@ function placeEvents() {
     let ln = 0; while (lanes[ln] != null && Math.abs(lanes[ln] - sy) < 11) ln++; if (ln > 1 && e.id !== ekey) { b.style.display = 'none'; return; } lanes[ln] = sy; b.style.top = (sy - 4) + 'px'; b.style.left = (x0 - ln * 10) + 'px'; b.classList.toggle('on', e.id === ekey); }); }
 function chrome() {
   const sx = x => view.tx + x * view.k, sy = y => view.ty + y * view.k, ox = svg.getBoundingClientRect().left, oy = svg.getBoundingClientRect().top;
-  const [cx, cy] = centre(), lv = level(), f = sel ? famAt(LAY.nodes[sel].x) : (lv >= 1 ? (curFam || famAt(cx)) : null), e = sel ? eraOf(sel) : (lv >= 1 ? eraAt(cy) : null);
+  const [cx, cy] = centre(), lv = level(), zs = sel || nzCrumbLan(), f = zs ? famAt(LAY.nodes[zs].x) : (lv >= 1 ? (curFam || famAt(cx)) : null), e = zs ? eraOf(zs) : (lv >= 1 ? eraAt(cy) : null);
   LAY.eras.forEach(E => { const [d, t] = ERAEL[E.id], top = oy + sy(E.top), bot = oy + sy(E.bottom), vis = bot > oy + 4 && top < innerHeight - 4;
     d.style.display = t.style.display = vis && top < innerHeight - 110 ? '' : 'none'; if (!vis || top >= innerHeight - 110) return;
     const mid = Math.max(oy + 30, Math.min(innerHeight - 124, (Math.max(top, oy) + Math.min(bot, innerHeight)) / 2)); d.style.top = (mid - 15) + 'px'; t.style.top = top + 'px'; t.style.display = top > oy + 2 ? '' : 'none'; d.classList.toggle('cur', E.id === e); });
@@ -975,8 +1101,8 @@ function chrome() {
   if (tkey) { const steps = [['Garden', home], ['Voices', () => openSheet('voices', $('.rail button[data-sheet=voices]'))], [VOICES[tkey].name, () => showThread(tkey)]]; steps.forEach(([t, fn], i) => add(t, fn, i === steps.length - 1)); $('.rung[data-l="4"]').hidden = false; placeEvents(); return; }
   $('.rung[data-l="4"]').hidden = true; placeEvents();
   const steps = [['Garden', home]]; if (f) steps.push([FN(f).replace(/^THE /, '').toLowerCase().replace(/^./, c => c.toUpperCase()), () => { closePanel(); clearSpot(); goFamily(f); }]);
-  if (e && (lv >= 2 || sel)) steps.push([ERA[e].name, () => { closePanel(); clearSpot(); goEra(f, e); }]);
-  if (sel) steps.push([N[sel].t, () => frameNet(sel, true)]);
+  if (e && (lv >= 2 || zs)) steps.push([ERA[e].name, () => { closePanel(); clearSpot(); goEra(f, e); }]);
+  if (zs) steps.push([N[zs].t, () => sel ? frameNet(sel, true) : nzFrame()]);
   steps.forEach(([t, fn], i) => add(t, fn, i === steps.length - 1)); }
 
 /* ---------- pointer, wheel, keys ---------- */
@@ -990,7 +1116,7 @@ svg.addEventListener('wheel', e => { e.preventDefault(); cancelAnimationFrame(an
   const k = Math.max(KMIN(), Math.min(KMAX, view.k * Math.exp(-e.deltaY * (e.ctrlKey ? .01 : .0016)))), q = k / view.k;
   view.tx = px - (px - view.tx) * q; view.ty = py - (py - view.ty) * q; view.k = k; nav = null; curEra = null; clamp(view); apply(); }, {passive: false});
 svg.addEventListener('click', e => { if (moved) return; const g = e.target.closest('.fm') || (COARSE() ? nearFm(e.clientX, e.clientY) : null); commonsNote(false);
-  if (g) { e.stopPropagation(); const id = g.dataset.id;
+  if (g) { e.stopPropagation(); const id = g.dataset.id; if (NZS && nzLanClick(id)) return;
     if (e.shiftKey) { collect(id, {k: 'pick'}); if (!spot && !sel && !tkey && !ekey) pin(id); return; }      // Shift-click drops a lantern straight into the trail
     if (sel === id) return; if (spot === id && !tkey && !ekey) return choose(id, view.k < 2.2); return pin(id); }
   if (!trace && (spot || sel) && !tkey && !ekey) traceAt(e, COARSE() ? 22 : 14);      // a tap on a line (no hover on touch) finds it here
@@ -998,7 +1124,7 @@ svg.addEventListener('click', e => { if (moved) return; const g = e.target.close
   if (sel || tkey || ekey) closePanel(); light(null); clearSpot(); });
 svg.addEventListener('dblclick', e => { const g = e.target.closest('.fm'); if (!g) return; e.preventDefault(); choose(g.dataset.id, view.k < 2.2); });
 let hoverId = null;
-svg.addEventListener('mouseover', e => { const g = e.target.closest('.fm'); hoverId = g ? g.dataset.id : hoverId; if (g && !sel && !spot && !tkey && !ekey) { light(g.dataset.id); if (g.dataset.id === 'commons') commonsNote(true); } });
+svg.addEventListener('mouseover', e => { const g = e.target.closest('.fm'); hoverId = g ? g.dataset.id : hoverId; if (g && !sel && !spot && !tkey && !ekey && !NZS) { light(g.dataset.id); if (g.dataset.id === 'commons') commonsNote(true); } });
 const cpop = $('#cpop');
 function commonsNote(on) {      // a short note on what lights up when the seed of the Garden is touched
   if (!on) { cpop.classList.remove('show'); return; }
@@ -1007,7 +1133,7 @@ function commonsNote(on) {      // a short note on what lights up when the seed 
   cpop.innerHTML = `<h4>The commons</h4><div class="k">Folk song · dance · work song</div><p>The unwritten music of ordinary people, made and passed on by ear in fields, kitchens, ships and village squares. Every spire grows from this ground.</p><p class="ends">The green lines run to the <b>${lit.length} lanterns</b> that grew from it, from <b>${first.t}</b> to <b>${last.t}</b>. Names nearest the ground shine brightest.</p><div class="go">Click the seed to pin its web, again to open its card. Hold Shift to keep the web while you trace its lines.</div>`;
   const r0 = $('#map').getBoundingClientRect(), p = LAY.nodes.commons, sx = r0.left + view.tx + p.x * view.k, sy = r0.top + view.ty + p.y * view.k;
   cpop.style.left = Math.max(r0.left + 10, Math.min(r0.right - 350, sx + 170)) + 'px'; cpop.style.top = Math.max(r0.top + 40, sy - 680) + 'px'; cpop.classList.add('show'); }      // set beside the seed, clear of the oldest (brightest) names
-svg.addEventListener('mouseout', e => { const g0 = e.target.closest('.fm.soil'); if (g0) commonsNote(false); const g = e.target.closest('.fm'); if (g && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.fm') === g)) hoverId = null; if (g && !sel && !spot && !tkey && !ekey && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.fm') === g)) light(null); });
+svg.addEventListener('mouseout', e => { const g0 = e.target.closest('.fm.soil'); if (g0) commonsNote(false); const g = e.target.closest('.fm'); if (g && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.fm') === g)) hoverId = null; if (g && !sel && !spot && !tkey && !ekey && !NZS && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.fm') === g)) light(null); });
 $('#zin').onclick = () => goLevel(level() + 1); $('#zout').onclick = () => { if (tkey) { closePanel(); return goLevel(1); } if (sel) { closePanel(); light(null); return goLevel(2); } goLevel(level() - 1); };
 /* phone zoom (22 Nov) */ (() => { const NARROW = () => aw < 700, MIDY = {};
   const midY = f => { if (MIDY[f] == null) { const ys = Object.values(LAY.nodes).filter(n => n.f === f).map(n => n.y).sort((a, b) => a - b); MIDY[f] = ys.length ? ys[ys.length >> 1] : centre()[1]; } return MIDY[f]; };
@@ -1020,7 +1146,7 @@ $('#zin').onclick = () => goLevel(level() + 1); $('#zout').onclick = () => { if 
 document.querySelectorAll('.rung').forEach(r => r.onclick = () => { if (+r.dataset.l === 4) return tkey && showThread(tkey); if (tkey) closePanel(); goLevel(+r.dataset.l); });
 $('#hint').onclick = () => openPinned();
 addEventListener('keydown', e => {
-  if (e.target.closest('input')) return;
+  if (e.target.closest('input')) return; if (NZS && e.key.startsWith('Arrow') && e.target.closest('aside.nz-read')) return;
   if (e.key === '/') { e.preventDefault(); $('#q').focus(); return; }
   if (e.key === '+' || e.key === '=') return goLevel(level() + 1);
   if (e.key === '-' || e.key === '_') return $('#zout').click();
@@ -1062,7 +1188,7 @@ function travel(to) {      // follow a connection: with a card open, open the ne
 // Shift: hold to keep a web while you trace it, release to let go; tap to toggle the pin on or off
 let shiftAt = 0, shiftMade = false;
 addEventListener('keydown', e => { if (e.key !== 'Shift' || e.repeat || (e.target.closest && e.target.closest('input'))) return; shiftAt = performance.now(); shiftMade = false;
-  if (!spot && !sel && !tkey && !ekey && hoverId) { pin(hoverId); shiftMade = true; } });
+  if (!spot && !sel && !tkey && !ekey && !NZS && hoverId) { pin(hoverId); shiftMade = true; } });
 addEventListener('keyup', e => { if (e.key !== 'Shift' || !shiftAt || (e.target.closest && e.target.closest('input'))) return; const held = performance.now() - shiftAt > 280; shiftAt = 0;
   if (document.body.classList.contains('pan')) return;
   if (held) { if (shiftMade) releasePin(); }      // held: the pin lasts only as long as the key
@@ -1284,7 +1410,7 @@ measure(); view.k = fitK; clamp(view); apply();
 /* ---------- F6: deep links and sharing ---------- */
 const HOME = /github\.io$|^localhost$|^127\./.test(location.hostname) ? location.origin + location.pathname : 'https://shmungfroi.github.io/thegardenofearthlysounds/';
 function hashOf() { const P = [], pan = document.body.classList.contains('pan');
-  if (tkey) P.push((pan ? 'v=' : 'vp=') + tkey); else if (ekey) P.push((pan ? 'e=' : 'ep=') + ekey); else if (sel && pan) P.push('l=' + sel); else if (spot) P.push('p=' + spot);
+  if (NZS) P.push(nzHash()); else if (tkey) P.push((pan ? 'v=' : 'vp=') + tkey); else if (ekey) P.push((pan ? 'e=' : 'ep=') + ekey); else if (sel && pan) P.push('l=' + sel); else if (spot) P.push('p=' + spot);
   if (lens.on.size) P.push('lens=' + [...lens.on].join(',')); if (lens.n) P.push('n=' + encodeURIComponent(lens.n)); return P.join('&'); }
 let lastHash = null;
 function syncHash() { const h = hashOf(); if (h === lastHash) return; lastHash = h; try { history.replaceState(null, '', h ? '#' + h : location.pathname + location.search); } catch (err) {} }
@@ -1308,6 +1434,7 @@ function readHash(h) {
   (Q.lens || '').split(',').filter(k => LENSES.some(L => L.k === k)).forEach(k => setLens(k, true));
   if (Q.n) { let ok = false; try { const S = GC.NSW.set(Q.n); ok = !!S && (S.size || S.length) > 0; } catch (err) {} if (ok) setCourse(Q.n); }
   if (Q.trail) { const t = Q.trail.split(',').filter(i => N[i] && LAY.nodes[i]); if (t.length) { shared = t; drawTrail(); } }
+  if (Q.nursery && nzFromHash(Q)) return true;
   if (Q.l && N[Q.l] && LAY.nodes[Q.l]) choose(Q.l, true);
   else if (Q.p && N[Q.p] && LAY.nodes[Q.p]) spotlight(Q.p);
   else if (Q.v && VOICES[Q.v]) showThread(Q.v);
@@ -1396,11 +1523,11 @@ async function shareJourney(j) { const code = await pack(jPack(j)), url = HOME +
 async function shareTask(T) { shareLink(HOME + '#task=' + await pack(taskPack(T)), `listening task “${T.t || 'Untitled'}”`); }
 
 // ---- the panel: editor, walk, task, task maker
-function openJPanel(build) { closeSheet(); clearThread(); clearEvent(); clearTrace(); hidePill(); sel = null; spot = null; jpanel = true; panel.innerHTML = ''; panel.scrollTop = 0;
+function openJPanel(build) { if (NZS) nzEnd(false); closeSheet(); clearThread(); clearEvent(); clearTrace(); hidePill(); sel = null; spot = null; jpanel = true; panel.innerHTML = ''; panel.scrollTop = 0;
   const x = el('button', 'x', panel, '×'); x.setAttribute('aria-label', 'Close'); x.onclick = () => endJourneyPanel(); build(panel);
   document.body.classList.add('pan', 'jmode'); measure(); clamp(view); apply(); }
 function endJourneyPanel() { const was = !!walking; walking = null; jpanel = false; document.body.classList.remove('jmode', 'walking'); if (was) light(null); document.body.classList.remove('pan'); measure(); clamp(view); drawTrail(); apply(); }
-function quitWalk() { if (inWalk) return; if (walking || jpanel) { walking = null; jpanel = false; document.body.classList.remove('jmode', 'walking'); drawTrail(); } }
+function quitWalk() { if (NZS) nzEnd(false); if (inWalk) return; if (walking || jpanel) { walking = null; jpanel = false; document.body.classList.remove('jmode', 'walking'); drawTrail(); } }
 const H = (t, cls, par, txt) => el(t, cls, par, txt);
 
 function resetJourney() {      // a fresh start: the trail and any task under way are cleared; saved journeys are never touched; Undo for a few seconds
@@ -1498,7 +1625,7 @@ function editTask(T) { const isNew = !T; T = T || {id: uid('t'), t: '', p: '', n
 
 // ---- the Journeys sheet (rail)
 function journeySheetOpen() { const b = document.querySelector('.rail button[data-sheet="journeys"]'); if (!sheet.classList.contains('open') || sheet.dataset.kind !== 'journeys') openSheet('journeys', b); else journeySheet(); }
-function journeySheet() { sheet.innerHTML = ''; el('h3', '', sheet, 'JOURNEYS');
+function journeySheet() { sheet.innerHTML = ''; el('h3', '', sheet, 'JOURNEYS'); nzJump(sheet);
   el('p', 'lnote', sheet, 'A journey is your trail kept with a work and a note at each stop. Walk it again, share its link, or print its sheet.');
   const rs = el('button', 'jreset', sheet, '↺ Start a new journey'); el('small', '', rs, trail.length || task ? `clears your trail${trail.length ? ' (' + trail.length + ')' : ''}${task ? ' and the task under way' : ''}; saved journeys stay` : 'your trail is empty'); rs.disabled = !trail.length && !task; rs.onclick = () => resetJourney();
   const sv = el('button', 'jbig', sheet, trail.length ? `✎ Save your trail as a journey (${trail.length} lanterns)` : '✎ Save your trail as a journey'); sv.disabled = !trail.length; sv.onclick = () => { closeSheet(); newJourneyFromTrail(); };
@@ -1514,7 +1641,7 @@ function journeySheet() { sheet.innerHTML = ''; el('h3', '', sheet, 'JOURNEYS');
   const nt = el('button', 'jbig', sheet, '＋ Set a listening task'); nt.onclick = () => { closeSheet(); editTask(null); };
   TASKS.forEach(T => { const r = el('div', 'jrow', sheet); const b = el('button', '', r, T.t || 'Untitled task'); el('small', '', b, `${T.n} stops${T.s && N[T.s] ? ' · from ' + N[T.s].t : ''}${T.e ? ' · to ' + ERANAME(T.e) : ''}`);
     b.onclick = () => { closeSheet(); showTask(T); }; const sh = el('button', 'jx', r, 'Link'); sh.title = 'Copy the task link'; sh.onclick = () => shareTask(T); const e = el('button', 'jx', r, 'Edit'); e.onclick = () => { closeSheet(); editTask(T); }; });
-  el('p', 'lnote', sheet, 'Kept in this browser: as many as it will hold. A link is the safest copy.'); }
+  el('p', 'lnote', sheet, 'Kept in this browser: as many as it will hold. A link is the safest copy.'); nzSection(sheet); }
 
 // ---- copy as text, and the journey sheet (a printable page in the Garden's style)
 function journeyText(j) { const L = [(j.title || 'A journey') + (j.by ? ' · by ' + j.by : ''), 'The Garden of Earthly Sounds' + (j.made ? ' · ' + j.made : ''), ''];
@@ -1765,6 +1892,390 @@ function mgKeep(S) { const before = MG.items.slice(); let added = 0;
   toast(`Kept in your glossary${added ? '' : ' (you had every term already)'} <button class="undo" aria-label="Undo keep a copy">Undo</button>`, 6000);
   const u = $('#toast .undo'); if (u) u.onclick = () => { MG.items = before; saveMG(); mgSync(); toast('Copy undone'); }; }
 
+/* nursery:js:start */
+/* ---------- The Nursery: The Branches and the Fruits (guided journeys, 26 Nov 2026) ----------
+   One journey for now: Sonata · Follow the growth (window.NURSERY.sonata, made from the checked text by convert.py).
+   Nothing is drawn and nothing in the Garden behaves differently while no journey is open: NZS is null (or not yet set),
+   and every hook placed in the Garden's own code tests it first. Notes, level, chosen name and place are kept in
+   localStorage 'garden.nursery'. No sound: every recording is a link that opens in a new tab. */
+var NZS = null;
+const NZJ = window.NURSERY && window.NURSERY.sonata, NZK = 'garden.nursery', NZ_ADDR = 'shmungfroi@gmail.com', NZ_NAMEMAX = 40;
+const NZ_NSW = 'For teachers in New South Wales: Seed is Stage 4, Shoot is Stage 5 and Bloom is Stage 6.';      /* still to be confirmed by Justin: set to '' to remove it */
+const NZLV = {4: 'Seed', 5: 'Shoot', 6: 'Bloom'}, NZLVS = [4, 5, 6];
+const NZ_SEED = 'M6 1.2c1.9 0 3.1 1.2 3.1 2.6S7.9 6.3 6 6.3 2.9 5.2 2.9 3.8 4.1 1.2 6 1.2zM6 6.3v6.4M6 8.6c-1 .5-2 1.6-2.7 3.3M6 8.6c1 .5 2 1.6 2.7 3.3M6 10.4c-.7.4-1.2 1.1-1.5 2.1M6 10.4c.7.4 1.2 1.1 1.5 2.1';      /* a seed with its first roots, 12 x 13 */
+
+/* ---- what is kept in this browser ---- */
+const NZ = (() => { const o = LS(NZK, {}), S = {v: 2, lv: 5, name: '', at: {}, notes: {}};
+  if (!o || typeof o !== 'object' || Array.isArray(o)) return S;
+  const lv = +(o.lv || o.level || o.stage); if (NZLVS.includes(lv)) S.lv = lv;
+  S.name = S60(o.name, NZ_NAMEMAX);
+  const at = o.at && typeof o.at === 'object' ? o.at.sonata : o.place; if (at === 'overview' || at === 'learned' || [0, 1, 2, 3].includes(at)) S.at.sonata = at;
+  const src = o.notes && typeof o.notes === 'object' ? (o.notes.sonata && typeof o.notes.sonata === 'object' ? o.notes.sonata : o.notes) : {}, out = {};
+  if (NZJ) NZJ.stops.forEach((st, i) => { const k = i ? String(i) : 'root', v = src[k] != null ? src[k] : src[i];
+    if (typeof v === 'string') { const core = st.works.find(w => w.core) || st.works[0]; if (v.trim()) out[k] = {[core.id]: v.slice(0, 280)}; }      /* an earlier build kept one note per chapter: it now belongs to the chapter's core work */
+    else if (v && typeof v === 'object') st.works.forEach(w => { if (typeof v[w.id] === 'string' && v[w.id]) (out[k] = out[k] || {})[w.id] = v[w.id].slice(0, 280); }); });
+  S.notes.sonata = out; return S; })();
+const nzSave = () => LSset(NZK, NZ);
+const nzKey = i => i === 0 ? 'root' : String(i);
+const nzLabel = i => i === 0 ? 'Root' : 'Chapter ' + i;
+const nzNote = (i, w) => ((NZ.notes.sonata || {})[nzKey(i)] || {})[w] || '';
+function nzSetNote(i, w, v) { const n = NZ.notes.sonata = NZ.notes.sonata || {}, k = nzKey(i); n[k] = n[k] || {}; if (v) n[k][w] = v.slice(0, 280); else delete n[k][w]; if (!Object.keys(n[k]).length) delete n[k]; nzSave(); }
+const nzIn = (arr, lv) => (arr || []).filter(x => x.lv.includes(lv));
+const nzWorks = (i, lv) => NZJ.stops[i].works.filter(w => w.lv.includes(lv));
+const nzHasNote = (i, lv) => nzWorks(i, lv).some(w => nzNote(i, w.id).trim());
+const nzIsCh = at => typeof at === 'number';
+const nzSur = w => w.composer.split(' ').pop();
+
+/* ---- text: **term** opens the Garden's own definition, *title* is set in italics ---- */
+function nzRich(parent, text) {
+  String(text || '').split('**').forEach((part, i) => { if (!part) return;
+    if (i % 2) { const key = GC.glossKey && GC.glossKey(part); if (key) { const b = el('button', 'kw', parent, part); b.type = 'button'; b.setAttribute('aria-expanded', 'false'); b.onclick = () => GC.gloss(b, key, panel); } else el('b', '', parent, part); return; }
+    part.split('*').forEach((q, j) => { if (!q) return; if (j % 2) el('em', '', parent, q); else parent.append(q); }); });
+  return parent; }
+const nzP = (parent, cls, text) => nzRich(el('p', cls, parent), text);
+function nzFruitMark(parent, core) { const s = document.createElementNS(SVGNS, 'svg'); s.setAttribute('viewBox', '0 0 12 12'); s.setAttribute('class', 'nz-fm'); s.setAttribute('aria-hidden', 'true');
+  s.innerHTML = core ? '<circle cx="6" cy="6" r="4.2" fill="#f0d48a"/>' : '<circle cx="6" cy="6" r="3.7" fill="none" stroke="#f0d48a" stroke-width="1.4"/>'; parent.appendChild(s); return s; }
+function nzSeed(parent, cls) { const s = document.createElementNS(SVGNS, 'svg'); s.setAttribute('viewBox', '0 0 12 14'); s.setAttribute('class', cls || 'nz-seed'); s.setAttribute('aria-hidden', 'true');
+  s.innerHTML = `<path d="${NZ_SEED}" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>`; parent.appendChild(s); return s; }
+
+/* ---- the level switch: Seed / Shoot / Bloom (links keep stage=4/5/6) ---- */
+function nzLevels(parent, onPick) { const box = el('div', 'nz-lv', parent); box.setAttribute('role', 'group'); box.setAttribute('aria-label', 'Level'); el('span', '', box, 'Level');
+  NZLVS.forEach(lv => { const b = el('button', '', box, NZLV[lv]); b.type = 'button'; b.setAttribute('aria-pressed', (NZS ? NZS.lv : NZ.lv) === lv ? 'true' : 'false');
+    b.title = {4: 'Seed: hear it and respond, in simple words', 5: 'Shoot: the elements and their context', 6: 'Bloom: analysis and evaluation'}[lv];
+    b.onclick = () => { NZ.lv = lv; nzSave(); if (NZS) NZS.lv = lv; box.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false')); onPick && onPick(lv); }; });
+  return box; }
+
+/* ---- the Journeys tab: a jump link at the top, the Nursery at the foot ---- */
+function nzJump(sh) { if (!NZJ) return; const b = el('button', 'nz-jump', sh, 'The Nursery ↓'); b.type = 'button'; b.title = 'Go to the Nursery, at the foot of this tab';
+  b.onclick = () => { const h = sh.querySelector('.nz-h'); if (!h) return; sh.scrollTo({top: Math.max(0, h.parentNode.offsetTop - 8), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}); h.focus({preventScroll: true}); }; }
+function nzSection(sh) { if (!NZJ) return; const S = el('section', 'nz-sec', sh); S.setAttribute('aria-labelledby', 'nz-h');
+  const h = el('h3', 'nz-h', S, NZJ.nursery.toUpperCase()); h.id = 'nz-h'; h.tabIndex = -1;
+  el('p', 'nz-tag', S, NZJ.tagline);
+  el('div', 'nz-feat', S, 'The Branches and the Fruits');
+  const m = NZJ.meta.split(' · '), c = el('div', 'nz-card', S), tt = el('div', 'nz-tt', c);
+  el('b', '', tt, m[0]); el('span', '', tt, m[1]); const lab = el('span', 'nz-lab ok', tt, NZJ.label); lab.title = 'Checked: written and fact-checked';
+  el('div', 'nz-meta', c, [m[2], m[4]].join(' · '));
+  const row = el('div', 'nz-row', c); nzLevels(row);
+  const at = NZ.at.sonata, go = el('button', 'nz-go', row, at != null && at !== 'overview' ? 'Go on ›' : 'Begin ›'); go.type = 'button';
+  if (at != null && at !== 'overview') go.title = 'Go on where you left off: ' + (at === 'learned' ? 'What I learned' : nzLabel(at));
+  go.setAttribute('aria-label', (at != null && at !== 'overview' ? 'Go on with ' : 'Begin ') + m[0] + ', ' + m[1]);
+  go.onclick = () => nzBegin(null);
+  const g = el('div', 'nz-grow', S); el('span', '', g, '＋ Grow your own (type an idea)'); el('small', '', g, ' · coming soon');
+  const k = el('div', 'nz-key', S); [['ok', NZJ.label, 'written and fact-checked'], ['grow', 'Growing', 'built from data or contributions']].forEach(([c2, t, d]) => { const p = el('p', '', k); el('span', 'nz-lab ' + c2, p, t); p.append(' ' + d); }); }
+
+/* ---- open, step, leave ---- */
+function nzBegin(at) { if (!NZJ) return;
+  if (NZS) return nzShow(at == null ? 'overview' : at);
+  const pan = document.body.classList.contains('pan');
+  const snap = {view: {...view}, curFam, curEra, nav, sel, spot, tkey, ekey, pan, ps: panel.scrollTop,
+    sheet: sheet.classList.contains('open') ? {kind: sheet.dataset.kind, top: sheet.scrollTop} : null, walk: walking ? {j: walking.j, i: walking.i, shared: walking.shared} : null};
+  closeSheet(); quitWalk(); clearTrace(); clearThread(); clearEvent(); hidePill(); commonsNote(false); tip.style.display = 'none'; sel = null; spot = null;
+  NZS = {lv: NZ.lv, at: null, snap};
+  panel.classList.add('nz-read'); document.body.classList.add('pan', 'nzon'); measure(); clamp(view);
+  nzMapOn(); nzShow(at == null ? 'overview' : at, true); }
+function nzShow(at, first) { if (!NZS) return; const prev = NZS.at; NZS.at = at; NZ.at.sonata = at; nzSave();
+  nzRender(); nzLight(); nzThreadState(first ? null : prev, at); nzFrame();
+  say(at === 'overview' ? 'Sonata, Follow the growth. The start of the journey.' : at === 'learned' ? 'What I learned.' : `${nzLabel(at)}: ${NZJ.stops[at].name}.`); }
+function nzBack() { if (!NZS) return false;
+  const g = panel.querySelector('.gdef'); if (g) { g.remove(); panel.querySelectorAll('button.kw[aria-expanded=true]').forEach(x => { x.setAttribute('aria-expanded', 'false'); x.focus(); }); return true; }
+  if (NZS.at === 'overview') nzEnd(true); else nzShow('overview'); return true; }
+function nzEnd(restore) { if (!NZS) return; const S = NZS; NZS = null; clearTimeout(nzT);
+  nzMapOff(); panel.classList.remove('nz-read'); document.body.classList.remove('nzon'); if (nav === 3) nav = null;
+  if (!restore) { light(null); return; }
+  const s = S.snap; panel.innerHTML = ''; document.body.classList.remove('pan'); measure(); clamp(view);
+  if (s.walk) walkJourney(s.walk.j, s.walk.i, s.walk.shared);
+  else if (s.sel && N[s.sel]) choose(s.sel, false);
+  else if (s.tkey && VOICES[s.tkey]) showThread(s.tkey, !s.pan);
+  else if (s.ekey && EVENTS[s.ekey]) showEvent(s.ekey, !s.pan);
+  else if (s.spot && N[s.spot]) pin(s.spot);
+  else light(null);
+  cancelAnimationFrame(anim); measure(); Object.assign(view, s.view); curFam = s.curFam; curEra = s.curEra; nav = s.nav; apply();
+  if (s.pan) panel.scrollTop = s.ps;
+  if (s.sheet) { const b = document.querySelector(`.rail button[data-sheet="${s.sheet.kind}"]`); if (b) { openSheet(s.sheet.kind, b); sheet.scrollTop = s.sheet.top; } }
+  say('The journey is closed. The Garden is as it was.'); }
+function nzLight() { if (!NZS) return; svg.classList.add('focus');
+  document.querySelectorAll('#map .on,#map .me').forEach(x => { x.classList.remove('on', 'me', 'fade'); if (x.classList.contains('fm')) x.removeAttribute('transform'); });
+  const cur = nzIsCh(NZS.at) ? NZJ.stops[NZS.at].lan : null; NZJ.stops.forEach(s => { const g = NODE[s.lan]; if (g) g.classList.add(s.lan === cur ? 'me' : 'on'); });
+  drawReach(null); hits(); apply(); }
+function nzLanClick(id) { if (!NZS) return false; const i = NZJ.stops.findIndex(s => s.lan === id); if (i < 0) return false; if (NZS.at !== i) nzShow(i); return true; }
+function nzHash() { const a = NZS.at; return 'nursery=sonata&stage=' + NZS.lv + (a === 'overview' ? '' : '&ch=' + (a === 0 ? 'root' : a)); }
+function nzFromHash(Q) { if (Q.nursery !== 'sonata' || !NZJ) return false; const lv = +Q.stage; if (NZLVS.includes(lv)) { NZ.lv = lv; if (NZS) NZS.lv = lv; }
+  const c = Q.ch, at = c == null || c === '' ? 'overview' : c === 'root' ? 0 : c === 'learned' ? 'learned' : ['1', '2', '3'].includes(c) ? +c : 'overview';
+  if (NZS) { nzShow(at); return true; } nzBegin(at); return true; }
+function nzCrumbLan() { return NZS && nav === 3 && nzIsCh(NZS.at) ? NZJ.stops[NZS.at].lan : null; }
+
+/* ---- the reader, in the side panel (on a phone, the lower sheet) ---- */
+function nzRender() { const at = NZS.at, lv = NZS.lv, P = panel; P.innerHTML = ''; P.scrollTop = 0;
+  const x = el('button', 'x', P, '×'); x.type = 'button'; x.setAttribute('aria-label', 'Leave the journey'); x.title = 'Leave the journey (the Garden returns as it was)'; x.onclick = () => nzEnd(true);
+  const bar = el('div', 'nz-lvbar', P); nzLevels(bar, () => { const st = P.scrollTop; nzRender(); P.scrollTop = st; nzLight(); nzSolve(); });
+  const k = el('div', 'k', P); k.append(NZJ.nursery + ' · '); el('span', 'nz-ok', k, NZJ.label);
+  const h1 = el('h1', 'jr-jt', P, NZJ.meta.split(' · ')[0]); el('small', '', h1, NZJ.meta.split(' · ')[1]);
+  el('div', 'lin', P, NZJ.meta.split(' · ')[2] + ' · ' + NZJ.meta.split(' · ')[4]);
+  const dots = el('div', 'jr-dots nz-dots', P); dots.setAttribute('role', 'navigation'); dots.setAttribute('aria-label', 'The stops of this journey');
+  NZJ.stops.forEach((s, i) => { const d = el('button', at === i ? 'cur' : '', dots); d.type = 'button'; if (i === 0) nzSeed(d); else d.append(String(i));
+    d.setAttribute('aria-label', `${nzLabel(i)}: ${s.name}`); d.title = `${nzLabel(i)} · ${s.year} · ${s.name}`; if (at === i) d.setAttribute('aria-current', 'step'); d.onclick = () => nzShow(i); });
+  const dl = el('button', at === 'learned' ? 'cur' : '', dots, '✦'); dl.type = 'button'; dl.setAttribute('aria-label', 'What I learned'); dl.title = 'What I learned'; if (at === 'learned') dl.setAttribute('aria-current', 'step'); dl.onclick = () => nzShow('learned');
+  if (at === 'overview') nzOverview(P, lv); else if (at === 'learned') nzLearned(P, lv); else nzChapter(P, at, lv);
+  const ft = el('div', 'jr-act nz-foot', P), lv2 = el('button', 'jr-b', ft, 'Leave the journey'); lv2.type = 'button'; lv2.onclick = () => nzEnd(true);
+  el('p', 'jr-small', P, 'Your notes are saved as you type, in this browser only.');
+  setTimeout(() => { const h = P.querySelector('.nz-focus'); if (h && NZS && (!document.activeElement || document.activeElement === document.body || P.contains(document.activeElement))) { h.tabIndex = -1; h.focus({preventScroll: true}); } }, 60); }
+function nzGo(parent, label, fn, gold) { const b = el('button', 'jr-b' + (gold ? ' gold' : ''), parent, label); b.type = 'button'; b.onclick = fn; return b; }
+function nzOverview(P, lv) {
+  el('h2', 'jr-stopname nz-focus', P, 'The start');
+  el('h4', '', P, NZJ.bigHead); nzP(P, 'jr-q nz-big', NZJ.big);
+  el('h4', '', P, NZJ.todayHead); nzP(P, '', NZJ.today);
+  el('h4', '', P, 'The stops'); const ol = el('ol', 'nz-stops', P), here = NZ.at.sonata;
+  NZJ.stops.forEach((s, i) => { const li = el('li', '', ol), b = el('button', 'nz-stop', li); b.type = 'button';
+    const m = el('span', 'nz-sm', b); if (i === 0) nzSeed(m); else m.textContent = String(i);
+    const t = el('span', 'nz-st', b); el('small', '', t, `${nzLabel(i)} · ${s.year}`); el('span', '', t, s.name); el('em', '', t, 'the lantern: ' + s.lanDate);
+    const nw = nzWorks(i, lv).length; el('i', 'nz-nw', b, nw + (nw === 1 ? ' work' : ' works')); if (i === 3) el('i', 'nz-leap', b, 'a leap');
+    b.onclick = () => nzShow(i); });
+  { const li = el('li', '', ol), b = el('button', 'nz-stop', li); b.type = 'button'; el('span', 'nz-sm', b, '✦'); const t = el('span', 'nz-st', b); el('small', '', t, 'At the end'); el('span', '', t, NZJ.learned.head); b.onclick = () => nzShow('learned'); }
+  const nv = el('div', 'jr-nav', P);
+  if (nzIsCh(here) || here === 'learned') { nzGo(nv, 'Begin again', () => nzShow(0)); nzGo(nv, here === 'learned' ? 'Go on: ' + NZJ.learned.head + ' ›' : here === 0 ? 'Go on at the root ›' : `Go on with chapter ${here} ›`, () => nzShow(here), true);
+    const li = ol.children[here === 'learned' ? 4 : here]; if (li) el('span', 'nz-here', li.firstChild, 'you are here'); }
+  else { el('span', '', nv); nzGo(nv, 'Begin ›', () => nzShow(0), true); }
+  const d = el('details', 'nz-t', P); el('summary', '', d, NZJ.levelsHead); const tb = el('table', 'nz-tb', d);
+  NZJ.levelsTable.forEach((r, i) => { const tr = el('tr', '', tb); r.forEach(c => el(i ? 'td' : 'th', '', tr, c)); }); nzP(d, 'nz-small', NZJ.levelsCore);
+  if (NZ_NSW) { const t = el('details', 'nz-t', P); el('summary', '', t, 'For teachers'); el('div', 'tnote', t, NZ_NSW); } }
+function nzBox(parent, head, items) { if (!items.length) return; el('small', 'nz-k', parent, head); const b = el('div', 'research nz-qbox', parent); el('small', '', b, 'a question for you'); items.forEach(x => nzP(b, '', x.t)); }
+function nzTeach(parent, text) { if (!text) return; const d = el('details', 'nz-t', parent); el('summary', '', d, 'For teachers'); nzP(el('div', 'tnote', d), '', text); }
+function nzChapter(P, i, lv) { const S = NZJ.stops[i], n = N[S.lan] || {}, f = famOf(S.lan);
+  el('div', 'nz-cap', P, `${nzLabel(i)} · ${S.year}`);
+  const h2 = el('h2', 'jr-stopname nz-focus', P, S.name);
+  const ln = el('div', 'lin nz-lin', P); ln.append('the lantern: ' + S.lanDate + ' · '); const sp = el('span', 'nz-spire', ln, FT(f)); sp.style.color = FC(f); sp.style.borderColor = FC(f); ln.append(' · ' + ERANAME(n.period) + ' storey');
+  const oc = el('button', 'jr-b nz-card-b', P, 'Open its card'); oc.type = 'button'; oc.title = 'Open the lantern card (you can come back to this chapter)'; oc.onclick = () => choose(S.lan, true);
+  if (S.lead) { const p = el('p', 'nz-lead', P); el('b', '', p, S.lead); }
+  nzIn(S.intro, lv).forEach(x => nzP(P, 'nz-intro', x.t));
+  el('h4', '', P, S.meansHead); nzIn(S.means, lv).forEach(x => nzP(P, '', x.t));
+  el('h4', '', P, S.changedHead); nzIn(S.changed, lv).forEach(x => { if (x.scope) el('p', 'nz-scope', P, x.scope); nzP(P, '', x.t); });
+  const ws = nzWorks(i, lv); const wh = el('h4', '', P, ws.length === 1 ? 'The work' : 'The works · ' + ws.length);
+  if (ws.some(w => !w.core)) { const key = el('span', 'nz-wkey', wh); nzFruitMark(key, true); key.append('core '); nzFruitMark(key, false); key.append('added at ' + NZLV[Math.min(...ws.filter(w => !w.core).map(w => Math.min(...w.lv)))]); }
+  ws.forEach(w => nzWork(P, i, w, lv));
+  if (S.words.length) { el('h4', '', P, 'New words'); const ch = el('div', 'chips nz-words', P); S.words.forEach(t => { const key = GC.glossKey && GC.glossKey(t), b = el('button', '', ch, t); b.type = 'button'; if (key) { b.setAttribute('aria-expanded', 'false'); b.className = 'kw-chip'; b.onclick = () => GC.gloss(b, key, panel); } }); }
+  nzBox(P, 'Check question', nzIn(S.check, lv));
+  nzBox(P, 'Find out by listening', nzIn(S.find, lv));
+  nzTeach(P, S.teachers);
+  nzSend(P, i, lv);
+  const nv = el('div', 'jr-nav', P);
+  nzGo(nv, i === 0 ? '‹ The start' : '‹ ' + nzLabel(i - 1), () => nzShow(i === 0 ? 'overview' : i - 1));
+  nzGo(nv, i === 3 ? NZJ.learned.head + ' ›' : nzLabel(i + 1) + (i + 1 === 3 ? ' · a leap' : '') + ' ›', () => nzShow(i === 3 ? 'learned' : i + 1), true); }
+function nzWork(P, i, w, lv) { const W = el('div', 'nz-work', P); W.dataset.w = w.id; W.id = 'nzw-' + w.id;
+  const hd = el('div', 'nz-wh', W); nzFruitMark(hd, w.core).setAttribute('aria-hidden', 'true'); const tt = el('div', 'nz-wt', hd); el('span', 'pg-y', tt, w.year); nzRich(el('span', 'nz-ti', tt), w.title);
+  el('div', 'nz-by', tt, w.composer + (w.core ? ' · core work' : ' · added at ' + NZLV[Math.min(...w.lv)]));
+  (w.pre || []).forEach(t => nzP(W, 'nz-pre', t));
+  const ls = nzIn(w.listen, lv); if (ls.length) { el('small', 'nz-k', W, 'Listen for'); const ul = el('ul', 'nz-cues', W); ls.forEach(c => { const li = el('li', '', ul); nzRich(li, c.t); if (c.el) { const g = el('span', 'gel', li); el('i', '', g, c.el); } }); }
+  nzBox(W, 'Find out by listening', nzIn(w.find, lv));
+  if (w.url) { const a = el('div', 'acts nz-rec', W), l = el('a', '', a, 'Listen ↗'); l.href = w.url; l.target = '_blank'; l.rel = 'noopener'; l.setAttribute('aria-label', `Listen: ${w.composer}, ${w.title.replace(/\*/g, '')} (opens in a new tab)`); if (w.perf) el('span', 'nz-perf', a, w.perf); }
+  nzTeach(W, w.teachers);
+  const lab = el('label', 'nz-nl', W); el('span', 'nz-k me', lab, 'My note · ' + nzSur(w));
+  const ta = quiet(el('textarea', 'nz-note', lab)); ta.maxLength = 280; ta.rows = 3; ta.value = nzNote(i, w.id); ta.placeholder = 'What did you hear? Say it in your own words.'; ta.dataset.w = w.id;
+  ta.setAttribute('aria-label', `My note on ${w.composer}, ${w.title.replace(/\*/g, '')}. 280 characters at most`);
+  const cnt = el('div', 'jr-cnt', W, `${ta.value.length} / 280`); cnt.setAttribute('aria-live', 'polite');
+  ta.oninput = () => { if (ta.value.length > 280) ta.value = ta.value.slice(0, 280); cnt.textContent = `${ta.value.length} / 280`; nzSetNote(i, w.id, ta.value); nzSendState(); };
+  ta.addEventListener('keydown', e => { if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); ta.blur(); } });
+  if (w.notice && w.notice.lv.includes(lv)) { const p = el('p', 'nz-notice', W); el('em', '', p, 'Notice: '); nzRich(p, w.notice.t); }
+  W.onmouseenter = () => nzHot(w.id, true); W.onmouseleave = () => nzHot(w.id, false); }
+function nzHot(id, on) { document.querySelectorAll(`#nzmk .nz-fr[data-w="${id}"]`).forEach(g => g.classList.toggle('hot', on)); }
+
+/* ---- Send it to the Garden: an e-mail with this chapter's notes, each labelled with its work ---- */
+function nzSend(P, i, lv) { const S = NZJ.stops[i], box = el('section', 'nz-send', P); box.setAttribute('aria-label', 'Send it to the Garden');
+  el('h4', '', box, 'Send it to the Garden');
+  const line = S.send.split(NZ_ADDR); const p = el('p', 'nz-to', box); p.append(line[0]); el('span', 'nz-addr', p, NZ_ADDR); if (line[1]) p.append(line[1]);
+  const fl = el('label', 'jr-f', box); el('span', '', fl, 'Your chosen name'); const nm = quiet(el('input', 'jr-by nz-name', fl)); nm.maxLength = NZ_NAMEMAX; nm.value = NZ.name; nm.placeholder = 'First name and initial, or a pen name'; nm.autocomplete = 'off';
+  nm.oninput = () => { NZ.name = nm.value.slice(0, NZ_NAMEMAX); nzSave(); }; nm.addEventListener('keydown', e => { if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); nm.blur(); } });
+  const ck = el('label', 'jr-chk', box), cb = el('input', 'nz-agree', ck); cb.type = 'checkbox'; ck.append(' I agree to this name being shown with my finding');
+  const b = el('button', 'jr-b gold nz-sendb', box, 'Send it to the Garden'); b.type = 'button';
+  b.onclick = () => { if (!nzHasNote(i, NZS.lv)) { toast('Write your note first, then send it.', 3000); say('Write your note first, then send it.'); const t = panel.querySelector('textarea.nz-note'); if (t) { t.focus({preventScroll: true}); t.scrollIntoView({block: 'center'}); } return; }
+    const url = nzMail(i, NZS.lv, cb.checked ? nm.value.trim() : ''); window.__nzMail = url;
+    toast(`Your e-mail should open now. If it does not, write to <b>${NZ_ADDR}</b> and paste in your notes.`, 6000); say('Your e-mail should open now.');
+    const a = document.createElement('a'); a.href = url; a.rel = 'noopener'; document.body.appendChild(a); try { a.click(); } catch (err) {} a.remove(); };
+  el('p', 'jr-small nz-fine', box, `If no e-mail opens, write to ${NZ_ADDR} and paste in your notes. Nothing you send appears in the Garden until Justin has approved it and it has been checked.`);
+  nzSendState(); }
+function nzSendState() { const b = panel.querySelector('.nz-sendb'); if (!b || !NZS || !nzIsCh(NZS.at)) return; const ok = nzHasNote(NZS.at, NZS.lv);
+  if (ok) { b.removeAttribute('aria-disabled'); b.title = 'Opens an e-mail with your notes from this chapter'; } else { b.setAttribute('aria-disabled', 'true'); b.title = 'Write your note first, then send it'; }
+  const m = panel.querySelector('.nz-dots button.cur'); if (m) m.classList.toggle('nz-noted', ok); }
+function nzMail(i, lv, name) { const S = NZJ.stops[i], ch = nzIn(S.check, lv)[0], L = [];
+  L.push('Journey: ' + NZJ.title, `${nzLabel(i)}: ${S.year} · ${S.name} (the lantern: ${S.lanDate})`, 'Level: ' + NZLV[lv]);
+  if (ch) L.push('Check question: ' + ch.t.replace(/\*/g, ''));
+  nzWorks(i, lv).forEach(w => { const t = nzNote(i, w.id).trim(); if (!t) return; L.push('', `My note on ${w.composer}, ${w.title.replace(/\*/g, '')} (${w.year}):`, t); });
+  if (name) L.push('', 'Name to show (I agree to it being shown): ' + name);
+  return 'mailto:' + NZ_ADDR + '?subject=' + encodeURIComponent('The Garden · ' + NZJ.meta.split(' · ').slice(0, 2).join(' · ') + ' · ' + nzLabel(i)) + '&body=' + encodeURIComponent(L.join('\n')); }
+
+/* ---- What I learned ---- */
+function nzLearned(P, lv) { const Lr = NZJ.learned;
+  el('div', 'nz-cap', P, 'At the end'); el('h2', 'jr-stopname nz-focus', P, Lr.head);
+  const ol = el('ol', 'nz-prompts', P); Lr.prompts.forEach(t => { const li = el('li', '', ol), b = el('div', 'research nz-qbox', li); el('small', '', b, 'a question for you'); nzP(b, '', t); });
+  nzTeach(P, Lr.teachers);
+  el('h4', '', P, 'Your notes'); let any = false;
+  NZJ.stops.forEach((S, i) => { const ws = S.works.filter(w => nzNote(i, w.id).trim()); const d = el('div', 'nz-mine', P); const h = el('button', 'nz-mh', d); h.type = 'button'; el('small', '', h, `${nzLabel(i)} · ${S.year}`); h.append(S.name); h.onclick = () => nzShow(i);
+    if (!ws.length) { el('p', 'nz-none', d, 'No note yet.'); return; } any = true;
+    ws.forEach(w => { const q = el('blockquote', 'jr-q nz-mq', d); el('cite', '', q, `${nzSur(w)} · ${w.year}`); q.append(nzNote(i, w.id).trim()); }); });
+  if (!any) el('p', 'jr-small', P, 'Notes you write at each work gather here.');
+  el('h4', '', P, NZJ.apply.head); el('p', 'nz-small', P, NZJ.apply.cjg); nzP(P, '', NZJ.apply.text);
+  el('h4', '', P, NZJ.keep.head); el('p', 'nz-small', P, NZJ.keep.head + ' ' + NZJ.keep.text);
+  const d = el('details', 'nz-t', P); el('summary', '', d, NZJ.sources.head); NZJ.sources.lines.forEach(t => nzP(d, 'nz-src', t));
+  const nv = el('div', 'jr-nav', P); nzGo(nv, '‹ ' + nzLabel(3), () => nzShow(3)); nzGo(nv, 'Back to the start', () => nzShow('overview'), true); }
+
+/* ---- the thread on the map: the Garden's own link curves, a gap for the leap, the walked part bright ---- */
+const nzS = (t, a, par) => { const e = document.createElementNS(SVGNS, t); for (const k in a) e.setAttribute(k, a[k]); if (par) par.appendChild(e); return e; };
+function nzMapOn() { const first = cam.querySelector(':scope > .fm');
+  const veil = nzS('rect', {id: 'nzveil', x: B[0] - 600, y: B[1] - 600, width: B[2] - B[0] + 1200, height: B[3] - B[1] + 1200}); cam.insertBefore(veil, first);
+  const g = nzS('g', {id: 'nzg'}); cam.insertBefore(g, first); const segs = [];
+  for (let i = 0; i < NZJ.stops.length - 1; i++) { const a = NZJ.stops[i].lan, b = NZJ.stops[i + 1].lan, A = LAY.nodes[a], Bn = LAY.nodes[b];
+    const lk = [...document.querySelectorAll('#map .lk')].find(q => (q.dataset.a === a && q.dataset.b === b) || (q.dataset.a === b && q.dataset.b === a));
+    let d, fwd = true, leap = !lk;
+    if (lk) { d = lk.getAttribute('d'); const p0 = lk.getPointAtLength(0); fwd = Math.hypot(p0.x - A.x, p0.y - A.y) <= Math.hypot(p0.x - Bn.x, p0.y - Bn.y); }
+    else { const L = Math.hypot(Bn.x - A.x, Bn.y - A.y), bow = Math.min(18, L * .14); d = `M${A.x},${A.y} Q${(A.x + Bn.x) / 2 + (A.y - Bn.y) / L * bow},${(A.y + Bn.y) / 2 - Math.abs(Bn.x - A.x) / L * bow} ${Bn.x},${Bn.y}`; }
+    const sg = nzS('g', {class: 'nz-seg' + (leap ? ' leap' : '')}, g), at = {d, pathLength: 100};
+    const faint = nzS('path', {...at, class: 'nz-faint'}, sg), glow = nzS('path', {...at, class: 'nz-glow nz-dr'}, sg), line = nzS('path', {...at, class: 'nz-line nz-dr'}, sg);
+    if (leap) [faint, glow, line].forEach(p => p.setAttribute('stroke-dasharray', '9 80 11'));
+    else [glow, line].forEach(p => { p.setAttribute('stroke-dasharray', '100 100'); p.style.strokeDashoffset = fwd ? 100 : -100; });
+    segs.push({sg, faint, glow, line, fwd, leap, i}); }
+  NZJ.stops.forEach((s, i) => { const p = LAY.nodes[s.lan]; nzS('circle', {cx: p.x, cy: p.y, r: 2.4, class: 'nz-ring' + (i ? '' : ' first'), 'data-lan': s.lan}, g); NODE[s.lan] && NODE[s.lan].classList.add('nzt'); });
+  const mk = nzS('g', {id: 'nzmk'}); svg.appendChild(mk);
+  mk.addEventListener('click', e => { const t = e.target.closest('[data-go]'); if (!t || moved) return; e.stopPropagation(); const i = +t.dataset.go, w = t.dataset.w;
+    if (NZS.at !== i) nzShow(i); if (w) setTimeout(() => { const W = document.getElementById('nzw-' + w); if (!W) return; W.scrollIntoView({block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}); W.classList.add('flash'); setTimeout(() => W.classList.remove('flash'), 1400); }, 80); });
+  mk.addEventListener('mouseover', e => { const t = e.target.closest('.nz-fr'); if (t) { const W = document.getElementById('nzw-' + t.dataset.w); if (W) W.classList.add('hot'); } });
+  mk.addEventListener('mouseout', e => { const t = e.target.closest('.nz-fr'); if (t) { const W = document.getElementById('nzw-' + t.dataset.w); if (W) W.classList.remove('hot'); } });
+  NZS.map = {veil, g, mk, segs}; }
+function nzMapOff() { document.querySelectorAll('#nzveil,#nzg,#nzmk').forEach(x => x.remove()); document.querySelectorAll('#map .fm.nzt').forEach(x => x.classList.remove('nzt')); }
+function nzThreadState(prev, at) { const M = NZS.map; if (!M) return; const whole = at === 'overview' || at === 'learned', walk = i => whole || (nzIsCh(at) && i < at);
+  const fade = prev == null || !nzIsCh(prev) || !nzIsCh(at), rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const set = () => M.segs.forEach(s => { const on = walk(s.i); s.sg.classList.toggle('on', on); if (!s.leap) [s.glow, s.line].forEach(p => { p.style.strokeDashoffset = on ? 0 : (s.fwd ? 100 : -100); }); });
+  if (fade || rm) { M.segs.forEach(s => s.sg.classList.add('nz-now')); M.g.classList.add('nzfade'); svg.getBoundingClientRect(); set(); svg.getBoundingClientRect();
+    setTimeout(() => { M.segs.forEach(s => s.sg.classList.remove('nz-now')); M.g.classList.remove('nzfade'); }, rm ? 0 : 30); }
+  else set(); }
+
+/* ---- framing: the chapter (with the stop before when names stay readable), or the whole thread ---- */
+function nzSafe() { const R = svg.getBoundingClientRect(); let l = 0, t = 0, r = R.width, b = R.height;
+  document.querySelectorAll('#fams .fam,.ladder,#lensbar>span,#foot,#trail,#hint').forEach(e => { if (!e.getClientRects().length) return; const cs = getComputedStyle(e); if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity < .05) return;
+    const q = e.getBoundingClientRect(), x0 = q.left - R.left, x1 = q.right - R.left, y0 = q.top - R.top, y1 = q.bottom - R.top; if (x1 <= l || x0 >= r || y1 <= t || y0 >= b) return;
+    const c = [['t', (y1 - t) * (r - l)], ['b', (b - y0) * (r - l)], ['l', (x1 - l) * (b - t)], ['r', (r - x0) * (b - t)]].sort((u, v) => u[1] - v[1])[0][0];
+    if (c === 't') t = y1; else if (c === 'b') b = y0; else if (c === 'l') l = x1; else r = x0; });
+  return {l: l + 8, t: t + 8, r: r - 8, b: b - 8}; }
+function nzFrame() { if (!NZS) return; measure(); const S = nzSafe(), W = S.r - S.l, Hh = S.b - S.t, phone = aw < 700; if (W < 40 || Hh < 40) return;
+  const at = NZS.at, P = i => LAY.nodes[NZJ.stops[i].lan]; let k, cx, cy;
+  if (nzIsCh(at)) { const p = P(at), q = at > 0 ? P(at - 1) : null, mx = phone ? 70 : 125, my = phone ? 60 : 85;
+    const kb = q ? Math.min((W - 2 * mx) / Math.max(1, Math.abs(p.x - q.x)), (Hh - 2 * my) / Math.max(1, Math.abs(p.y - q.y))) : 0;
+    if (q && !phone && kb >= 2.4) { k = Math.min(kb, 4.2); cx = (p.x + q.x) / 2; cy = (p.y + q.y) / 2; }
+    else { k = phone ? 3.4 : 3.2; const nb = [at - 1, at + 1].filter(j => j >= 0 && j < NZJ.stops.length).map(P).filter(o => Math.abs(o.x - p.x) * k < W * .5 && Math.abs(o.y - p.y) * k < Hh * .45);      /* a near neighbour shares the frame */
+      cx = nb.length ? (p.x + nb.reduce((a, o) => a + o.x, 0)) / (nb.length + 1) : p.x; cy = (nb.length ? (p.y + nb.reduce((a, o) => a + o.y, 0)) / (nb.length + 1) : p.y) + (phone ? 4 : 6); }
+    curFam = famAt(p.x); curEra = eraOf(NZJ.stops[at].lan); }
+  else { const xs = NZJ.stops.map((s, i) => P(i).x), ys = NZJ.stops.map((s, i) => P(i).y), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), mx = phone ? 40 : 90, my = phone ? 45 : 80;
+    k = Math.min((W - 2 * mx) / (x1 - x0), (Hh - 2 * my) / (y1 - y0)); if (phone) k = Math.min(k, fitK * 2.65); cx = (x0 + x1) / 2; cy = (y0 + y1) / 2; curFam = curEra = null; }
+  k = Math.max(KMIN(), Math.min(KMAX, k)); const ox = ((S.l + S.r) / 2 - aw / 2) / k, oy = ((S.t + S.b) / 2 - ah / 2) / k;
+  if (NZS.map) NZS.map.mk.classList.add('nzfade');
+  flyTo(k, cx - ox, cy - oy); nav = nzIsCh(at) ? 3 : 0;
+  clearTimeout(nzFrame.t); nzFrame.t = setTimeout(() => { if (!NZS) return; nzSettle(); NZS.map && NZS.map.mk.classList.remove('nzfade'); }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 20 : 700); }
+
+/* ---- the marks: names, captions, fruits on stems, the root sign and the leap's words, placed so that none touches another,
+   the thread, a lantern ring or a name of the Garden's, and none sits under the frame ---- */
+let nzT = 0;
+const nzScr = p => [view.tx + p.x * view.k, view.ty + p.y * view.k];
+function nzOnApply() { if (!NZS || !NZS.map) return; nzPos(); clearTimeout(nzT); nzT = setTimeout(nzSettle, 110); }
+function nzSettle(n) { if (!NZS) return; n = n || 0;      /* wait until the Garden's names have finished fading in or out, so what is measured is what is seen */
+  const busy = document.getAnimations ? document.getAnimations().some(a => a.playState === 'running' && a.effect && a.effect.target && a.effect.target.closest && a.effect.target.closest('#map') && !a.effect.target.closest('#nzg,#nzmk')) : false;
+  if (busy && n < 8) { nzT = setTimeout(() => nzSettle(n + 1), 90); return; } nzSolve(); }
+function nzPos() { const M = NZS.map; if (!M || !M.st) return; M.st.forEach((g, i) => { const [x, y] = nzScr(LAY.nodes[NZJ.stops[i].lan]); g.setAttribute('transform', `translate(${x.toFixed(1)},${y.toFixed(1)})`); });
+  if (M.lg && M.lm) { const [x, y] = nzScr(M.lm); M.lg.setAttribute('transform', `translate(${x.toFixed(1)},${y.toFixed(1)})`); } }
+function nzObstacles(R) { const out = [], W = R.width, Hh = R.height;
+  const vis = e => { const cs = getComputedStyle(e); return cs.display !== 'none' && cs.visibility !== 'hidden' && +cs.opacity > .05; };
+  const add = (q, pad, tag) => { if (!q.width && !q.height) return; const r = {l: q.left - R.left - pad, t: q.top - R.top - pad, r: q.right - R.left + pad, b: q.bottom - R.top + pad, tag}; if (r.r < -30 || r.l > W + 30 || r.b < -30 || r.t > Hh + 30) return; out.push(r); };
+  document.querySelectorAll('.ladder,.mm,#foot,#fams .fam,#lensbar>span,#hint,#trail,.gut,.rail,header.top,#eras .era,#evs .evd,#tmark,#sheet.open,#toast,#panel,#cpop.show').forEach(e => { if (e.getClientRects().length && vis(e)) add(e.getBoundingClientRect(), 3, 'ui'); });
+  document.querySelectorAll('#map .fm').forEach(g => { const go = +getComputedStyle(g).opacity; if (go < .05) return; const own = g.classList.contains('nzt');
+    if (!own) g.querySelectorAll('text').forEach(t => { const cs = getComputedStyle(t); if (cs.display === 'none' || go * +cs.opacity * +(cs.fillOpacity || 1) < .04) return; const q = t.getBoundingClientRect(); add(q, 2 + q.height * .12, 'name'); });
+    const c = g.querySelector('circle'); if (c) add(c.getBoundingClientRect(), 2, own ? 'pt:' + g.dataset.id : 'pt'); });
+  document.querySelectorAll('#lens circle,#lens .rt-b,#trailg .tr-b,#evlayer circle,#reachspots .spot,#stars .st,#thread circle').forEach(e => { if (vis(e)) add(e.getBoundingClientRect(), 1.5, 'mark'); });
+  document.querySelectorAll('#stars .stn').forEach(t => { if (vis(t)) add(t.getBoundingClientRect(), 1.5, 'name'); });
+  document.querySelectorAll('#nzg circle').forEach(c => add(c.getBoundingClientRect(), 1.5, 'pt:' + c.dataset.lan));
+  return out; }
+function nzThreadPts(R) { const pts = [], M = NZS.map; M.segs.forEach(s => { const p = s.line, L = p.getTotalLength(), n = Math.min(500, Math.max(8, Math.ceil(L * view.k / 2.5)));
+    if (s.leap) { s.ef = Math.max(.03, Math.min(.12, 22 / (view.k * L))); const a = (s.ef * 100).toFixed(2), gap = (100 - 2 * s.ef * 100).toFixed(2); [s.faint, s.glow, s.line].forEach(q => q.setAttribute('stroke-dasharray', `${a} ${gap} ${a}`)); }
+    for (let j = 0; j <= n; j++) { const u = j / n; if (s.leap && u > s.ef + .005 && u < 1 - s.ef - .005) continue; const q = p.getPointAtLength(L * u), [x, y] = nzScr(q); if (x < -10 || y < -10 || x > R.width + 10 || y > R.height + 10) continue; pts.push({l: x - 1.6, t: y - 1.6, r: x + 1.6, b: y + 1.6, tag: 'thread'}); } });
+  return pts; }
+const nzW = (() => { const c = {}; return (txt, cls) => { const k = cls + '|' + txt; if (c[k] != null) return c[k]; const t = nzS('text', {class: cls, x: -9999, y: -9999}, NZS.map.mk); t.textContent = txt; const w = t.getComputedTextLength(); t.remove(); return c[k] = w; }; })();
+function nzSolve() { if (!NZS || !NZS.map) return; const R = svg.getBoundingClientRect(); if (R.width < 60 || R.height < 60 || !(view.k > .02)) return;
+  nzPos(); const OB = nzObstacles(R), TP = nzThreadPts(R), BOX = {l: 3, t: 3, r: R.width - 3, b: R.height - 3};
+  let L = nzPlace(R, OB, TP, BOX, 0); if (L.forced.length) { const L2 = nzPlace(R, OB, TP, BOX, 1); if (L2.forced.length < L.forced.length || (L2.forced.length === L.forced.length && L2.hidden.length < L.hidden.length)) L = L2; else L = nzPlace(R, OB, TP, BOX, 0); }
+  NZS.layout = {hidden: L.hidden, forced: L.forced, off: L.off, soft: L.soft, k: view.k}; NZS.dbg = {OB, TP, PL: L.PL, BOX, SP: L.SP}; }
+/* one placement. mode 0: the chapter's core works first, then the names; mode 1: the names first */
+function nzPlace(R, OB, TP, BOX, mode) { const M = NZS.map, mk = M.mk, at = NZS.at, lv = NZS.lv, cur = nzIsCh(at) ? at : -1, labels = cur >= 0 && view.k >= 2.3;
+  mk.innerHTML = ''; M.st = []; M.lg = null; const PL = [], hidden = [], forced = [], off = [], soft = [];
+  const SP = NZJ.stops.map(s => nzScr(LAY.nodes[s.lan])), ALL = OB.concat(TP);
+  const near = (x, y, rad) => ALL.filter(o => o.r > x - rad && o.l < x + rad && o.b > y - rad && o.t < y + rad);
+  const ov = (a, o) => Math.max(0, Math.min(a.r, o.r) - Math.max(a.l, o.l)) * Math.max(0, Math.min(a.b, o.b) - Math.max(a.t, o.t));
+  const GARDEN = o => o.tag === 'name' || o.tag === 'pt' || o.tag === 'mark';
+  /* cost of a set of rects: [hard, soft]. Soft: the faint points of the Garden's other lanterns, and (isSoft) whatever the caller allows */
+  const cost = (rs, lists, skip, isSoft) => { let h = 0, sf = 0; for (const r of rs) { if (r.l < BOX.l || r.t < BOX.t || r.r > BOX.r || r.b > BOX.b) return [1e9, 0];
+      for (const Ls of lists) for (const o of Ls) { if (skip && skip(o)) continue; if (o.l < r.r + 1.5 && o.r > r.l - 1.5 && o.t < r.b + 1.5 && o.b > r.t - 1.5) { const a = ov(r, o) + 1; if (o.tag === 'pt' || (isSoft && isSoft(o))) sf += a; else h += a; } } } return [h, sf]; };
+  const seen = i => { const [x, y] = SP[i]; return x > BOX.l + 4 && x < BOX.r - 4 && y > BOX.t + 4 && y < BOX.b - 4; };
+  const g0 = NZJ.stops.map((s, i) => { const g = nzS('g', {class: 'nz-st' + (i === cur ? ' cur' : '') + (cur >= 0 && i !== cur ? ' other' : '')}, mk); M.st.push(g); return g; }); nzPos();
+  const leapSeg = M.segs.find(s => s.leap);
+  /* stop names with their caption, in the Garden's own line breaks: never hidden */
+  const nameBlock = (i, fs) => { const s = NZJ.stops[i], lines = [...(NODE[s.lan] ? NODE[s.lan].querySelectorAll('text') : [])].map(t => t.textContent.trim()).filter(Boolean), cap = `${i ? 'CHAPTER ' + i : 'ROOT'} · ${s.year}${at === 'learned' && s.works.some(w => nzNote(i, w.id).trim()) ? '  ✎ NOTE' : ''}`;
+    const w = Math.max(nzW(cap, 'nz-cap'), ...lines.map(t => nzW(t, 'nz-nm f' + fs))) + 2, lh = fs + 2.5; return {cap, lines, w, h: 11 + lines.length * lh, fs, lh}; };
+  const placeName = i => { if (!seen(i)) { off.push('name:' + i); return; } const [px, py] = SP[i], lists = [near(px, py, 280), PL]; let best = null;
+    for (const fs of [11, 10, 9]) { const B2 = nameBlock(i, fs), w = B2.w, h = B2.h, cand = [];
+      [1, 1.6, 2.3, 3.2, 4.4].forEach(m => { const g = 6 * m; cand.push([-w / 2, -h - g, 'm'], [g + 2, -h / 2, 's'], [-w - g - 2, -h / 2, 'e'], [-w / 2, g + 1, 'm'], [g, -h - g * .6, 's'], [-w - g, -h - g * .6, 'e'], [g, g * .6, 's'], [-w - g, g * .6, 'e']); });
+      for (const [dx, dy, al] of cand) { const r = {l: px + dx, t: py + dy, r: px + dx + w, b: py + dy + h}, [hd, sf] = cost([r], lists), key = hd * 1e4 + sf + (11 - fs) * 30;
+        if (!best || key < best.key) best = {key, hd, sf, dx, dy, al, B2, r}; if (!hd && !sf) break; }
+      if (best && !best.hd && !best.sf) break; }
+    if (best.hd) { forced.push('name:' + i); best.dx = Math.max(BOX.l - px, Math.min(BOX.r - px - best.B2.w, best.dx)); best.dy = Math.max(BOX.t - py, Math.min(BOX.b - py - best.B2.h, best.dy)); best.r = {l: px + best.dx, t: py + best.dy, r: px + best.dx + best.B2.w, b: py + best.dy + best.B2.h}; }
+    else if (best.sf) soft.push('name:' + i);
+    const {dx, dy, al, B2} = best, g = nzS('g', {class: 'nz-nmb' + (i === cur ? ' cur' : ''), 'data-go': i, role: 'button', 'aria-label': `${nzLabel(i)}: ${NZJ.stops[i].name}`}, g0[i]), ax = al === 'm' ? dx + B2.w / 2 : al === 'e' ? dx + B2.w : dx, an = al === 'm' ? 'middle' : al === 'e' ? 'end' : 'start';
+    nzS('rect', {x: dx, y: dy, width: B2.w, height: B2.h, class: 'nz-hit'}, g);
+    nzS('text', {class: 'nz-cap', x: ax, y: dy + 8, 'text-anchor': an}, g).textContent = B2.cap;
+    B2.lines.forEach((t, j) => { nzS('text', {class: 'nz-nm f' + B2.fs, x: ax, y: dy + 11 + B2.lh * (j + 1) - 2.5, 'text-anchor': an}, g).textContent = t; });
+    PL.push(best.r); };
+  /* fruits: hanging down first, longer stems before turning upward, then smaller, then without a label */
+  const ANG = []; for (let j = 0; j <= 12; j++) { ANG.push(90 + j * 15); if (j && j < 12) ANG.push(90 - j * 15); }
+  const LEN = []; for (let j = 0; j < 20; j++) LEN.push(14 + j * 4);
+  const CAND = []; ANG.forEach(a => LEN.forEach(Ln => CAND.push([a, Ln, Math.abs(((a - 90 + 540) % 360) - 180) / 15 + (Ln - 14) / 9]))); CAND.sort((u, v) => u[2] - v[2]);
+  const placeFruit = (i, w, opt) => { if (!seen(i)) { off.push(w.id); return; } const [px, py] = SP[i], lists = [near(px, py, 280), PL], lab = opt.label ? `${w.year} · ${nzSur(w)}` : '', lw = lab ? nzW(lab, 'nz-fl') : 0, own = 'pt:' + NZJ.stops[i].lan; let best = null;
+    const tryAll = (sizes, withLab) => { for (const rr of sizes) for (const [a, Ln] of CAND) { const t = a * Math.PI / 180, ux = Math.cos(t), uy = Math.sin(t), fx = px + ux * (Ln + rr), fy = py + uy * (Ln + rr);
+        const rs = [{l: fx - rr - 1, t: fy - rr - 1, r: fx + rr + 1, b: fy + rr + 1}], side = ux >= -.15 ? 1 : -1, stem = [];
+        const cxq = (px + fx) / 2 - uy * Ln * .12 * side, cyq = (py + fy) / 2 + Math.abs(ux) * Ln * .12;
+        for (let k = 1; k <= 6; k++) { const u = .12 + k * .13; if (u > .92) break; const qx = (1 - u) * (1 - u) * px + 2 * (1 - u) * u * cxq + u * u * fx, qy = (1 - u) * (1 - u) * py + 2 * (1 - u) * u * cyq + u * u * fy; stem.push({l: qx - 1, t: qy - 1, r: qx + 1, b: qy + 1}); }
+        let lr = null; if (withLab) { lr = side > 0 ? {l: fx + rr + 3, t: fy - 6.5, r: fx + rr + 3 + lw, b: fy + 5.5} : {l: fx - rr - 3 - lw, t: fy - 6.5, r: fx - rr - 3, b: fy + 5.5}; rs.push(lr); }
+        const a1 = cost(rs, lists), a2 = cost(stem, lists, o => o.tag === own, GARDEN), hd = a1[0] + a2[0]; if (hd >= 1e9) continue;
+        const sf = a1[1] + a2[1], key = hd * 1e4 + sf * 2 + (withLab ? 0 : 60) + (sizes[0] - rr) * 12;
+        if (!best || key < best.key) best = {key, hd, sf, fx, fy, rr, cxq, cyq, lr, side, rs: rs.concat(stem), withLab}; if (!hd && !sf) return true; } return false; };
+    const ok = (lab && tryAll(opt.sizes, true)) || tryAll(opt.sizes, false);
+    if (!best) { (opt.must ? forced : hidden).push(w.id + ':nowhere'); return; }
+    if (!ok && !best.hd) soft.push(w.id); else if (!ok && !opt.must) { hidden.push(w.id); return; } else if (!ok) forced.push(w.id);
+    const b = best, g = nzS('g', {class: 'nz-fr' + (w.core ? ' core' : ''), 'data-go': i, 'data-w': w.id, role: 'button', 'aria-label': `${w.composer}, ${w.title.replace(/\*/g, '')}, ${w.year}`}, g0[i]), dx = b.fx - px, dy = b.fy - py, dl = Math.hypot(dx, dy) || 1;
+    nzS('path', {class: 'nz-stem', d: `M0,0 Q${(b.cxq - px).toFixed(1)},${(b.cyq - py).toFixed(1)} ${(dx - dx / dl * b.rr).toFixed(1)},${(dy - dy / dl * b.rr).toFixed(1)}`}, g);
+    nzS('circle', {class: 'nz-hit', cx: dx.toFixed(1), cy: dy.toFixed(1), r: Math.max(7, b.rr + 4)}, g);
+    nzS('circle', {class: 'nz-fruit', cx: dx.toFixed(1), cy: dy.toFixed(1), r: w.core ? b.rr : b.rr - .6}, g);
+    nzS('title', {}, g).textContent = `${w.year} · ${w.title.replace(/\*/g, '')} · ${w.composer}`;
+    if (b.withLab && b.lr) nzS('text', {class: 'nz-fl', x: ((b.side > 0 ? b.lr.l : b.lr.r) - px).toFixed(1), y: (b.fy - py + 3.6).toFixed(1), 'text-anchor': b.side > 0 ? 'start' : 'end'}, g).textContent = lab;
+    PL.push(...b.rs); };
+  /* the root sign, under the root and clear of its ring */
+  const placeRoot = () => { if (!seen(0)) return; const [px, py] = SP[0], lists = [near(px, py, 90), PL], rg = 2.4 * view.k + 2.5; let best = null;
+    for (const [dx, dy] of [[-6, 0], [-6, 3], [-13, 1], [1, 1], [-6, 7], [-15, 6], [3, 6], [-20, 0], [8, 0], [-6, 13], [-24, -4], [-28, 2], [12, -4], [-34, -6], [-6, 20], [-40, -4], [-40, 3], [-46, -2], [-52, 0]]) { const r = {l: px + dx - 1, t: py + rg + dy - 1, r: px + dx + 13, b: py + rg + dy + 15}, [hd, sf] = cost([r], lists), key = hd * 1e4 + sf;
+      if (!best || key < best.key) best = {key, hd, dx, dy: rg + dy, r}; if (!key) break; }
+    if (best.hd) { hidden.push('root-sign'); return; }
+    nzS('path', {class: 'nz-root', d: NZ_SEED, transform: `translate(${best.dx.toFixed(1)},${best.dy.toFixed(1)}) scale(1.05)`}, g0[0]); PL.push(best.r); };
+  /* the leap's words, in the gap between its two ends */
+  const placeLeap = () => { if (!leapSeg || (!seen(2) && !seen(3))) return; const p = leapSeg.line, Ln = p.getTotalLength(), mp = p.getPointAtLength(Ln / 2); M.lm = {x: mp.x, y: mp.y}; const [mx, my] = nzScr(M.lm);
+    const a = nzScr(p.getPointAtLength(Ln * .4)), b = nzScr(p.getPointAtLength(Ln * .6)), tx = b[0] - a[0], ty = b[1] - a[1], tl = Math.hypot(tx, ty) || 1, nx = -ty / tl, ny = tx / tl;
+    const txt = 'a leap · no link', w = nzW(txt, 'nz-lp'), lists = [near(mx, my, 220), PL]; let best = null;
+    if (Math.hypot(SP[2][0] - SP[3][0], SP[2][1] - SP[3][1]) < w * .9) { hidden.push('leap'); return; }
+    for (const d of [0, 9, -9, 15, -15, 22, -22, 30, -30, 40, -40]) for (const sh of [0, .12, -.12, .24, -.24]) { const cx = mx + nx * d + tx * sh * 2, cy = my + ny * d + ty * sh * 2, r = {l: cx - w / 2, t: cy - 8, r: cx + w / 2, b: cy + 4}, [hd, sf] = cost([r], lists), key = hd * 1e4 + sf;
+      if (!best || key < best.key) best = {key, hd, cx, cy, r}; if (!key) break; }
+    if (best.hd) { hidden.push('leap'); return; }
+    M.lg = nzS('g', {class: 'nz-lpg'}, mk); nzS('text', {class: 'nz-lp', x: (best.cx - mx).toFixed(1), y: (best.cy - my).toFixed(1), 'text-anchor': 'middle'}, M.lg).textContent = txt; nzPos(); PL.push(best.r); };
+  const order = cur >= 0 ? [cur, ...[0, 1, 2, 3].filter(i => i !== cur)] : [0, 1, 2, 3], curWs = cur >= 0 ? nzWorks(cur, lv) : [];
+  const coreCur = () => curWs.filter(w => w.core).forEach(w => placeFruit(cur, w, {label: labels, sizes: [4.6, 3.6, 2.8], must: true}));
+  placeRoot(); if (mode) { order.forEach(placeName); coreCur(); } else { coreCur(); order.forEach(placeName); }
+  curWs.filter(w => !w.core).forEach(w => placeFruit(cur, w, {label: labels, sizes: [4.2, 3.4, 2.6], must: true}));
+  order.filter(i => i !== cur).forEach(i => nzWorks(i, lv).filter(w => w.core).forEach(w => placeFruit(i, w, {label: false, sizes: [3.8, 3, 2.3], must: true})));
+  order.filter(i => i !== cur).forEach(i => nzWorks(i, lv).filter(w => !w.core).forEach(w => placeFruit(i, w, {label: false, sizes: [3.4, 2.7, 2.1], must: false})));
+  placeLeap();
+  return {hidden, forced, off, soft, PL, SP}; }
+window.__nz = {begin: nzBegin, show: nzShow, end: nzEnd, back: nzBack, solve: nzSolve, frame: nzFrame, open: () => NZS ? NZS.at : null, state: () => NZS, store: () => NZ, mail: nzMail, data: NZJ};
+/* nursery:js:end */
 readHash(location.hash); drawTrail();
 window.__openLantern = id => { if (N[id]) choose(id, true); };
 window.__map = {spot: () => spot, trail: () => trail, pin, travel, STAR, reachOf, drawReach, fitBox, LENSES, drawLens, lens, setLens, setCourse, view, home, goFamily, goEra, goLevel, spotlight, choose, level, LAY, frameNet, showThread, tkey: () => tkey, showEvent, ekey: () => ekey};

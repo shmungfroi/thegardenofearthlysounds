@@ -6,7 +6,7 @@
 set -e
 mkdir -p /home/claude/tools && cp "$(dirname "$0")/serve.py" /home/claude/tools/serve.py
 cd "$(dirname "$0")/.."
-for t in f2test f3test f4test f5test cardtest clicktest livetest nowtest pintest f6test jtest resettest starkey searchtest myglossarytest; do
+for t in f2test f3test f4test f5test cardtest clicktest livetest nowtest pintest f6test jtest resettest starkey searchtest myglossarytest nurserytest; do
   printf "%-10s " $t; timeout 400 python3 dev/tests/$t.py 2>&1 | grep -E "^errors|Traceback" | tail -1
 done
 echo "Full glossary-box audit (slow, ~10 min):  python3 dev/tests/glossaudit.py 8926 check"
