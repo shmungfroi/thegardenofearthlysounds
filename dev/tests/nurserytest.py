@@ -511,6 +511,25 @@ async def followup(b):
             await ev(TAP); await ev("(() => { const g = document.querySelector('#nzmk .nz-dot[data-go=\"2\"]'); if (g) g.dispatchEvent(new MouseEvent('click', {bubbles: true})); })()"); await pg.wait_for_timeout(200)
             if await ev("__nz.open()") != 2: err('follow-up 768x1024: a dot does not open its chapter')
         pg._errs and err('follow-up console', tag, pg._errs[:2]); await ctx.close()
+    # C-12: 1440 Bloom, Chapter 3, ++ then three drags left: no name over its own ring (CHECK tests every mark against every ring)
+    ctx, pg = await newpage(b, 1440, 900, rm=True); ev = pg.evaluate
+    await ev("__nz.begin(3)"); await ev("document.querySelector('#panel .nz-lv button:nth-of-type(3)').click()"); await settle(pg); await ev("document.querySelector('#map').focus()")
+    for k in ('+', '+'): await pg.keyboard.press(k); await pg.wait_for_timeout(80)
+    await settle(pg); r0 = await ev("(() => { const r = document.getElementById('map').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; })()")
+    for n in range(3):
+        await pg.mouse.move(r0[0], r0[1]); await pg.mouse.down(); await pg.mouse.move(r0[0] - 40, r0[1], steps=4); await pg.mouse.up(); await settle(pg)
+        r = await ev(CHECK, False)
+        for x in (r or {}).get('bad', ['journey lost']): err('follow-up C-12 drag', n + 1, x)
+    await pg.screenshot(path=f'{O}/1440x900-Bloom-3-++-drag3.png'); await ctx.close()
+    # C-14: the root frames the same way whichever route leads to it
+    for W, H in ((667, 375), (390, 844), (1440, 900)):
+        got = []
+        for route in ('link', 'overview', 1, 3, 'learned'):
+            ctx, pg = await newpage(b, W, H, rm=True); ev = pg.evaluate
+            if route == 'link': await pg.goto(U + '#nursery=sonata&stage=5&ch=root'); await pg.reload(); await pg.wait_for_timeout(900)
+            else: await ev(f"__nz.begin({json.dumps(route)})"); await settle(pg); await ev("__nz.show(0)")
+            await settle(pg); got.append(await ev("[__map.view.k, __map.view.tx, __map.view.ty]")); await ctx.close()
+        if any(abs(g[0] - got[0][0]) > .001 or abs(g[1] - got[0][1]) > 1.5 or abs(g[2] - got[0][2]) > 1.5 for g in got): err('follow-up C-14: the root frame depends on the route', W, H, got)
 
 
 async def main():

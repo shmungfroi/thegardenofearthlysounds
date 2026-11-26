@@ -121,7 +121,7 @@ body.nzon #map .fm.nzt text{opacity:0!important}
 #nzmk .nz-fl{font-size:10.5px;fill:var(--ivory);letter-spacing:.2px}
 #nzmk .nz-st.other .nz-fr{opacity:.72}
 #nzmk .nz-root{fill:none;stroke:var(--goldhi);stroke-width:1.1;stroke-linecap:round;pointer-events:none}
-#nzmk .nz-dc{fill:#12100b;stroke:#6d6350;stroke-width:1} #nzmk .nz-num{font-size:11px;fill:var(--ivory)} #nzmk .nz-num.sm{font-size:9px} #nzmk .nz-dseed{fill:none;stroke:var(--ivory);stroke-width:1.1;stroke-linecap:round}
+#nzmk .nz-tie{fill:none;stroke:var(--goldhi);stroke-opacity:.7;stroke-width:.8;stroke-linecap:round;pointer-events:none} #nzmk .nz-dc{fill:#12100b;stroke:#6d6350;stroke-width:1} #nzmk .nz-num{font-size:11px;fill:var(--ivory)} #nzmk .nz-num.sm{font-size:9px} #nzmk .nz-dseed{fill:none;stroke:var(--ivory);stroke-width:1.1;stroke-linecap:round}
 #nzmk .nz-dot:hover .nz-dc{stroke:var(--gold)} #nzmk .nz-dot.cur .nz-dc{fill:var(--goldhi);stroke:var(--goldhi)} #nzmk .nz-dot.cur .nz-num{fill:#111} #nzmk .nz-dot.cur .nz-dseed{stroke:#111}
 #nzg .nz-ring.nz-off{display:none}
 #nzmk .nz-lp{font-size:10px;font-style:italic;fill:#bfa86a;letter-spacing:.3px}

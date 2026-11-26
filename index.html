@@ -698,7 +698,7 @@ body.nzon #map .fm.nzt text{opacity:0!important}
 #nzmk .nz-fl{font-size:10.5px;fill:var(--ivory);letter-spacing:.2px}
 #nzmk .nz-st.other .nz-fr{opacity:.72}
 #nzmk .nz-root{fill:none;stroke:var(--goldhi);stroke-width:1.1;stroke-linecap:round;pointer-events:none}
-#nzmk .nz-dc{fill:#12100b;stroke:#6d6350;stroke-width:1} #nzmk .nz-num{font-size:11px;fill:var(--ivory)} #nzmk .nz-num.sm{font-size:9px} #nzmk .nz-dseed{fill:none;stroke:var(--ivory);stroke-width:1.1;stroke-linecap:round}
+#nzmk .nz-tie{fill:none;stroke:var(--goldhi);stroke-opacity:.7;stroke-width:.8;stroke-linecap:round;pointer-events:none} #nzmk .nz-dc{fill:#12100b;stroke:#6d6350;stroke-width:1} #nzmk .nz-num{font-size:11px;fill:var(--ivory)} #nzmk .nz-num.sm{font-size:9px} #nzmk .nz-dseed{fill:none;stroke:var(--ivory);stroke-width:1.1;stroke-linecap:round}
 #nzmk .nz-dot:hover .nz-dc{stroke:var(--gold)} #nzmk .nz-dot.cur .nz-dc{fill:var(--goldhi);stroke:var(--goldhi)} #nzmk .nz-dot.cur .nz-num{fill:#111} #nzmk .nz-dot.cur .nz-dseed{stroke:#111}
 #nzg .nz-ring.nz-off{display:none}
 #nzmk .nz-lp{font-size:10px;font-style:italic;fill:#bfa86a;letter-spacing:.3px}
@@ -3882,7 +3882,7 @@ function nzThreadState(prev, at) { const M = NZS.map; if (!M) return; const whol
 /* ---- framing: the chapter (with the stop before when names stay readable), or the whole thread ---- */
 function nzSafe(dx, dy) { const R = svg.getBoundingClientRect(); let l = 0, t = 0, r = R.width, b = R.height; dx = dx || 1; dy = dy || 1;
   document.querySelectorAll('#fams .fam,.ladder,#lensbar>span,#foot,#trail,#hint').forEach(e => { if (!e.getClientRects().length) return; const cs = getComputedStyle(e); if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity < .05) return;
-    const q = e.getBoundingClientRect(), x0 = q.left - R.left, x1 = q.right - R.left, y0 = q.top - R.top, y1 = q.bottom - R.top; if (x1 <= l || x0 >= r || y1 <= t || y0 >= b) return;
+    const q = e.getBoundingClientRect(), band = e.classList.contains('fam'), x0 = band ? -1e4 : q.left - R.left, x1 = band ? 1e4 : q.right - R.left, y0 = q.top - R.top, y1 = q.bottom - R.top; if (x1 <= l || x0 >= r || y1 <= t || y0 >= b) return;
     const fit = (w, h) => Math.min(w / dx, h / dy), c = [['t', fit(r - l, b - y1)], ['b', fit(r - l, y0 - t)], ['l', fit(r - x1, b - t)], ['r', fit(x0 - l, b - t)]].sort((u, v) => v[1] - u[1])[0][0];
     if (c === 't') t = y1; else if (c === 'b') b = y0; else if (c === 'l') l = x1; else r = x0; });
   return {l: l + 8, t: t + 8, r: r - 8, b: b - 8}; }
@@ -3899,7 +3899,7 @@ function nzFrame() { if (!NZS) return; measure(); const at = NZS.at, P = i => LA
     k = Math.min((W - 2 * mx) / (x1 - x0), (Hh - 2 * my) / (y1 - y0)); if (phone) k = Math.min(k, fitK * 2.65); cx = (x0 + x1) / 2; cy = (y0 + y1) / 2; curFam = curEra = null; }
   k = Math.max(KMIN(), Math.min(KMAX, k)); const k0 = k;
   const need = nzIsCh(at) ? (pair ? [at, at - 1] : [at]) : NZJ.stops.map((s, i) => i), m2 = phone ? 24 : 40;
-  const R = svg.getBoundingClientRect(), UIR = [...document.querySelectorAll('.ladder,#fams .fam,#lensbar>span,#foot,#trail,#hint')].filter(e => e.getClientRects().length && getComputedStyle(e).display !== 'none' && +getComputedStyle(e).opacity > .05).map(e => { const q = e.getBoundingClientRect(); return {l: q.left - R.left, t: q.top - R.top, r: q.right - R.left, b: q.bottom - R.top}; });
+  const R = svg.getBoundingClientRect(), UIR = [...document.querySelectorAll('.ladder,#fams .fam,#lensbar>span,#foot,#trail,#hint')].filter(e => e.getClientRects().length && getComputedStyle(e).display !== 'none' && +getComputedStyle(e).opacity > .05).map(e => { const q = e.getBoundingClientRect(), band = e.classList.contains('fam'); return {l: band ? -1e4 : q.left - R.left, t: q.top - R.top, r: band ? 1e4 : q.right - R.left, b: q.bottom - R.top}; });      /* the spire strip is one band, wherever its labels happen to be */
   const isIn = ([x, y]) => x > m2 && x < aw - m2 && y > m2 && y < ah - m2 && !UIR.some(u => x > u.l - m2 && x < u.r + m2 && y > u.t - m2 && y < u.b + m2);
   const centreFor = kk => [cx - ((S.l + S.r) / 2 - aw / 2) / kk, cy - ((S.t + S.b) / 2 - ah / 2) / kk];
   const at2 = (c, kk) => { kk = kk || k; const v = clamp({k: kk, tx: aw / 2 - c[0] * kk, ty: ah / 2 - c[1] * kk}); return NZJ.stops.map((st, i) => [v.tx + P(i).x * v.k, v.ty + P(i).y * v.k]); };
@@ -3940,7 +3940,7 @@ function nzObstacles(R) { const out = [], W = R.width, Hh = R.height;
     const c = g.querySelector('circle'); if (c) add(c.getBoundingClientRect(), 2, own ? 'pt:' + g.dataset.id : 'pt'); });
   document.querySelectorAll('#lens circle,#lens .rt-b,#trailg .tr-b,#evlayer circle,#reachspots .spot,#stars .st,#thread circle').forEach(e => { if (vis(e)) add(e.getBoundingClientRect(), 1.5, 'mark'); });
   document.querySelectorAll('#stars .stn').forEach(t => { if (vis(t)) add(t.getBoundingClientRect(), 1.5, 'name'); });
-  document.querySelectorAll('#nzg circle').forEach(c => { const q = c.getBoundingClientRect(); add(q, 1.5, 'pt:' + c.dataset.lan); if (out.length && out[out.length - 1].tag === 'pt:' + c.dataset.lan && q.width) out[out.length - 1].circ = [q.left - R.left + q.width / 2, q.top - R.top + q.height / 2, q.width / 2 + 1.5]; });      /* a ring is a circle: its corners are free */
+  NZJ.stops.forEach(st => { const [x, y] = nzScr(LAY.nodes[st.lan]), r = 2.4 * view.k + .6; out.push({l: x - r - 1.5, t: y - r - 1.5, r: x + r + 1.5, b: y + r + 1.5, tag: 'pt:' + st.lan, circ: [x, y, r + 1.5]}); });      /* the thread's rings, from the map itself (a ring that stepped aside in the last layout still counts); a ring is a circle: its corners are free */
   return out; }
 function nzThreadPts(R) { const pts = [], M = NZS.map; M.segs.forEach(s => { const p = s.line, L = p.getTotalLength(), n = Math.min(500, Math.max(8, Math.ceil(L * view.k / 2.5)));
     if (s.leap) { s.ef = Math.max(.03, Math.min(.12, 22 / (view.k * L))); const a = (s.ef * 100).toFixed(2), gap = (100 - 2 * s.ef * 100).toFixed(2); [s.faint, s.glow, s.line].forEach(q => q.setAttribute('stroke-dasharray', `${a} ${gap} ${a}`)); }
@@ -3954,11 +3954,11 @@ function nzSolve() { if (!NZS || !NZS.map) return; const R = svg.getBoundingClie
   let L = nzPlace(R, OB, TP, BOX, 0), best = 0;
   if (L.forced.length || !L.curCap) for (const m of [1, 2]) { const L2 = nzPlace(R, OB, TP, BOX, m); if (better(L2, L)) { L = L2; best = m; } }
   if (best !== 2 && (L.forced.length || !L.curCap || best === 1)) L = nzPlace(R, OB, TP, BOX, best);
-  if (L.anyNum) { L = nzPlace(R, OB, TP, BOX, 0, true); if (L.forced.length) { const L2 = nzPlace(R, OB, TP, BOX, 1, true); if (better(L2, L)) L = L2; else L = nzPlace(R, OB, TP, BOX, 0, true); } }      /* when one stop has to fall back to its number, all four do, so the map reads like the reader's row of dots */
+  if (L.anyNum || L.ringCover) { L = nzPlace(R, OB, TP, BOX, 0, true); if (L.forced.length) { const L2 = nzPlace(R, OB, TP, BOX, 1, true); if (better(L2, L)) L = L2; else L = nzPlace(R, OB, TP, BOX, 0, true); } }      /* when one stop has to fall back to its number, all four do, so the map reads like the reader's row of dots */
   NZS.layout = {hidden: L.hidden, forced: L.forced, off: L.off, soft: L.soft, k: view.k}; NZS.pending = !!nzFrame.busy; NZS.dbg = {OB, TP, PL: L.PL, BOX, SP: L.SP}; }
 /* one placement. mode 0: the chapter's core works first, then the names; mode 1: the names first */
 function nzPlace(R, OB, TP, BOX, mode, allNum) { const M = NZS.map, mk = M.mk, at = NZS.at, lv = NZS.lv, cur = nzIsCh(at) ? at : -1, labels = cur >= 0 && view.k >= 2.3;
-  mk.innerHTML = ''; M.st = []; M.lg = null; const PL = [], hidden = [], forced = [], off = [], soft = []; let curCap = true, capsOff = 0, capsOn = 0, anyNum = false;
+  mk.innerHTML = ''; M.st = []; M.lg = null; const PL = [], hidden = [], forced = [], off = [], soft = []; let curCap = true, capsOff = 0, capsOn = 0, anyNum = false, ringCover = false;
   const SP = NZJ.stops.map(s => nzScr(LAY.nodes[s.lan])), ALL = OB.concat(TP);
   const near = (x, y, rad) => ALL.filter(o => o.r > x - rad && o.l < x + rad && o.b > y - rad && o.t < y + rad);
   const ov = (a, o) => Math.max(0, Math.min(a.r, o.r) - Math.max(a.l, o.l)) * Math.max(0, Math.min(a.b, o.b) - Math.max(a.t, o.t));
@@ -3973,19 +3973,25 @@ function nzPlace(R, OB, TP, BOX, mode, allNum) { const M = NZS.map, mk = M.mk, a
   const nameBlock = (i, fs) => { const s = NZJ.stops[i], lines = [...(NODE[s.lan] ? NODE[s.lan].querySelectorAll('text') : [])].map(t => t.textContent.trim()).filter(Boolean), cap = `${i ? 'CHAPTER ' + i : 'ROOT'} · ${s.year}${at === 'learned' && s.works.some(w => nzNote(i, w.id).trim()) ? '  ✎ NOTE' : ''}`;
     if (fs === 'num' || fs === 'nums') { const d = fs === 'num' ? 22 : 16; return {cap: '', lines: [i ? String(i) : ''], w: d, h: d, fs, lh: 12, top: 0, num: true}; }
     const nc = fs < 0, f2 = Math.abs(fs), w = Math.max(nc ? 0 : nzW(cap, 'nz-cap'), ...lines.map(t => nzW(t, 'nz-nm f' + f2))) + 2, lh = f2 + 2.5, top = nc ? 0 : 11; return {cap: nc ? '' : cap, lines, w, h: top + lines.length * lh + 2, fs: f2, lh, top}; };
-  const placeName = i => { if (!seen(i)) { off.push('name:' + i); return; } const [px, py] = SP[i], lists = [near(px, py, 280), PL]; let best = null;
-    const forms = allNum ? ['num', 'nums'] : mode === 2 && i !== cur ? [-11, -10, -9] : [11, 10, 9, -10, -9]; if (!allNum && (R.width < 320 || R.height < 160)) forms.push('num');
+  const placeName = (i, dotsOnly) => { if (!seen(i)) { off.push('name:' + i); return; } const [px, py] = SP[i], lists = [near(px, py, 280), PL]; let best = null;
+    const forms = allNum || dotsOnly ? ['num', 'nums'] : mode === 2 && i !== cur ? [-11, -10, -9] : [11, 10, 9, -10, -9]; if (!allNum && (R.width < 320 || R.height < 160)) forms.push('num');
     for (const fs of forms) { const B2 = nameBlock(i, fs), w = B2.w, h = B2.h, cand = [];
       (allNum ? [.5, .9, 1.4, 2, 2.8, 3.8, 5, 6.5, 8.5, 11] : [1, 1.6, 2.3, 3.2, 4.4, 5.8, 7.4]).forEach(m => { const g = 6 * m; cand.push([-w / 2, -h - g, 'm'], [g + 2, -h / 2, 's'], [-w - g - 2, -h / 2, 'e'], [-w / 2, g + 1, 'm'], [g, -h - g * .6, 's'], [-w - g, -h - g * .6, 'e'], [g, g * .6, 's'], [-w - g, g * .6, 'e']); });
-      for (const [dx, dy, al] of cand) { const r = {l: px + dx, t: py + dy, r: px + dx + w, b: py + dy + h}, [hd, sf] = cost([r], lists), key = hd * 1e4 + sf + (fs === 'nums' ? 700 : fs === 'num' ? 600 : (11 - Math.abs(fs)) * 30 + (fs < 0 ? 200 : 0));
+      for (const [dx, dy, al] of cand) { const r = {l: px + dx, t: py + dy, r: px + dx + w, b: py + dy + h}; let [hd, sf] = cost([r], lists);
+        if (B2.num) { const qx = px + dx + w / 2, qy = py + dy + h / 2, dOwn = Math.hypot(qx - px, qy - py); if (SP.some((o, j) => j !== i && seen(j) && Math.hypot(qx - o[0], qy - o[1]) < dOwn * 1.25 + 2)) sf += 300; }      /* a dot sits on the side away from its neighbours */
+        const key = hd * 1e4 + sf + (fs === 'nums' ? 700 : fs === 'num' ? 600 : (11 - Math.abs(fs)) * 30 + (fs < 0 ? 200 : 0));
         if (!best || key < best.key) best = {key, hd, sf, dx, dy, al, B2, r}; if (!hd && !sf) break; }
       if (best && !best.hd && !best.sf) break; }
     if (best.hd) { forced.push('name:' + i); best.dx = Math.max(BOX.l - px, Math.min(BOX.r - px - best.B2.w, best.dx)); best.dy = Math.max(BOX.t - py, Math.min(BOX.b - py - best.B2.h, best.dy)); best.r = {l: px + best.dx, t: py + best.dy, r: px + best.dx + best.B2.w, b: py + best.dy + best.B2.h}; }
     else if (best.sf) soft.push('name:' + i);
+    { const own = OB.find(o => o.tag === 'pt:' + NZJ.stops[i].lan && o.circ), r = best.r;      /* a name never covers its own ring: rather the stops go to their dots */
+      if (best.hd && own && !best.B2.num && !dotsOnly) { const [ccx, ccy, cr] = own.circ, ex = ccx - Math.max(r.l, Math.min(ccx, r.r)), ey = ccy - Math.max(r.t, Math.min(ccy, r.b)); if (ex * ex + ey * ey < cr * cr) ringCover = true; } }
     const {dx, dy, al, B2} = best, g = nzS('g', {class: 'nz-nmb' + (i === cur ? ' cur' : ''), 'data-go': i, role: 'button', 'aria-label': `${nzLabel(i)}: ${NZJ.stops[i].name}`}, g0[i]), ax = al === 'm' ? dx + B2.w / 2 : al === 'e' ? dx + B2.w : dx, an = al === 'm' ? 'middle' : al === 'e' ? 'end' : 'start';
     nzS('rect', {x: dx, y: dy, width: B2.w, height: B2.h, class: 'nz-hit'}, g);
     if (B2.cap) nzS('text', {class: 'nz-cap', x: ax, y: dy + 8, 'text-anchor': an}, g).textContent = B2.cap; else { soft.push('caption:' + i); if (i === cur) curCap = false; capsOff++; }
-    if (B2.num) { anyNum = true; g.classList.add('nz-dot'); const hw = B2.w / 2, cx = dx + hw, cy = dy + hw, sm = B2.fs === 'nums'; nzS('circle', {class: 'nz-dc', cx, cy, r: hw - 1.5}, g);
+    if (B2.num) { anyNum = true; g.classList.add('nz-dot'); const hw = B2.w / 2, cx = dx + hw, cy = dy + hw, sm = B2.fs === 'nums', dl = Math.hypot(cx, cy) || 1, a0 = 2.4 * view.k + 1.5, a1 = dl - hw + .5;
+      if (a1 - a0 > 2) nzS('path', {class: 'nz-tie', d: `M${(cx / dl * a0).toFixed(1)},${(cy / dl * a0).toFixed(1)}L${(cx / dl * a1).toFixed(1)},${(cy / dl * a1).toFixed(1)}`}, g);      /* a hairline ties the dot to its lantern */
+      nzS('circle', {class: 'nz-dc', cx, cy, r: hw - 1.5}, g);
       if (i) nzS('text', {class: 'nz-num' + (sm ? ' sm' : ''), x: cx, y: cy + (sm ? 3 : 3.6), 'text-anchor': 'middle'}, g).textContent = B2.lines[0]; else nzS('path', {class: 'nz-dseed', d: NZ_SEED, transform: `translate(${cx - (sm ? 4.2 : 5.4)},${cy - (sm ? 4.6 : 6)}) scale(${sm ? .7 : .9})`}, g);
       nzS('title', {}, g).textContent = `${nzLabel(i)} · ${NZJ.stops[i].year} · ${NZJ.stops[i].name}`; } else
     B2.lines.forEach((t, j) => { nzS('text', {class: 'nz-nm f' + B2.fs, x: ax, y: dy + B2.top + B2.lh * (j + 1) - 2.5, 'text-anchor': an}, g).textContent = t; });
@@ -4030,7 +4036,7 @@ function nzPlace(R, OB, TP, BOX, mode, allNum) { const M = NZS.map, mk = M.mk, a
     M.lg = nzS('g', {class: 'nz-lpg'}, mk); nzS('text', {class: 'nz-lp', x: (best.cx - mx).toFixed(1), y: (best.cy - my).toFixed(1), 'text-anchor': 'middle'}, M.lg).textContent = txt; nzPos(); PL.push(best.r); };
   const order = cur >= 0 ? [cur, ...[0, 1, 2, 3].filter(i => i !== cur)] : [0, 1, 2, 3], curWs = cur >= 0 ? nzWorks(cur, lv) : [];
   const coreCur = () => curWs.filter(w => w.core).forEach(w => placeFruit(cur, w, {label: labels, sizes: [4.6, 3.6, 2.8], must: true}));
-  placeRoot(); if (mode) { placeName(order[0]); coreCur(); order.slice(1).forEach(placeName); } else { coreCur(); order.forEach(placeName); }
+  placeRoot(); if (mode) { placeName(order[0]); coreCur(); order.slice(1).forEach(i => placeName(i)); } else { coreCur(); order.forEach(i => placeName(i)); }
   curWs.filter(w => !w.core).forEach(w => placeFruit(cur, w, {label: labels, sizes: [4.2, 3.4, 2.6], must: true}));
   order.filter(i => i !== cur).forEach(i => nzWorks(i, lv).filter(w => w.core).forEach(w => placeFruit(i, w, {label: false, sizes: [3.8, 3, 2.3], must: true})));
   order.filter(i => i !== cur).forEach(i => nzWorks(i, lv).filter(w => !w.core).forEach(w => placeFruit(i, w, {label: false, sizes: [3.4, 2.7, 2.1], must: false})));
@@ -4039,7 +4045,7 @@ function nzPlace(R, OB, TP, BOX, mode, allNum) { const M = NZS.map, mk = M.mk, a
   NZJ.stops.forEach((st, i) => { const c = M.g.querySelector(`circle[data-lan="${st.lan}"]`); if (!c) return; const rg = 2.4 * view.k + 1, [x, y] = SP[i];
     const onScreen = x + rg > BOX.l && x - rg < BOX.r && y + rg > BOX.t && y - rg < BOX.b && !UI.some(u => x - rg >= u.l && x + rg <= u.r && y - rg >= u.t && y + rg <= u.b);
     c.classList.toggle('nz-off', !seen(i) && onScreen); });
-  return {hidden, forced, off, soft, PL, SP, curCap, capsOff, capsOn, anyNum}; }
+  return {hidden, forced, off, soft, PL, SP, curCap, capsOff, capsOn, anyNum, ringCover}; }
 window.__nz = {begin: nzBegin, show: nzShow, end: nzEnd, back: nzBack, solve: nzSolve, frame: nzFrame, open: () => NZS ? NZS.at : null, pending: () => !!(NZS && (NZS.pending || nzFrame.busy)), state: () => NZS, store: () => NZ, mail: nzMail, data: NZJ};
 /* nursery:js:end */
 readHash(location.hash); drawTrail();
