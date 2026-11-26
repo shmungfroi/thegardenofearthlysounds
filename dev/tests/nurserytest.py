@@ -400,7 +400,8 @@ CHECK = """(frame) => { const svg = document.getElementById('map'), R = svg.getB
       if (marks.some(m => m.grp !== g && x > m.r.l && x < m.r.r && y > m.r.t && y < m.r.b)) { bad.push('stem of ' + g.dataset.w + ' through a mark'); break; }
       if (rings.some(r => r !== ring && x > r.r.l && x < r.r.r && y > r.r.t && y < r.r.b)) { bad.push('stem of ' + g.dataset.w + ' through a ring'); break; } } });
   const free = (x, y) => x > R.left + 8 && x < R.right - 8 && y > R.top + 8 && y < R.bottom - 8 && !ui.some(u => x > u.r.l - 3 && x < u.r.r + 3 && y > u.r.t - 3 && y < u.r.b + 3);      /* a lantern touching the frame counts as out of view (its ring steps aside) */
-  __nz.data.stops.forEach((s, i) => { const c = document.querySelector('#map .fm[data-id="' + s.lan + '"] circle').getBoundingClientRect(), x = c.left + c.width / 2, y = c.top + c.height / 2; if (!free(x, y)) return; seenStop.push(i);
+  __nz.data.stops.forEach((s, i) => { const c = document.querySelector('#map .fm[data-id="' + s.lan + '"] circle').getBoundingClientRect(), x = c.left + c.width / 2, y = c.top + c.height / 2;
+    if (!free(x, y)) { if (frame && (S.at === 'overview' || S.at === 'learned')) bad.push('the whole-thread frame leaves a stop out of view: ' + s.name); return; } seenStop.push(i);
     if (!document.querySelector('#nzmk .nz-nmb[data-go="' + i + '"]')) bad.push('stop name hidden: ' + s.name);
     s.works.filter(w => w.core && w.lv.includes(S.lv)).forEach(w => { if (!document.querySelector('#nzmk .nz-fr[data-w="' + w.id + '"]')) bad.push('core work hidden: ' + w.id); }); });
   const Rv = {l: R.left, t: R.top, r: R.right, b: R.bottom};

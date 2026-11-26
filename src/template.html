@@ -2177,17 +2177,23 @@ function nzFrame() { if (!NZS) return; measure(); const at = NZS.at, P = i => LA
     curFam = famAt(p.x); curEra = eraOf(NZJ.stops[at].lan); }
   else { const xs = NZJ.stops.map((s, i) => P(i).x), ys = NZJ.stops.map((s, i) => P(i).y), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), mx = Math.min(phone ? 40 : 90, W * .12), my = Math.min(phone ? 45 : 80, Hh * .18);      /* a short map (a phone on its side) keeps the thread a readable size */
     k = Math.min((W - 2 * mx) / (x1 - x0), (Hh - 2 * my) / (y1 - y0)); if (phone) k = Math.min(k, fitK * 2.65); cx = (x0 + x1) / 2; cy = (y0 + y1) / 2; curFam = curEra = null; }
-  k = Math.max(KMIN(), Math.min(KMAX, k)); let ox = ((S.l + S.r) / 2 - aw / 2) / k, oy = ((S.t + S.b) / 2 - ah / 2) / k;
-  const need = nzIsCh(at) ? (pair ? [at, at - 1] : [at]) : NZJ.stops.map((s, i) => i), m2 = phone ? 24 : 40;      /* the Garden's edges can stop the camera short: then come a little closer until the stops sit clear of the frame */
-  for (let n = 0; n < 16; n++) { const v = clamp({k, tx: aw / 2 - (cx - ox) * k, ty: ah / 2 - (cy - oy) * k});
-    if (need.every(i => { const p = P(i), x = v.tx + p.x * v.k, y = v.ty + p.y * v.k; return x > S.l + m2 && x < S.r - m2 && y > S.t + m2 && y < S.b - m2; })) break;
-    k = Math.min(KMAX, k * 1.05); ox = ((S.l + S.r) / 2 - aw / 2) / k; oy = ((S.t + S.b) / 2 - ah / 2) / k; }
-  /* a lantern is either well inside the frame, with room for its name, or out of sight: never a ring at the edge */
+  k = Math.max(KMIN(), Math.min(KMAX, k)); const k0 = k;
+  const need = nzIsCh(at) ? (pair ? [at, at - 1] : [at]) : NZJ.stops.map((s, i) => i), m2 = phone ? 24 : 40;
   const R = svg.getBoundingClientRect(), UIR = [...document.querySelectorAll('.ladder,#fams .fam,#lensbar>span,#foot,#trail,#hint')].filter(e => e.getClientRects().length && getComputedStyle(e).display !== 'none' && +getComputedStyle(e).opacity > .05).map(e => { const q = e.getBoundingClientRect(); return {l: q.left - R.left, t: q.top - R.top, r: q.right - R.left, b: q.bottom - R.top}; });
-  let C = [cx - ox, cy - oy]; const at2 = c => { const v = clamp({k, tx: aw / 2 - c[0] * k, ty: ah / 2 - c[1] * k}); return NZJ.stops.map((st, i) => [v.tx + P(i).x * v.k, v.ty + P(i).y * v.k]); };
-  const rr = 2.4 * k + 6, isIn = ([x, y]) => x > S.l + m2 && x < S.r - m2 && y > S.t + m2 && y < S.b - m2, isOut = ([x, y]) => x < -rr || x > aw + rr || y < -rr || y > ah + rr || UIR.some(u => x - rr > u.l && x + rr < u.r && y - rr > u.t && y + rr < u.b);
+  const isIn = ([x, y]) => x > m2 && x < aw - m2 && y > m2 && y < ah - m2 && !UIR.some(u => x > u.l - m2 && x < u.r + m2 && y > u.t - m2 && y < u.b + m2);
+  const centreFor = kk => [cx - ((S.l + S.r) / 2 - aw / 2) / kk, cy - ((S.t + S.b) / 2 - ah / 2) / kk];
+  const at2 = (c, kk) => { kk = kk || k; const v = clamp({k: kk, tx: aw / 2 - c[0] * kk, ty: ah / 2 - c[1] * kk}); return NZJ.stops.map((st, i) => [v.tx + P(i).x * v.k, v.ty + P(i).y * v.k]); };
+  /* the Garden's edges can stop the camera short of the centre asked for: then look for the nearest zoom, closer or further, and the nearest shift that keeps every stop that must be seen clear of the frame */
+  const SH = [[0, 0], [0, -.1], [0, .1], [-.1, 0], [.1, 0], [0, -.2], [0, .2], [-.2, 0], [.2, 0], [-.1, -.1], [.1, -.1], [-.1, .1], [.1, .1], [0, -.3], [0, .3], [-.3, 0], [.3, 0]];
+  let C = centreFor(k), found = null;
+  for (let n = 0; n <= 18 && !found; n++) for (const kk of n ? [k0 * Math.pow(1.05, n), k0 / Math.pow(1.06, n)] : [k0]) { if (kk > KMAX || kk < KMIN()) continue; const c0 = centreFor(kk);
+    for (const [fx, fy] of SH) { const c = [c0[0] + fx * aw / kk, c0[1] + fy * ah / kk], q = at2(c, kk); if (need.every(i => isIn(q[i]))) { found = [kk, c]; break; } } if (found) break; }
+  if (found) { k = found[0]; C = found[1]; }
+  /* a lantern is either well inside the frame, with room for its name, or out of sight: never a ring at the edge */
+  const rr = 2.4 * k + 6, isOut = ([x, y]) => x < -rr || x > aw + rr || y < -rr || y > ah + rr || UIR.some(u => x - rr > u.l && x + rr < u.r && y - rr > u.t && y + rr < u.b);
   for (let n = 0; n < 8; n++) { const pts = at2(C), j = pts.findIndex(q => !isIn(q) && !isOut(q)); if (j < 0) break; const [x, y] = pts[j], moves = [];
-    if (x < S.l + m2) moves.push([S.l + m2 + 2 - x, 0]); if (x > S.r - m2) moves.push([S.r - m2 - 2 - x, 0]); if (y < S.t + m2) moves.push([0, S.t + m2 + 2 - y]); if (y > S.b - m2) moves.push([0, S.b - m2 - 2 - y]);
+    if (x < m2) moves.push([m2 + 2 - x, 0]); if (x > aw - m2) moves.push([aw - m2 - 2 - x, 0]); if (y < m2) moves.push([0, m2 + 2 - y]); if (y > ah - m2) moves.push([0, ah - m2 - 2 - y]);
+    UIR.forEach(u => { if (x > u.l - m2 && x < u.r + m2 && y > u.t - m2 && y < u.b + m2) moves.push([u.l - m2 - 2 - x, 0], [u.r + m2 + 2 - x, 0], [0, u.t - m2 - 2 - y], [0, u.b + m2 + 2 - y]); });
     moves.push([-(x + rr + 2), 0], [aw + rr + 2 - x, 0], [0, -(y + rr + 2)], [0, ah + rr + 2 - y]);
     const ok = moves.map(([dx, dy]) => [dx, dy, [C[0] - dx / k, C[1] - dy / k]]).filter(([, , c]) => { const q = at2(c); return need.every(i => isIn(q[i])) && (isIn(q[j]) || isOut(q[j])); }).sort((a, b) => Math.hypot(a[0], a[1]) - Math.hypot(b[0], b[1]));
     if (!ok.length) break; C = ok[0][2]; }
