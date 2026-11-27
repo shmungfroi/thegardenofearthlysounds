@@ -1,0 +1,58 @@
+{
+ "groundbass": {
+  "title": "Arie, Op. 8: “Che si può fare”",
+  "composer": "Barbara Strozzi",
+  "year": "1664",
+  "youtube": "https://www.youtube.com/watch?v=1F458aC_FUM",
+  "imslp": "https://imslp.org/wiki/Arie,_Op.8_(Strozzi,_Barbara)",
+  "note": "Lament over a descending ground. Ensemble Artaserse, France Musique."
+ },
+ "concertogrosso": {
+  "title": "Brandenburg Concerto No. 5 in D, BWV 1050",
+  "composer": "J. S. Bach",
+  "year": "1721",
+  "youtube": "https://www.youtube.com/watch?v=LHjbRMIIhuM",
+  "imslp": "https://imslp.org/wiki/Brandenburg_Concerto_No.5,_BWV_1050_(Bach,_Johann_Sebastian)",
+  "note": "Movement I ends with the long harpsichord cadenza. Netherlands Bach Society."
+ },
+ "buffa": {
+  "title": "Don Giovanni, K. 527: “Madamina, il catalogo è questo”",
+  "composer": "W. A. Mozart",
+  "year": "1787",
+  "youtube": "https://www.youtube.com/watch?v=vyTEddU8E68",
+  "imslp": "https://imslp.org/wiki/Don_Giovanni,_K.527_(Mozart,_Wolfgang_Amadeus)",
+  "note": "Leporello’s Catalogue aria. Score: No. 4 in Act 1."
+ },
+ "quartet": {
+  "title": "String Quartet in C, Op. 76 No. 3, ‘Emperor’: II. Poco adagio, cantabile",
+  "composer": "Joseph Haydn",
+  "year": "1797",
+  "youtube": "https://www.youtube.com/watch?v=QkUW2Rny160",
+  "imslp": "https://imslp.org/wiki/String_Quartets,_Op.76_(Haydn,_Joseph)",
+  "note": "Recording is the second movement. Score: the whole Op. 76 set; No. 3 is the Emperor."
+ },
+ "lied": {
+  "title": "“Erlkönig”, D. 328",
+  "composer": "Franz Schubert",
+  "year": "1815",
+  "youtube": "https://www.youtube.com/watch?v=lTjXk-cPkrY",
+  "imslp": "https://imslp.org/wiki/Erlk%C3%B6nig,_D.328_(Schubert,_Franz)",
+  "note": "Matthias Goerne and Andreas Haefliger."
+ },
+ "romsym": {
+  "title": "Symphony No. 4 in E minor, Op. 98: IV. Allegro energico e passionato",
+  "composer": "Johannes Brahms",
+  "year": "1885",
+  "youtube": "https://www.youtube.com/watch?v=0WoYVCOWF_8",
+  "imslp": "https://imslp.org/wiki/Symphony_No.4,_Op.98_(Brahms,_Johannes)",
+  "note": "The finale is a passacaglia. Recording is the finale only; score is the whole symphony."
+ },
+ "romquartet": {
+  "title": "Verklärte Nacht, Op. 4 (string sextet)",
+  "composer": "Arnold Schoenberg",
+  "year": "1899",
+  "youtube": "https://www.youtube.com/watch?v=dNER5JVCTPw",
+  "imslp": "https://imslp.org/wiki/Verkl%C3%A4rte_Nacht,_Op.4_(Schoenberg,_Arnold)",
+  "note": "The original version for string sextet."
+ }
+}
