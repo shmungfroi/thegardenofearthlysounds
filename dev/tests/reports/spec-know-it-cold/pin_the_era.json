@@ -1,0 +1,82 @@
+[
+ {
+  "lantern": "sacredconcerto",
+  "index": 2,
+  "title": "“In ecclesiis”",
+  "composer": "Giovanni Gabrieli",
+  "year": "1615",
+  "youtube": "https://www.youtube.com/watch?v=nXNkTuzGAxo",
+  "imslp": "https://imslp.org/wiki/In_ecclesiis,_Ch.78_(Gabrieli,_Giovanni)",
+  "note": ""
+ },
+ {
+  "lantern": "anthem",
+  "index": 5,
+  "title": "Coronation Anthem “Zadok the Priest”, HWV 258",
+  "composer": "G. F. Handel",
+  "year": "1727",
+  "youtube": "https://www.youtube.com/watch?v=n7gyXNuLQ8Y",
+  "imslp": "https://imslp.org/wiki/Coronation_Anthems,_HWV_258-261_(Handel,_George_Frideric)",
+  "note": "Score: 'Zadok the Priest' is No. 1 of the Coronation Anthems."
+ },
+ {
+  "lantern": "buffa",
+  "index": 4,
+  "title": "Le nozze di Figaro, K. 492: Act II finale",
+  "composer": "W. A. Mozart",
+  "year": "1786",
+  "youtube": "https://www.youtube.com/watch?v=75P7IPs5vJk",
+  "imslp": "https://imslp.org/wiki/Le_nozze_di_Figaro,_K.492_(Mozart,_Wolfgang_Amadeus)",
+  "note": "Score: the Act 2 finale is No. 16, beginning \"Esci omai, garzon malnato\"."
+ },
+ {
+  "lantern": "sonataform",
+  "index": 4,
+  "title": "Symphony No. 8 in B minor, D. 759 ‘Unfinished’: I. Allegro moderato",
+  "composer": "Franz Schubert",
+  "year": "1822",
+  "youtube": "https://www.youtube.com/watch?v=eJ_TS1Lc1IA",
+  "imslp": "https://imslp.org/wiki/Symphony_No.8,_D.759_(Schubert,_Franz)",
+  "note": "First movement only."
+ },
+ {
+  "lantern": "concertov",
+  "index": 0,
+  "title": "Overture, A Midsummer Night’s Dream, Op. 21",
+  "composer": "Felix Mendelssohn",
+  "year": "1826",
+  "youtube": "https://www.youtube.com/watch?v=m0gHTNJVFtA",
+  "imslp": "https://imslp.org/wiki/A_Midsummer_Night's_Dream,_overture,_Op.21_(Mendelssohn,_Felix)",
+  "note": ""
+ },
+ {
+  "lantern": "sympoem",
+  "index": 4,
+  "title": "Till Eulenspiegels lustige Streiche, Op. 28",
+  "composer": "Richard Strauss",
+  "year": "1895",
+  "youtube": "https://www.youtube.com/watch?v=SS7dy3c8gZM",
+  "imslp": "https://imslp.org/wiki/Till_Eulenspiegels_lustige_Streiche,_Op.28_(Strauss,_Richard)",
+  "note": ""
+ },
+ {
+  "lantern": "romquartet",
+  "index": 6,
+  "title": "String Quartet in G minor, Op. 10",
+  "composer": "Claude Debussy",
+  "year": "1893",
+  "youtube": "https://www.youtube.com/watch?v=YouRcBRkb6o",
+  "imslp": "https://imslp.org/wiki/String_Quartet_in_G_minor,_Op.10_(Debussy,_Claude)",
+  "note": ""
+ },
+ {
+  "lantern": "freeatonal",
+  "index": 0,
+  "title": "Three Piano Pieces, Op. 11",
+  "composer": "Arnold Schoenberg",
+  "year": "1909",
+  "youtube": "https://www.youtube.com/watch?v=PgifNj-JY34",
+  "imslp": "https://imslp.org/wiki/3_Pieces,_Op.11_(Schoenberg,_Arnold)",
+  "note": ""
+ }
+]

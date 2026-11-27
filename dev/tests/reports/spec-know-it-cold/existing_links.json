@@ -1,0 +1,282 @@
+[
+ {
+  "lantern": "opera",
+  "index": 1,
+  "title": "L’Orfeo: “Possente spirto”",
+  "composer": "Claudio Monteverdi",
+  "year": "1607",
+  "youtube": "https://www.youtube.com/watch?v=EPwbYGH3y8E",
+  "imslp": "https://imslp.org/wiki/L'Orfeo,_SV_318_(Monteverdi,_Claudio)",
+  "note": "Possente spirto is in Act III."
+ },
+ {
+  "lantern": "groundbass",
+  "index": 2,
+  "title": "Lamento della ninfa",
+  "composer": "Claudio Monteverdi",
+  "year": "1638",
+  "youtube": "https://www.youtube.com/watch?v=d2lLoPZkR5k",
+  "imslp": "https://imslp.org/wiki/Lamento_della_ninfa,_SV_163_(Monteverdi,_Claudio)",
+  "note": ""
+ },
+ {
+  "lantern": "opera",
+  "index": 6,
+  "title": "Dido and Aeneas: “When I am laid in earth”",
+  "composer": "Henry Purcell",
+  "year": "c.1689",
+  "youtube": "https://www.youtube.com/watch?v=f00nKLzCRrI",
+  "imslp": "https://imslp.org/wiki/Dido_and_Aeneas,_Z.626_(Purcell,_Henry)",
+  "note": "The lament is in Act III."
+ },
+ {
+  "lantern": "concertogrosso",
+  "index": 2,
+  "title": "Concerto grosso Op. 6 No. 8, “Christmas”",
+  "composer": "Arcangelo Corelli",
+  "year": "1714",
+  "youtube": "https://www.youtube.com/watch?v=p2C5mC4y-tk",
+  "imslp": "https://imslp.org/wiki/Concerto_grosso_in_G_minor_'Fatto_per_la_Notte_di_Natale',_Op.6_No.8_(Corelli,_Arcangelo)",
+  "note": ""
+ },
+ {
+  "lantern": "overture",
+  "index": 3,
+  "title": "Water Music",
+  "composer": "G. F. Handel",
+  "year": "1717",
+  "youtube": "https://www.youtube.com/watch?v=zcOBbkVXbrM",
+  "imslp": "https://imslp.org/wiki/Water_Music,_HWV_348-350_(Handel,_George_Frideric)",
+  "note": ""
+ },
+ {
+  "lantern": "toccata",
+  "index": 5,
+  "title": "Well-Tempered Clavier I: Prelude in C, BWV 846",
+  "composer": "J. S. Bach",
+  "year": "1722",
+  "youtube": "https://www.youtube.com/watch?v=aengbLEFnM8",
+  "imslp": "https://imslp.org/wiki/Prelude_and_Fugue_in_C_major,_BWV_846_(Bach,_Johann_Sebastian)",
+  "note": ""
+ },
+ {
+  "lantern": "fugue",
+  "index": 4,
+  "title": "Little Fugue in G minor, BWV 578 (and WTC I, BWV 846)",
+  "composer": "J. S. Bach",
+  "year": "c.1707",
+  "youtube": "https://www.youtube.com/watch?v=vITIeoxcfdM",
+  "imslp": "https://imslp.org/wiki/Fugue_in_G_minor,_BWV_578_(Bach,_Johann_Sebastian)",
+  "note": ""
+ },
+ {
+  "lantern": "soloconcerto",
+  "index": 1,
+  "title": "The Four Seasons: Spring, RV 269",
+  "composer": "Antonio Vivaldi",
+  "year": "1725",
+  "youtube": "https://www.youtube.com/watch?v=3LiztfE1X7E",
+  "imslp": "https://imslp.org/wiki/Violin_Concerto_in_E_major,_RV_269_(Vivaldi,_Antonio)",
+  "note": ""
+ },
+ {
+  "lantern": "cantata",
+  "index": 5,
+  "title": "“Wachet auf”, BWV 140",
+  "composer": "J. S. Bach",
+  "year": "1731",
+  "youtube": "https://www.youtube.com/watch?v=DqZE54i-muE",
+  "imslp": "https://imslp.org/wiki/Wachet_auf,_ruft_uns_die_Stimme,_BWV_140_(Bach,_Johann_Sebastian)",
+  "note": ""
+ },
+ {
+  "lantern": "oratorio",
+  "index": 5,
+  "title": "Messiah",
+  "composer": "G. F. Handel",
+  "year": "1742",
+  "youtube": "https://www.youtube.com/watch?v=i3FXcznStUI",
+  "imslp": "https://imslp.org/wiki/Messiah,_HWV_56_(Handel,_George_Frideric)",
+  "note": ""
+ },
+ {
+  "lantern": "clconcerto",
+  "index": 3,
+  "title": "Piano Concerto No. 21 in C, K. 467",
+  "composer": "W. A. Mozart",
+  "year": "1785",
+  "youtube": "https://www.youtube.com/watch?v=Bs-H7SwPfJo",
+  "imslp": "https://imslp.org/wiki/Piano_Concerto_No.21_in_C_major,_K.467_(Mozart,_Wolfgang_Amadeus)",
+  "note": ""
+ },
+ {
+  "lantern": "divertimento",
+  "index": 4,
+  "title": "Eine kleine Nachtmusik, K. 525",
+  "composer": "W. A. Mozart",
+  "year": "1787",
+  "youtube": "https://www.youtube.com/watch?v=8OD1EhvaXMI",
+  "imslp": "https://imslp.org/wiki/Eine_kleine_Nachtmusik,_K.525_(Mozart,_Wolfgang_Amadeus)",
+  "note": ""
+ },
+ {
+  "lantern": "symphony",
+  "index": 5,
+  "title": "Symphony No. 40 in G minor, K. 550",
+  "composer": "W. A. Mozart",
+  "year": "1788",
+  "youtube": "https://www.youtube.com/watch?v=kjMSpNCWqVs",
+  "imslp": "https://imslp.org/wiki/Symphony_No.40_in_G_minor,_K.550_(Mozart,_Wolfgang_Amadeus)",
+  "note": ""
+ },
+ {
+  "lantern": "variations",
+  "index": 1,
+  "title": "Symphony No. 94 in G, Hob. I:94, ‘Surprise’: II. Andante",
+  "composer": "Joseph Haydn",
+  "year": "1791",
+  "youtube": "https://www.youtube.com/watch?v=BFz_Y3KSNus",
+  "imslp": "https://imslp.org/wiki/Symphony_No.94_in_G_major,_Hob.I:94_(Haydn,_Joseph)",
+  "note": "Orchestral variations on a simple theme, with the famous loud chord. Recording is the second movement; score is the whole symphony."
+ },
+ {
+  "lantern": "clsonata",
+  "index": 4,
+  "title": "Piano Sonata in C minor, Op. 13, ‘Pathétique’",
+  "composer": "Ludwig van Beethoven",
+  "year": "1798",
+  "youtube": "https://www.youtube.com/watch?v=nwWl2pOjJzk",
+  "imslp": "https://imslp.org/wiki/Piano_Sonata_No.8,_Op.13_(Beethoven,_Ludwig_van)",
+  "note": "Played on fortepiano."
+ },
+ {
+  "lantern": "symphony",
+  "index": 6,
+  "title": "Symphony No. 5 in C minor, Op. 67",
+  "composer": "Ludwig van Beethoven",
+  "year": "1808",
+  "youtube": "https://www.youtube.com/watch?v=dhI_qDV5LwI",
+  "imslp": "https://imslp.org/wiki/Symphony_No.5,_Op.67_(Beethoven,_Ludwig_van)",
+  "note": ""
+ },
+ {
+  "lantern": "progsym",
+  "index": 1,
+  "title": "Symphonie fantastique, Op. 14",
+  "composer": "Hector Berlioz",
+  "year": "1830",
+  "youtube": "https://www.youtube.com/watch?v=9zsSrKEYVbc",
+  "imslp": "https://imslp.org/wiki/Symphonie_fantastique,_H_48_(Berlioz,_Hector)",
+  "note": ""
+ },
+ {
+  "lantern": "nocturne",
+  "index": 6,
+  "title": "Nocturne in E-flat, Op. 9 No. 2",
+  "composer": "Frédéric Chopin",
+  "year": "1832",
+  "youtube": "https://www.youtube.com/watch?v=lqHaA_5o9mg",
+  "imslp": "https://imslp.org/wiki/Nocturnes,_Op.9_(Chopin,_Fr%C3%A9d%C3%A9ric)",
+  "note": "Chopin took Field’s singing right-hand melody over wide left-hand chords and made the nocturne his own. Score: No. 2 in the set of three."
+ },
+ {
+  "lantern": "pianochamber",
+  "index": 3,
+  "title": "Piano Trio in G minor, Op. 17",
+  "composer": "Clara Schumann",
+  "year": "1846",
+  "youtube": "https://www.youtube.com/watch?v=MrkSwOtidhE",
+  "imslp": "https://imslp.org/wiki/Piano_Trio_in_G_minor,_Op.17_(Schumann,_Clara)",
+  "note": ""
+ },
+ {
+  "lantern": "melodramma",
+  "index": 1,
+  "title": "La traviata: “Sempre libera”",
+  "composer": "Giuseppe Verdi",
+  "year": "1853",
+  "youtube": "https://www.youtube.com/watch?v=IGlugsYQZgg",
+  "imslp": "https://imslp.org/wiki/La%20traviata%20(Verdi,%20Giuseppe)",
+  "note": "Violetta's aria ending Act 1."
+ },
+ {
+  "lantern": "sympoem",
+  "index": 0,
+  "title": "Les préludes, S. 97",
+  "composer": "Franz Liszt",
+  "year": "1854",
+  "youtube": "https://www.youtube.com/watch?v=RVB1Xctzn-o",
+  "imslp": "https://imslp.org/wiki/Les_pr%C3%A9ludes,_S.97_(Liszt,_Franz)",
+  "note": ""
+ },
+ {
+  "lantern": "musicdrama",
+  "index": 0,
+  "title": "Tristan und Isolde: Prelude and “Liebestod”",
+  "composer": "Richard Wagner",
+  "year": "1865",
+  "youtube": "https://www.youtube.com/watch?v=oG_MSFhiu1k",
+  "imslp": "https://imslp.org/wiki/Tristan_und_Isolde,_WWV_90_(Wagner,_Richard)",
+  "note": "Orchestral concert version."
+ },
+ {
+  "lantern": "nationalorch",
+  "index": 5,
+  "title": "Symphony No. 9 in E minor, Op. 95, ‘From the New World’",
+  "composer": "Antonín Dvořák",
+  "year": "1893",
+  "youtube": "https://www.youtube.com/watch?v=skbJe25nOk8",
+  "imslp": "https://imslp.org/wiki/Symphony_No.9,_Op.95_(Dvo%C5%99%C3%A1k,_Anton%C3%ADn)",
+  "note": ""
+ },
+ {
+  "lantern": "romsym",
+  "index": 5,
+  "title": "Symphony No. 6 in B minor, Op. 74, ‘Pathétique’",
+  "composer": "Pyotr Ilyich Tchaikovsky",
+  "year": "1893",
+  "youtube": "https://www.youtube.com/watch?v=OFYmPoErbh0",
+  "imslp": "https://imslp.org/wiki/Symphony_No.6,_Op.74_(Tchaikovsky,_Pyotr)",
+  "note": ""
+ },
+ {
+  "lantern": "impressionism",
+  "index": 0,
+  "title": "Prélude à l’après-midi d’un faune",
+  "composer": "Claude Debussy",
+  "year": "1894",
+  "youtube": "https://www.youtube.com/watch?v=Y9iDOt2WbjY",
+  "imslp": "https://imslp.org/wiki/Pr%C3%A9lude_%C3%A0_l'apr%C3%A8s-midi_d'un_faune,_CD_87_(Debussy,_Claude)",
+  "note": "Uploaded by hr-Sinfonieorchester – Frankfurt Radio Symphony."
+ },
+ {
+  "lantern": "imppiano",
+  "index": 0,
+  "title": "Jeux d’eau",
+  "composer": "Maurice Ravel",
+  "year": "1901",
+  "youtube": "https://www.youtube.com/watch?v=2DhJr1m8Y80",
+  "imslp": "https://imslp.org/wiki/Jeux_d'eau,_M.30_(Ravel,_Maurice)",
+  "note": ""
+ },
+ {
+  "lantern": "sonataform",
+  "index": 3,
+  "title": "Symphony No. 5 in C minor, Op. 67: I. Allegro con brio",
+  "composer": "Ludwig van Beethoven",
+  "year": "1808",
+  "youtube": "https://www.youtube.com/watch?v=6cbFlkRu54I",
+  "imslp": "https://imslp.org/wiki/Symphony_No.5,_Op.67_(Beethoven,_Ludwig_van)",
+  "note": "First movement only."
+ },
+ {
+  "lantern": "sonataform",
+  "index": 2,
+  "title": "Symphony No. 40 in G minor, K. 550: I. Molto allegro",
+  "composer": "Wolfgang Amadeus Mozart",
+  "year": "1788",
+  "youtube": "https://www.youtube.com/watch?v=Wx8qoMmc9EI",
+  "imslp": "https://imslp.org/wiki/Symphony_No.40_in_G_minor,_K.550_(Mozart,_Wolfgang_Amadeus)",
+  "note": "First movement only."
+ }
+]
